@@ -10,7 +10,7 @@ app.use(express.json())
 
 app.use('/products', productsRouter)
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', (req, res) => res.send('Hello World from /!'))
 
 
 module.exports = app

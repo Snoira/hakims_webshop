@@ -5,6 +5,8 @@ const productsRouter = Router()
 
 productsRouter.post('/', createProduct)
 productsRouter.get('/', getProducts)
+productsRouter.get('/start', startMessage)
+
 
 
 module.exports = productsRouter

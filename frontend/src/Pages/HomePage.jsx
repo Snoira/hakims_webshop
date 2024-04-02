@@ -2,12 +2,13 @@
 import axios from 'axios';
 import RenderProductCards from '../Components/RenderProductCards';
 import Header from '../Components/Header';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const HomePage = () => {
     const [products, setProducts] = useState([])
 
-    const getProducts = async () => {
+    useEffect(() => {
+    // const getProducts = async () => {
         axios.get('https://hakims-webshop-1.onrender.com/products/')
             .then(res => {
                 console.log(res.data)
@@ -15,8 +16,18 @@ const HomePage = () => {
             }).catch(err => {
                 console.log(err)
             })
-    }
+    // }
+    }, [])
 
+    const getProducts = async () => {
+        axios.get('https://hakims-webshop-1.onrender.com/products/')
+            .then(res => {
+                console.log(res.data + "klicka")
+                setProducts(res.data)
+            }).catch(err => {
+                console.log(err)
+            })
+    }
     return (
         <div>
             <Header />

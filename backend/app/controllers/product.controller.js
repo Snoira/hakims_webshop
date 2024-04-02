@@ -22,7 +22,12 @@ async function getProducts(req, res){
     }
 }
 
+async function startMessage(req, res){
+    res.status(200).send("Hello from the server")
+}
+
 module.exports = {
     createProduct,
-    getProducts
+    getProducts,
+    startMessage
 }
