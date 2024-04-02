@@ -12,6 +12,7 @@ app.listen(port, () => {
 async function run() {
     //await connect(DATABASE_PATH)
     await connect(MONGOOSE_LIVE_URI)
+    
 }
 
 run()
