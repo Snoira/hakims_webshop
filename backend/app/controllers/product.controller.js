@@ -22,16 +22,7 @@ async function getProducts(req, res){
     }
 }
 
-async function startMessage(req, res){
-    try{res.status(200).json({"message": "Welcome to the product controller!"})}
-    catch(error){
-        console.log("fel i startMessage")
-        res.status(400).json({"message": "Error in startMessage"})
-    }
-}
-
 module.exports = {
     createProduct,
-    getProducts,
-    startMessage
+    getProducts
 }
