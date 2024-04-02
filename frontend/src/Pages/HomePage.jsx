@@ -3,6 +3,7 @@ import axios from 'axios';
 import RenderProductCards from '../Components/RenderProductCards';
 import Header from '../Components/Header';
 import { useState, useEffect } from 'react';
+import SidebarMenu from '../Components/SidebarMenu';
 
 const HomePage = () => {
     const [products, setProducts] = useState([])
@@ -34,8 +35,11 @@ const HomePage = () => {
             <Header />
 
             <h1>Home Page</h1>
+            
             { products && <RenderProductCards products={products} /> }
             <button onClick={getProducts} >klicka</button>
+            
+            <SidebarMenu />
         </div>
     );
 }
