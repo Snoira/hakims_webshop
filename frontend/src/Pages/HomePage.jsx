@@ -1,6 +1,7 @@
 
 import axios from 'axios';
 import RenderProductCards from '../Components/RenderProductCards';
+import Header from '../Components/Header';
 import { useState } from 'react';
 
 const HomePage = () => {
@@ -18,6 +19,8 @@ const HomePage = () => {
 
     return (
         <div>
+            <Header />
+
             <h1>Home Page</h1>
             <RenderProductCards products={products} />
             <button onClick={getProducts} >klicka</button>
