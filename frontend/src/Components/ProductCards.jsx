@@ -1,9 +1,9 @@
 
 
-const ProductCards = ({ products }) => {
+const ProductCards = ({ product }) => {
     return(
         <div>
-            <p>Products</p>
+            <p>{product.title}</p>
         </div>
     )
 }
