@@ -8,7 +8,7 @@ const HomePage = () => {
     const [products, setProducts] = useState([])
 
     const getProducts = async () => {
-        axios.get('https://hakims-webshop-1.onrender.com/api/v1/products/')
+        axios.get('https://hakims-webshop-1.onrender.com/products/')
             .then(res => {
                 console.log(res.data)
                 setProducts(res.data)
