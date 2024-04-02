@@ -8,7 +8,7 @@ app.use(urlencoded({ extended: true }))
 app.use(express.json())
 
 
-app.use('/api/v1/products', productsRouter)
+app.use('/products', productsRouter)
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
