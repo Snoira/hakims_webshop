@@ -28,12 +28,13 @@ const HomePage = () => {
                 console.log(err)
             })
     }
+    
     return (
         <div>
             <Header />
 
             <h1>Home Page</h1>
-            <RenderProductCards products={products} />
+            { products && <RenderProductCards products={products} /> }
             <button onClick={getProducts} >klicka</button>
         </div>
     );
