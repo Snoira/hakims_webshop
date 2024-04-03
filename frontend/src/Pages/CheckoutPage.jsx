@@ -1,7 +1,12 @@
+import { Link } from 'react-router-dom';
+import Header from '../Components/Header';
+
 const CheckoutPage = () => {
-    return(
+    return (
         <>
-        <h1>Checkout Page</h1>
+            <Header />
+
+            <h1>Checkout Page</h1>
         </>
     )
 }
