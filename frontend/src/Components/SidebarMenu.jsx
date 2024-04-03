@@ -4,10 +4,10 @@ const Sidebar = () => {
     return (
       <div className="container-fluid">
         <div className="row">
-          <nav className="col-md-2 d-flex flex-column position-absolute vh-100 top-0">
+          <nav className="col-md-2 d-flex flex-column  vh-100 top-0 ">
             <ul className="nav flex-column">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Nyinkommet</a>
+                <a className="nav-link active" href="#">Nyinkommet</a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#">Sista chansen</a>
@@ -26,7 +26,7 @@ const Sidebar = () => {
               </li>
             </ul>
             <ul className="nav flex-column">
-              <h4>KATEGORIER</h4>
+              <h5>KATEGORIER</h5>
               <li className="nav-item">
                 <a className="nav-link" href="#">Skafferi</a>
               </li>
