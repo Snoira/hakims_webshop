@@ -4,7 +4,7 @@ const Sidebar = () => {
     return (
       <div className="container-fluid">
         <div className="row">
-          <nav className="col-md-2 d-flex flex-column  vh-100 top-0 ">
+          <nav className="col-md-2 d-flex flex-column position-absolute vh-100 top-0 mt-5">
             <ul className="nav flex-column">
               <li className="nav-item">
                 <a className="nav-link active" href="#">Nyinkommet</a>
