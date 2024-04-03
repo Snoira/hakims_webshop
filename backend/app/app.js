@@ -7,7 +7,7 @@ const app = express()
 
 app.use(
     cors({
-        origin: 'https://hakims-webshop-frontend.onrender.com',
+        origin: ['https://hakims-webshop-frontend.onrender.com', 'http://localhost:5173'],
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         credentials: true
     })
