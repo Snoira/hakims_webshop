@@ -22,6 +22,17 @@ async function getProducts(req, res){
     }
 }
 
+async function searchProducts(req, res) {
+    try {
+        const { query } = req.body;
+        const products = await Product.find({ $text: { $search: query } });
+        res.status(200).send(products);
+    } catch(error) {
+        console.error("Error searching products", error);
+        res.status(500).json({ message: "Error"});
+    }
+}
+
 async function startMessage(req, res){
     res.status(200).send("Hello from the server")
 }
@@ -29,5 +40,6 @@ async function startMessage(req, res){
 module.exports = {
     createProduct,
     getProducts,
+    searchProducts,
     startMessage
-}
+};
