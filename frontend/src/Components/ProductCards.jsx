@@ -2,21 +2,21 @@
 
 const ProductCards = ({ product }) => {
     return (
-        // <>
-        // <p>test</p>
-        //     <div className="card" style="width: 18rem;">
-        //         <img src={product.image} className="card-img-top" alt="..." />
-        //         <div className="card-body">
-        //             <h5 className="card-title">{product.title}</h5>
-        //             <p className="card-text">{product.description}</p>
-        //             <a href="#" className="btn btn-primary">Go somewhere</a>
-        //         </div>
-        //     </div>
-        // </>
-        <div>
-
-            <p>{product.name}</p>
-        </div>
+        <>
+            <div className="product-card gap-2">
+                <img src={product.image} alt="..." />
+                <div className="product-card-details">
+                <h2 className="font-bold">{product.price} sek</h2>
+                <p className="card-text">{product.description}</p>
+                <p className="font-bold">{product.name}</p>
+                <div className="m-1 mt-0"> 
+                    <a href="#" className="btn btn-primary button font-bold">KÖP</a>
+                    </div>
+                </div>
+                </div>
+            
+        </>
+        
     )
 }
 
