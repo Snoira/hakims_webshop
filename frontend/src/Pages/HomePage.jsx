@@ -2,7 +2,10 @@
 import axios from 'axios';
 import RenderProductCards from '../Components/RenderProductCards';
 import Header from '../Components/Header';
+import Navbar from  '../Components/Navbar';
+import Footer from '../Components/Footer';
 import { useState, useEffect } from 'react';
+
 
 const HomePage = () => {
     const [products, setProducts] = useState([
@@ -81,13 +84,17 @@ const HomePage = () => {
     return (
         <div>
             <Header />
-
-            <h1>Home Page</h1>
+            <div className="main-container"> 
+                <Navbar  />
             {products && <RenderProductCards products={products} />}
-            <button onClick={async () => {
+            
+            </div>
+            {/* <button onClick={async () => {
                 await getProducts()
                 console.log("klick")
-            }} >klicka</button>
+            }} >klicka</button> */}
+
+            <Footer />
         </div>
     );
 }
