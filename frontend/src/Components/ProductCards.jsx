@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ProductCards = ({ product }) => {
+const ProductCards = ({ product, addToCart, cart }) => {
    
 
     return (

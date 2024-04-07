@@ -1,5 +1,5 @@
-const ShoppingCartmodal = () => {
-    const cart = [];
+const ShoppingCartmodal = ({ cart , addToCart }) => {
+    
 
 
 
@@ -15,7 +15,7 @@ const ShoppingCartmodal = () => {
                         {cart.map((item, index) => (
                             <li key={index}>
                                 <span>{item.name}</span>
-                                <span>{item.price} kr</span>
+                                <span> {item.price} kr</span>
                             </li>
                         ))}
                     </ul>

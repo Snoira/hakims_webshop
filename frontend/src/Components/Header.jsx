@@ -4,7 +4,7 @@ import { FaSearch } from 'react-icons/fa';
 import SearchBar from './SearchBar';
 import ShoppingCartModal from './CartModal';
 
-const Header = () => {
+const Header = ({ cart }) => {
     const [showCartModal, setShowCartModal] = useState(false);  
 
     const toggleCartModal  = () => {
@@ -36,7 +36,7 @@ const Header = () => {
             </div>
 
         </nav>
-        {showCartModal && <ShoppingCartModal />}
+        {showCartModal && <ShoppingCartModal cart={cart} />}
 
         
         

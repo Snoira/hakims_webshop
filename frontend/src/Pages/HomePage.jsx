@@ -83,14 +83,20 @@ const HomePage = () => {
         getProducts()
     }, [])
 
+    const [cart, setCart] = useState([]);
+
+    const addToCart = (productToAdd) => {
+        setCart([...cart, productToAdd]);
+    }
+
     return (
         <div>
-            <Header />
+            <Header cart={cart}/>
             <HeroSection />
               
             <div className="main-container"> 
                 <Navbar  />
-            {products && <RenderProductCards products={products} />}
+            {products && <RenderProductCards products={products} addToCart={addToCart} cart= {cart}/>}
             
             </div>
             {/* <button onClick={async () => {
