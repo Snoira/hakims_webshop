@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 
 const ProductCards = ({ product }) => {
-    const [cart, setCart] = useState([]);
-
-
-    const addToCart = (productToAdd) => {
-        setCart([...cart, productToAdd]);
-    };
+   
 
     return (
         <>
