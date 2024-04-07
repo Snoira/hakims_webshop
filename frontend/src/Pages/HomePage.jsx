@@ -4,7 +4,9 @@ import RenderProductCards from '../Components/RenderProductCards';
 import Header from '../Components/Header';
 import Navbar from  '../Components/Navbar';
 import Footer from '../Components/Footer';
+import HeroSection from '../Components/HeroSection';
 import { useState, useEffect } from 'react';
+
 
 
 const HomePage = () => {
@@ -84,6 +86,7 @@ const HomePage = () => {
     return (
         <div>
             <Header />
+            <HeroSection />
             <div className="main-container"> 
                 <Navbar  />
             {products && <RenderProductCards products={products} />}
