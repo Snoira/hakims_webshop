@@ -1,0 +1,37 @@
+.header-container {
+    width: 100%;
+    padding: 20px;
+    background-color: #c3cdf7;
+  }
+  
+  .search-container {
+    max-width: 500px;
+  }
+  
+  .search-form {
+    display: flex;
+    gap: 1rem;
+    flex: 1;
+    width: 500px;
+  
+  
+  }
+  
+  @media (max-width: 576px) {
+    .header-container {
+      flex-wrap: wrap;
+    }
+  }
+  
+  @media (max-width: 991.98px) {
+    .d-lg-block {
+      display: none !important;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .search-bar-container {
+      width: 100%;
+  
+    }
+  }

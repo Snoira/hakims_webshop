@@ -1,9 +1,20 @@
 import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import SearchBar from './SearchBar';
+import ShoppingCartModal from './CartModal';
 
 const Header = () => {
+    const [showCartModal, setShowCartModal] = useState(false);  
+
+    const toggleCartModal  = () => {
+        setShowCartModal(prevState => !prevState);
+        console.log(showCartModal)
+        };
+
+
     return (
+        <> 
         <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top p-0">
 
             <div className="header-container d-flex align-items-center justify-content-between ">
@@ -20,11 +31,16 @@ const Header = () => {
                         <Link to="/SearchPage" className="nav-link"><FaSearch /></Link>
                     </div>
                     <a className="nav-link" href="#">Logga in</a>
-                    <Link to="/checkout" className="nav-link">Varukorg</Link>
+                    <button className="btn btn-primary" onClick={() => toggleCartModal()} >Varukorg</button>
                 </div>
             </div>
 
         </nav>
+        {showCartModal && <ShoppingCartModal />}
+
+        
+        
+        </>
     )
 };
 

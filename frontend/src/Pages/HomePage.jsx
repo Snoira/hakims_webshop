@@ -87,6 +87,7 @@ const HomePage = () => {
         <div>
             <Header />
             <HeroSection />
+              
             <div className="main-container"> 
                 <Navbar  />
             {products && <RenderProductCards products={products} />}
@@ -96,7 +97,6 @@ const HomePage = () => {
                 await getProducts()
                 console.log("klick")
             }} >klicka</button> */}
-
             <Footer />
         </div>
     );
