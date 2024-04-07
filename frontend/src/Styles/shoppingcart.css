@@ -1,12 +1,12 @@
 .shopping-cart-modal {
     position: fixed;
-    top: 20px; /* Justera efter behov */
-    right: 20px; /* Justera efter behov */
-    width: 300px; /* Justera efter behov */
-    height: 400px; /* Justera efter behov */
+    top: 85px; 
+    right: 20px; 
+    width: 300px; 
+    height: 300px;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000; /* Säkerställer att den visas över andra element */
+    z-index: 1000;
 }

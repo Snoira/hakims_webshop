@@ -19,7 +19,7 @@ const Header = () => {
 
             <div className="header-container d-flex align-items-center justify-content-between ">
                 <div className="logo">
-                    <Link to="/" ><b>Hakim's</b></Link>
+                    <Link to="/" ><b>Hakim Livs</b></Link>
                 </div>
 
                 <div className="d-lg-block">
