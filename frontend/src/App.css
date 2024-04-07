@@ -1,131 +1,18 @@
+@import url("Styles/shoppingcart.css");
+@import url("Styles/header.css");
+@import url("Styles/productcards.css");
+@import url("Styles/herosection.css");
+@import url("Styles/footer.css");
+
 #root {
   width: 100%;
   height: 100%;
   text-align: center;
 }
 
-
 * {
   padding: 0;
   margin: 0;
-}
-
-/* header */
-
-.header-container {
-  width: 100%;
-  padding: 20px;
-  background-color: #c3cdf7;
-}
-
-.search-container {
-  max-width: 500px;
-}
-
-.search-form {
-  display: flex;
-  gap: 1rem;
-  flex: 1;
-  width: 500px;
-
-
-}
-
-@media (max-width: 576px) {
-  .header-container {
-    flex-wrap: wrap;
-  }
-}
-
-@media (max-width: 991.98px) {
-  .d-lg-block {
-    display: none !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .search-bar-container {
-    width: 100%;
-
-  }
-}
-
-/* ProductCards */
-.products {
-  position: relative;
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-areas: "products";
-  gap: 1rem;
-  margin-top: 30px;
-  padding-left: 20px;
-  padding-right: 20px;
-  flex-grow: 1;
-}
-
-
-.product-card {
-  display: grid;
-  grid-template-rows: 1fr;
-  width: 100%;
-  height: 370px;
-  padding: 0 10px;
-  gap: 10px;
-  align-items: center;
-  border-radius: .25rem;
-  background-color: #ffffff;
-
-  img {
-    max-width: 100%;
-    max-height: 200px;
-    width: auto;
-    object-fit: contain;
-    justify-self: center;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-    flex: 1;
-  }
-
-  p {
-    font-size: 16px;
-  }
-}
-
-.product-card-details {
-  width: 100%;
-  height: 122px;
-  overflow: hidden;
-  margin-bottom: 5px;
-  background-color: #ffffff;
-}
-
-.button {
-  display: flex;
-  justify-content: center;
-  font-style: italic;
-  align-items: center;
-}
-
-
-
-.product-card:hover {
-  cursor: pointer;
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-@media (max-width: 768px) {
-  .products {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-@media (max-width: 576px) {
-  .products {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 
@@ -139,21 +26,8 @@
   display: grid;
   grid-template-columns: 23vw auto !important;
   /* position: absolute; */
-  margin-top:  80px;
+  /* margin-top:  80px; behövs ej med hero section på homepage */
   padding-bottom: 50px;
   width: 100%;
   background-color: #f0f0f0;
-}
-
-/* Navbar container */
-.navbar-container {
-  height: 100%;
-  background-color: #f0f0f0; 
-}
-
-/* Footer */
-.footer {
-  z-index: 1;
-  bottom: 0;
-  width: 100%;
 }
