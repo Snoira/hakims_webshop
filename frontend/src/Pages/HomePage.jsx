@@ -4,7 +4,9 @@ import RenderProductCards from '../Components/RenderProductCards';
 import Header from '../Components/Header';
 import Navbar from  '../Components/Navbar';
 import Footer from '../Components/Footer';
+import HeroSection from '../Components/HeroSection';
 import { useState, useEffect } from 'react';
+
 
 
 const HomePage = () => {
@@ -81,19 +83,26 @@ const HomePage = () => {
         getProducts()
     }, [])
 
+    const [cart, setCart] = useState([]);
+
+    const addToCart = (productToAdd) => {
+        setCart([...cart, productToAdd]);
+    }
+
     return (
         <div>
-            <Header />
+            <Header cart={cart}/>
+            <HeroSection />
+              
             <div className="main-container"> 
                 <Navbar  />
-            {products && <RenderProductCards products={products} />}
+            {products && <RenderProductCards products={products} addToCart={addToCart} cart= {cart}/>}
             
             </div>
             {/* <button onClick={async () => {
                 await getProducts()
                 console.log("klick")
             }} >klicka</button> */}
-
             <Footer />
         </div>
     );
