@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Product = require("../models/product.model");
+const Product = require("../app/models/product.model");
 const fs = require("fs");
 
 require("dotenv").config();
@@ -9,7 +9,7 @@ async function updateDatabase() {
     await mongoose.connect(process.env.MONGOOSE_LIVE_URI);
     await Product.deleteMany({});
 
-    const data = fs.readFileSync("./app/scripts/products.json");
+    const data = fs.readFileSync("./test/products.json");
     const products = JSON.parse(data);
 
     for (let product of products) {
