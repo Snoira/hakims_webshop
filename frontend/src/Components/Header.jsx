@@ -31,7 +31,7 @@ const Header = () => {
                         <Link to="/SearchPage" className="nav-link"><FaSearch /></Link>
                     </div>
                     <a className="nav-link" href="#">Logga in</a>
-                    <button className="btn btn-primary" onClick={() => toggleCartModal()} >Varukorg</button>
+                    <a className="nav-link" onClick={() => toggleCartModal()} >Varukorg</a>
                 </div>
             </div>
 
