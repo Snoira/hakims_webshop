@@ -66,22 +66,46 @@ const HomePage = () => {
 
         const deleteProductFromCart = (productToRemove) => {
             const updatedCart = cart.filter(item => item.name !== productToRemove.name);
-        // Uppdatera varukorgen
-        setCart(updatedCart);
+            setCart(updatedCart);
         }
 
+      const changeQuantityCart = (product, change) => {
+        const updatedCart = [...cart];
+        const index = updatedCart.findIndex(item => item.name === product.name);
+        if (index !== -1) {
+            if (change === "increase") {
+              updatedCart[index].quantity += 1;
+            } else if (change === "decrease") {
+                if (updatedCart[index].quantity === 1) {
+                    updatedCart.splice(index, 1);
+                } else {
+                    updatedCart[index].quantity -= 1;
+                }
+            }
+            setCart(updatedCart);
+            localStorage.setItem('cart', JSON.stringify(updatedCart));
+          }
+      }
+
+      const calculateTotal = (cart) => {
+        if (cart.length === 0) {
+          return 0;
+        }
       
-
-
-
-    // Gamla add to cart
-    // const addToCart = (productToAdd) => {
-    //     setCart([...cart, productToAdd]);
-    // }
+        const total = cart.reduce((accumulator, currentItem) => {
+          return accumulator + (currentItem.price * currentItem.quantity);
+        }, 0);
+      
+        return total;
+      };
 
     return (
         <div>
-            <Header cart={cart} deleteProductFromCart={deleteProductFromCart}/>
+            <Header 
+            cart={cart} 
+            deleteProductFromCart={deleteProductFromCart}
+            changeQuantityCart={changeQuantityCart}
+            calculateTotal={calculateTotal}/>
             <HeroSection />
               
             <div className="main-container"> 

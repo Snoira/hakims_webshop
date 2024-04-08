@@ -1,6 +1,6 @@
-const ShoppingCartmodal = ({ cart, deleteProductFromCart }) => {
+const ShoppingCartmodal = ({ cart, deleteProductFromCart, changeQuantityCart, calculateTotal }) => {
     
-
+const total = calculateTotal(cart);
 
 
     return (
@@ -16,15 +16,15 @@ const ShoppingCartmodal = ({ cart, deleteProductFromCart }) => {
                             <div> 
                             <div className="cart-item-details" key={index}>
                                 <p>{item.name}</p>
-                                <button className="btn-secondary btn-sm">-</button>
+                                <button className="btn-secondary btn-sm" onClick={() => changeQuantityCart(item, "decrease")}>-</button>
                                 <p>{item.quantity}</p>
-                                <button className="btn-success btn-sm">+</button>
-                                <p> {item.price}kr</p>
+                                <button className="btn-success btn-sm" onClick={() => changeQuantityCart(item, "increase")}>+</button>
+                                <p> {item.price}kr/st</p>
                                 <button className="btn-danger btn-sm" onClick={() => deleteProductFromCart(item)}>Ta bort</button>
                             </div>                            
                             </div>
                         ))}
-                        <p>Total: kr</p>
+                        <p>Total: {total} kr</p>
                     </ul>
                     
                 ) : (
