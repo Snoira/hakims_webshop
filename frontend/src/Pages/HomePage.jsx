@@ -40,15 +40,14 @@ const HomePage = () => {
         getProducts()
     }, [])
 
-    // Nedan useState kollar efter produkter i localstorage, finns inget lagrat, blir  en tom array
+    // Nedan useState kollar efter produkter i localstorage, finns inget lagrat, blir cart en tom array
     const [cart, setCart] = useState(localStorage.getItem('cart') ? JSON.parse(localStorage.getItem("cart")) : []);
 
+    // spara produkt i localstorage
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart));
-        
       }, [cart]);
-      
-
+       
       const addToCart = (productToAdd) => {
         const existingProductIndex = cart.findIndex((item) => item.name === productToAdd.name);
         if (existingProductIndex !== -1) {
@@ -65,23 +64,57 @@ const HomePage = () => {
           }
         };
 
+        const deleteProductFromCart = (productToRemove) => {
+            const updatedCart = cart.filter(item => item.name !== productToRemove.name);
+            setCart(updatedCart);
+        }
+
+      const changeQuantityCart = (product, change) => {
+        const updatedCart = [...cart];
+        const index = updatedCart.findIndex(item => item.name === product.name);
+        if (index !== -1) {
+            if (change === "increase") {
+              updatedCart[index].quantity += 1;
+            } else if (change === "decrease") {
+                if (updatedCart[index].quantity === 1) {
+                    updatedCart.splice(index, 1);
+                } else {
+                    updatedCart[index].quantity -= 1;
+                }
+            }
+            setCart(updatedCart);
+            localStorage.setItem('cart', JSON.stringify(updatedCart));
+          }
+      }
+
+      const calculateTotal = (cart) => {
+        if (cart.length === 0) {
+          return 0;
+        }
       
-
-
-
-    // Gamla add to cart
-    // const addToCart = (productToAdd) => {
-    //     setCart([...cart, productToAdd]);
-    // }
+        const total = cart.reduce((accumulator, currentItem) => {
+          return accumulator + (currentItem.price * currentItem.quantity);
+        }, 0);
+      
+        return total;
+      };
 
     return (
         <div>
-            <Header cart={cart}/>
+            <Header 
+            cart={cart} 
+            deleteProductFromCart={deleteProductFromCart}
+            changeQuantityCart={changeQuantityCart}
+            calculateTotal={calculateTotal}/>
             <HeroSection />
               
             <div className="main-container"> 
                 <Navbar  />
-            {products && <RenderProductCards products={products} addToCart={addToCart} cart= {cart}/>}
+            {products && <RenderProductCards 
+            products={products} 
+            addToCart={addToCart} 
+            cart={cart} 
+             />}
             
             </div>
             {/* <button onClick={async () => {
