@@ -1,10 +1,9 @@
 const fs = require('fs');
 
-
 async function addProducts() {
-    const inquirer = await import('inquirer');
+    const inquirer = await import("inquirer");
 
-    const product = await inquirer.prompt([
+    const product = await inquirer.default.prompt([
         {
             type: 'input',
             name: 'name',
@@ -22,4 +21,19 @@ async function addProducts() {
         },
 
     ]);
+
+    const data = fs.readFileSync("./test/products.json");
+    const products = JSON.parse(data);
+
+    products.push(product);
+
+    fs.writeFileSync('./test/products.json', JSON.stringify(products, null, 2));
+
+    console.log('Product has been added successfully to the products.json file.', product);
+
+
+    
 }
+
+
+addProducts();
