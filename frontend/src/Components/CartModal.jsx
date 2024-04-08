@@ -1,4 +1,4 @@
-const ShoppingCartmodal = ({ cart }) => {
+const ShoppingCartmodal = ({ cart, deleteProductFromCart }) => {
     
 
 
@@ -17,17 +17,16 @@ const ShoppingCartmodal = ({ cart }) => {
                             <div className="cart-item-details" key={index}>
                                 <p>{item.name}</p>
                                 <button className="btn-secondary btn-sm">-</button>
-
-                               
-                                
                                 <p>{item.quantity}</p>
                                 <button className="btn-success btn-sm">+</button>
-                                <p> {item.price} kr</p>
-                                <button className="btn-danger btn-sm">Ta bort</button>
-                            </div>
+                                <p> {item.price}kr</p>
+                                <button className="btn-danger btn-sm" onClick={() => deleteProductFromCart(item)}>Ta bort</button>
+                            </div>                            
                             </div>
                         ))}
+                        <p>Total: kr</p>
                     </ul>
+                    
                 ) : (
                     <p>Du har inte lagt till några varor!</p>
                 )}

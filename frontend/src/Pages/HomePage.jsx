@@ -40,15 +40,14 @@ const HomePage = () => {
         getProducts()
     }, [])
 
-    // Nedan useState kollar efter produkter i localstorage, finns inget lagrat, blir  en tom array
+    // Nedan useState kollar efter produkter i localstorage, finns inget lagrat, blir cart en tom array
     const [cart, setCart] = useState(localStorage.getItem('cart') ? JSON.parse(localStorage.getItem("cart")) : []);
 
+    // spara produkt i localstorage
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart));
-        
       }, [cart]);
-      
-
+       
       const addToCart = (productToAdd) => {
         const existingProductIndex = cart.findIndex((item) => item.name === productToAdd.name);
         if (existingProductIndex !== -1) {
@@ -65,6 +64,12 @@ const HomePage = () => {
           }
         };
 
+        const deleteProductFromCart = (productToRemove) => {
+            const updatedCart = cart.filter(item => item.name !== productToRemove.name);
+        // Uppdatera varukorgen
+        setCart(updatedCart);
+        }
+
       
 
 
@@ -76,12 +81,16 @@ const HomePage = () => {
 
     return (
         <div>
-            <Header cart={cart}/>
+            <Header cart={cart} deleteProductFromCart={deleteProductFromCart}/>
             <HeroSection />
               
             <div className="main-container"> 
                 <Navbar  />
-            {products && <RenderProductCards products={products} addToCart={addToCart} cart= {cart}/>}
+            {products && <RenderProductCards 
+            products={products} 
+            addToCart={addToCart} 
+            cart={cart} 
+             />}
             
             </div>
             {/* <button onClick={async () => {
