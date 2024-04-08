@@ -3,14 +3,28 @@ import axios from 'axios';
 
 const SearchBar = () => {
     const [query, setQuery] = useState('');
+    const [category, setCategory] = useState('');
+    const [categories, setCategories] = useState([]);
     const [searchRes, setSearchRes] = useState([]);
     const [searching, setSearching] = useState(false);
-    const searchRef = useRef(null); //samlar klick utanför sökfält
+    const searchRef = useRef(null);
+
+    useEffect(() => {
+        async function fetchCategories() {
+            try {
+                const res = await axios.get('http://localhost:5173/categories');
+                setCategories(res.data);
+            } catch (error) {
+                console.error("Error fetching Categories ", error);
+            }
+        }
+        fetchCategories();
+    }, []);
 
     const handleSearch = async () => {
         setSearching(true);
         try {
-            const res = await axios.post('https://hakims-webshop-1.onrender.com/products/search', { query });
+            const res = await axios.post('https://hakims-webshop-1.onrender.com/products/search', { query, category });
             console.log("search results", res.data);
             setSearchRes(res.data);
         } catch (error) {
@@ -21,8 +35,6 @@ const SearchBar = () => {
         }
     };
 
-
-    //använder useRef resätta sökfältet om det klickas utanför
     useEffect(() => {
         function handleClickOutside(event) {
             if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -37,19 +49,20 @@ const SearchBar = () => {
     }, []);
 
     useEffect(() => {
-        if (query.trim() !== '') {
+        if (query.trim() !== '' || category !== '') {
             handleSearch();
         } else {
             setSearchRes([]);
         }
-    }, [query]);
-
+    }, [query, category]);
 
     const filterResults = (results, searchTerm) => {
         return results.filter(product =>
-            product.name.toLowerCase().includes(searchTerm.toLowerCase())
+            product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+            (!category || product.category === category) // Om kategorin är tom, filtrera inte på kategori
         );
     };
+
 
     return (
         <div className="Search-container">
@@ -63,6 +76,12 @@ const SearchBar = () => {
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                     />
+                    <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                        <option value="">All categories</option>
+                        <option value="Bread and Pastries">Bread and Pastries</option>
+                        <option value="Fruit">Fruit</option>
+                        <option value="Hygiene">Hygiene</option>
+                    </select>
                 </form>
                 {searchRes.length > 0 && (
                     <div className="search-results">
