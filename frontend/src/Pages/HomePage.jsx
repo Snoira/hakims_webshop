@@ -40,11 +40,39 @@ const HomePage = () => {
         getProducts()
     }, [])
 
-    const [cart, setCart] = useState([]);
+    // Nedan useState kollar efter produkter i localstorage, finns inget lagrat, blir  en tom array
+    const [cart, setCart] = useState(localStorage.getItem('cart') ? JSON.parse(localStorage.getItem("cart")) : []);
 
-    const addToCart = (productToAdd) => {
-        setCart([...cart, productToAdd]);
-    }
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+      }, [cart]);
+      
+
+      const addToCart = (productToAdd) => {
+        const existingProductIndex = cart.findIndex((item) => item.name === productToAdd.name);
+        if (existingProductIndex !== -1) {
+            const updatedCart = [...cart];
+            updatedCart[existingProductIndex].quantity += 1;
+            setCart(updatedCart, () => {
+                localStorage.setItem('cart', JSON.stringify(cart));
+            });
+          } else {
+            const updatedCart = [...cart, { ...productToAdd, quantity: 1 }];
+            setCart(updatedCart, () => {
+                localStorage.setItem('cart', JSON.stringify(cart))
+            });
+          }
+        };
+
+      
+
+
+
+    // Gamla add to cart
+    // const addToCart = (productToAdd) => {
+    //     setCart([...cart, productToAdd]);
+    // }
 
     return (
         <div>
