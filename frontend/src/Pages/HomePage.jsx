@@ -10,50 +10,7 @@ import { useState, useEffect } from 'react';
 
 
 const HomePage = () => {
-    const [products, setProducts] = useState([
-        {
-        "_id": "6605bb372aa93949811cd7e2",
-        "name": "spagetti",
-        "category": "pasta",
-        "price": 10,
-        "__v": 0
-        },
-        {
-        "_id": "6605bb852aa93949811cd7e5",
-        "name": "yoghurt",
-        "category": "dairy",
-        "price": 5,
-        "__v": 0
-        },
-        {
-        "_id": "660bc190635ca0d2fca2e5a0",
-        "name": "milk",
-        "category": "dairy",
-        "price": 5,
-        "__v": 0
-        },
-        {
-        "_id": "660bc282635ca0d2fca2e5a3",
-        "name": "juice",
-        "category": "dairy",
-        "price": 5,
-        "__v": 0
-        },
-        {
-        "_id": "660c0e42745ab6b96dbbacf4",
-        "name": "spagetti",
-        "category": "pasta",
-        "price": 10,
-        "__v": 0
-        },
-        {
-        "_id": "660c0e5f745ab6b96dbbacf6",
-        "name": "rice",
-        "category": "rice",
-        "price": 15,
-        "__v": 0
-        }
-        ])
+    const [products, setProducts] = useState([])
 
     const getProducts = async () => {
         try {
