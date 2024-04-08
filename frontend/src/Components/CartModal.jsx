@@ -1,4 +1,4 @@
-const ShoppingCartmodal = ({ cart , addToCart }) => {
+const ShoppingCartmodal = ({ cart }) => {
     
 
 
