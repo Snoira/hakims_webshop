@@ -19,6 +19,11 @@ async function addProducts() {
         type: "input",
         name: "price",
         message: "Enter product price: ",
+        validate: function(value){
+          const valid = !isNaN(parseFloat(value));
+          return valid || "please enter a valid product price."
+
+        }
       },
     ]);
 
