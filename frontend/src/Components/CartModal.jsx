@@ -1,4 +1,4 @@
-const ShoppingCartmodal = ({ cart , addToCart }) => {
+const ShoppingCartmodal = ({ cart }) => {
     
 
 
@@ -11,12 +11,21 @@ const ShoppingCartmodal = ({ cart , addToCart }) => {
             </div>
 
             {cart.length > 0 ? (
-                    <ul>
+                    <ul className="cart-list">
                         {cart.map((item, index) => (
-                            <li key={index}>
-                                <span>{item.name}</span>
-                                <span> {item.price} kr</span>
-                            </li>
+                            <div> 
+                            <div className="cart-item-details" key={index}>
+                                <p>{item.name}</p>
+                                <button className="btn-secondary btn-sm">-</button>
+
+                               
+                                
+                                <p>{item.quantity}</p>
+                                <button className="btn-success btn-sm">+</button>
+                                <p> {item.price} kr</p>
+                                <button className="btn-danger btn-sm">Ta bort</button>
+                            </div>
+                            </div>
                         ))}
                     </ul>
                 ) : (
