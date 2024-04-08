@@ -59,7 +59,7 @@ const SearchBar = () => {
     const filterResults = (results, searchTerm) => {
         return results.filter(product =>
             product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-            (!category || product.category === category) // Om kategorin är tom, filtrera inte på kategori
+            (!category || product.category === category) // Filtrera endast om en kategori har valts
         );
     };
 
