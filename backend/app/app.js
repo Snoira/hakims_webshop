@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { urlencoded } = require('express');
 const productsRouter = require('./routes/product.route.js')
+const categoryRouter = require('./routes/category.route.js');
 
 const app = express()
 
@@ -18,6 +19,7 @@ app.use(express.json())
 
 
 app.use('/products', productsRouter)
+app.use('/categories', categoryRouter);
 
 app.get('/', (req, res) => res.send('Hello World from /!'))
 
