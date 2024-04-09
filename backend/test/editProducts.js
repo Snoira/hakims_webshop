@@ -1,11 +1,12 @@
 const fs = require("fs");
+const inquirer = require("inquirer");
+
 
 async function editProducts() {
-  const inquirer = await import("inquirer");
   const data = fs.readFileSync("./test/products.json");
   const products = JSON.parse(data);
 
-  const { productName } = await inquirer.default.prompt([
+  const { productName } = await inquirer.prompt([
     {
       type: "list",
       name: "productName",
@@ -16,7 +17,7 @@ async function editProducts() {
 
   const product = products.find((p) => p.name === productName);
 
-  const updatedProduct = await inquirer.default.prompt([
+  const updatedProduct = await inquirer.prompt([
     {
       type: "input",
       name: "name",
@@ -39,6 +40,12 @@ async function editProducts() {
         return valid || "please enter a valid product price.";
       },
     },
+    {
+      type: "input",
+      name: "imageURL",
+      message: `Enter new image URL for the product (current: ${product.imageURL}):`,
+      default: product.imageURL,
+    },
   ]);
 
   Object.assign(product, updatedProduct);
@@ -50,7 +57,11 @@ async function editProducts() {
     Name: ${product.name}\n
     Category: ${product.category}\n
     Price: ${product.price}\n 
+    Image URL: ${product.imageURL}\n
     ---------------------------\n`);
 }
 
-editProducts();
+// editProducts();
+
+
+module.exports = editProducts;

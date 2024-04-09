@@ -9,7 +9,7 @@ const addToCart = useCartUpdate(product);
     return (
         <>
             <div className="product-card gap-2">
-                <img src={product.image} alt="..." />
+                <img src={product.imageURL} alt="..." />
                 <div className="product-card-details">
                 <h2 className="font-bold">{product.price} sek</h2>
                 <p className="card-text">{product.description}</p>

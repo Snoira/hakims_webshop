@@ -1,18 +1,32 @@
 [
-    {
-        "name": "Apple",
-        "category": "Fruit",
-        "price": 10
-    },
-    {
-        "name": "Banana",
-        "category": "fruit",
-        "price": 8
-    },
-    {
-        "name": "Coca Cola",
-        "category": "Drink",
-        "price": 15
-
-    }
+  {
+    "name": "Äpple",
+    "category": "Frukt",
+    "price": 10,
+    "imageURL": "https://handlaprivatkund.ica.se/images-v3/bf7a00ca-390e-4769-865f-dc369586872e/f889f2cf-de4f-457e-ad25-c141b8de55a1/300x300.jpg"
+  },
+  {
+    "name": "Banan",
+    "category": "Frukt",
+    "price": 8,
+    "imageURL": "https://handlaprivatkund.ica.se/images-v3/bf7a00ca-390e-4769-865f-dc369586872e/a6201739-6638-4d2f-950e-99c3f94ac874/300x300.jpg"
+  },
+  {
+    "name": "Coca Cola",
+    "category": "Drycker",
+    "price": 15,
+    "imageURL": "https://handlaprivatkund.ica.se/images-v3/bf7a00ca-390e-4769-865f-dc369586872e/ff912367-e5b7-49c1-9ff8-79132069cf39/300x300.jpg"
+  },
+  {
+    "name": "Bacon",
+    "category": "Kött",
+    "price": "25",
+    "imageURL": "https://handlaprivatkund.ica.se/images-v3/bf7a00ca-390e-4769-865f-dc369586872e/83e1c282-f28b-4271-8cc3-f914feeb60c1/300x300.jpg"
+  },
+  {
+    "name": "Grill chips",
+    "category": "Snacks",
+    "price": "21",
+    "imageURL": "https://handlaprivatkund.ica.se/images-v3/bf7a00ca-390e-4769-865f-dc369586872e/c128f1d8-4a6a-491c-a8d2-3a6afa624837/300x300.jpg"
+  }
 ]
