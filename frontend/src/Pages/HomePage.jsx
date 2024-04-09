@@ -6,7 +6,7 @@ import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import HeroSection from '../Components/HeroSection';
 import { useState, useEffect } from 'react';
-
+import { CartProvider } from "../Context/Cart.contex";
 
 
 const HomePage = () => {
@@ -108,34 +108,37 @@ const HomePage = () => {
 
     return (
         <div>
-            <Header
-                cart={cart}
-                deleteProductFromCart={deleteProductFromCart}
-                changeQuantityCart={changeQuantityCart}
-                calculateTotal={calculateTotal} />
-            <HeroSection />
+            <CartProvider>
+                <Header
+                // cart={cart}
+                // deleteProductFromCart={deleteProductFromCart}
+                // changeQuantityCart={changeQuantityCart}
+                // calculateTotal={calculateTotal}
+                />
+                <HeroSection />
 
-            <div className="main-container">
-                <Navbar onSelectCategory={handleSelectCategory} />
-                {filteredProducts.length > 0 ? (
-                    <RenderProductCards
-                        products={filteredProducts > 0 ? filteredProducts : products}
-                        addToCart={addToCart}
-                        cart={cart}
-                    />
-                ) : (
-                    <RenderProductCards
-                        products={products}
-                        addToCart={addToCart}
-                        cart={cart}
-                    />
-                )}
-            </div>
-            {/* <button onClick={async () => {
+                <div className="main-container">
+                    <Navbar onSelectCategory={handleSelectCategory} />
+                    {filteredProducts.length > 0 ? (
+                        <RenderProductCards
+                            products={filteredProducts > 0 ? filteredProducts : products}
+                            addToCart={addToCart}
+                            cart={cart}
+                        />
+                    ) : (
+                        <RenderProductCards
+                            products={products}
+                            addToCart={addToCart}
+                            cart={cart}
+                        />
+                    )}
+                </div>
+                {/* <button onClick={async () => {
                 await getProducts()
                 console.log("klick")
             }} >klicka</button> */}
-            <Footer />
+                <Footer />
+            </CartProvider>
         </div>
     );
 }
