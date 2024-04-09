@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import SearchBar from './SearchBar';
 import ShoppingCartModal from './CartModal';
+import { useCartContext } from '../Context/Cart.contex';
 
-const Header = ({ cart, deleteProductFromCart, changeQuantityCart, calculateTotal }) => {
+const Header = () => {
     const [showCartModal, setShowCartModal] = useState(false);  
 
     const toggleCartModal  = () => {
@@ -37,10 +38,11 @@ const Header = ({ cart, deleteProductFromCart, changeQuantityCart, calculateTota
 
         </nav>
         {showCartModal && <ShoppingCartModal 
-        cart={cart} 
-        deleteProductFromCart={deleteProductFromCart} 
-        changeQuantityCart={changeQuantityCart} 
-        calculateTotal={calculateTotal} />}
+        // cart={cart} 
+        // deleteProductFromCart={deleteProductFromCart} 
+        // changeQuantityCart={changeQuantityCart} 
+        // calculateTotal={calculateTotal} 
+        />}
 
         
         

@@ -1,4 +1,17 @@
-const ShoppingCartmodal = ({ cart, deleteProductFromCart, changeQuantityCart, calculateTotal }) => {
+import { useCartContext } from "../Context/Cart.contex";
+
+const ShoppingCartmodal = () => {
+    const { cart, setCart } = useCartContext();
+
+     // spara produkt i localstorage
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }, [cart]);
+
+
+    
+
+      
     
 const total = calculateTotal(cart);
 
