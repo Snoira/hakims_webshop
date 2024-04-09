@@ -20,6 +20,7 @@ const HomePage = () => {
             console.log("res.data:", res.data)
             setProducts(res.data)
             setFilteredProducts(res.data);
+            console.log("filtered:", filteredProducts)
         } catch (error) {
             if (error.response) {
                 // The request was made and the server responded with a status code
@@ -44,10 +45,13 @@ const HomePage = () => {
         getProducts()
     }, [])
 
-    const handleSelectCategory = (category) => {
-        const filtered = products.filter(product => product.category === category);
-        console.log(filtered)
-        setFilteredProducts(filtered);
+    const handleSelectCategory = async (category) => {
+        try {
+            const res = await axios.post('http://localhost:8000/products/category', { category });
+            setFilteredProducts(res.data);
+        } catch (error) {
+            console.error("Error filtering products by category:", error);
+        }
     };
 
     // Nedan useState kollar efter produkter i localstorage, finns inget lagrat, blir cart en tom array
