@@ -1,28 +1,11 @@
-import React, { useState } from "react";
-import { useCartContext } from "../Context/Cart.contex";
+import {useCartUpdate} from "../Context/Cart.contex";
+
 
 const ProductCards = ({ product }) => {
-    
-    // const { cart, setCart } = useCartContext();
-    
+const addToCart = useCartUpdate(product);
 
-    // const addToCart = (product) => {
-    //     const existingProductIndex = cart.findIndex((item) => item.name === product.name);
-    //     if (existingProductIndex !== -1) {
-    //         const updatedCart = [...cart];
-    //         updatedCart[existingProductIndex].quantity += 1;
-    //         setCart(updatedCart, () => {
-    //             localStorage.setItem('cart', JSON.stringify(cart));
-    //         });
-    //       } else {
-    //         const updatedCart = [...cart, { ...product, quantity: 1 }];
-    //         setCart(updatedCart, () => {
-    //             localStorage.setItem('cart', JSON.stringify(cart))
-    //         });
-    //       }
-    //     };
-   
 
+ 
     return (
         <>
             <div className="product-card gap-2">

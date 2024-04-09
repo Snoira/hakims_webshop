@@ -1,19 +1,29 @@
-import { useCartContext } from "../Context/Cart.contex";
+import { useCart, useDeleteProduct, useChangeQuantity } from "../Context/Cart.contex";
+import { useEffect } from "react";
+
 
 const ShoppingCartmodal = () => {
-    const { cart, setCart } = useCartContext();
+    const cart = useCart();
+    const deleteProductFromCart = useDeleteProduct();
+    const changeQuantiy = useChangeQuantity();
 
-     // spara produkt i localstorage
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart));
       }, [cart]);
 
-
-    
-
+      const calculateTotal = (cart) => {
+        if (cart.length === 0) {
+          return 0;
+        }
       
-    
-const total = calculateTotal(cart);
+        const total = cart.reduce((accumulator, currentItem) => {
+          return accumulator + (currentItem.price * currentItem.quantity);
+        }, 0);
+      
+        return total;
+      };
+
+      const total = calculateTotal(cart);
 
 
     return (
@@ -29,11 +39,11 @@ const total = calculateTotal(cart);
                             <div> 
                             <div className="cart-item-details" key={index}>
                                 <p>{item.name}</p>
-                                <button className="btn-secondary btn-sm" onClick={() => changeQuantityCart(item, "decrease")}>-</button>
+                                <button className="btn-secondary btn-sm" onClick={() => changeQuantiy(item, "decrease")}>-</button>
                                 <p>{item.quantity}</p>
-                                <button className="btn-success btn-sm" onClick={() => changeQuantityCart(item, "increase")}>+</button>
+                                <button className="btn-success btn-sm" onClick={() => changeQuantiy(item, "increase")}>+</button>
                                 <p> {item.price}kr/st</p>
-                                <button className="btn-danger btn-sm" onClick={() => deleteProductFromCart(item)}>Ta bort</button>
+                                <button className="btn-danger btn-sm" onClick={() => deleteProductFromCart(item)}>Ta bort</button> 
                             </div>                            
                             </div>
                         ))}

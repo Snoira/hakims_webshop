@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import SearchBar from './SearchBar';
 import ShoppingCartModal from './CartModal';
-import { useCartContext } from '../Context/Cart.contex';
+
 
 const Header = () => {
     const [showCartModal, setShowCartModal] = useState(false);  
