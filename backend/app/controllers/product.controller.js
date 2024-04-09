@@ -73,6 +73,25 @@ async function searchProducts(req, res) {
     }
 }
 
+async function getProductbyCategory (req, res){
+    try {
+        const { category } = req.body;
+        const products = await Product.find({}).populate({
+            path: 'category',
+            match: { name: category }
+        });
+
+        const filteredProducts = products.filter(product => product.category !== null);
+
+        res.json(filteredProducts);
+    } catch (error) {
+        res.status(500).json({ 
+            message: error.message
+        });
+    }
+
+}
+
 async function startMessage(req, res){
     res.status(200).send("Hello from the server")
 }
@@ -81,5 +100,6 @@ module.exports = {
     createProduct,
     getProducts,
     searchProducts,
+    getProductbyCategory,
     startMessage
 };
