@@ -1,19 +1,10 @@
 import React from 'react';
-import axios from 'axios';
+
 
 const Navbar = ({ onSelectCategory }) => {
 
-  const handleCategory = async (category) => {
-    console.log("Selected category:", category);
-    try {
-      const res = await axios.post('/products/category', { category: category });
-      console.log("cat: ", category)
-      const products = res.data;
-      console.log(res.data)
-      onSelectCategory(products);
-    } catch (error) {
-      console.error("Error fetching products ", error);
-    }
+  const handleCategory = (category) => {
+    onSelectCategory(category);
   };
 
   return (
