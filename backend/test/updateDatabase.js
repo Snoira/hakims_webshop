@@ -14,15 +14,12 @@ async function updateDatabase() {
     const products = JSON.parse(data);
 
     for (let product of products) {
-
       let category = await Category.findOne({ name: product.category });
       if (!category) {
         category = await Category.create({ name: product.category });
       }
 
       product.category = category._id;
-
-
 
       await Product.create(product);
     }
