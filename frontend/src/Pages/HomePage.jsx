@@ -18,6 +18,7 @@ const HomePage = () => {
         try {
             const res = await axios.get('https://hakims-webshop-1.onrender.com/products')
             setProducts(res.data)
+            setFilteredProducts(res.data);
         } catch (error) {
             if (error.response) {
                 // The request was made and the server responded with a status code
@@ -42,9 +43,9 @@ const HomePage = () => {
         getProducts()
     }, [])
 
-    const handleSelectCategory = (categoryProducts) => {
-        console.log('categoryProdukts', categoryProducts)
-        setFilteredProducts(categoryProducts); // Uppdatera filtrerade produkter
+    const handleSelectCategory = (category) => {
+        const filtered = products.filter(product => product.category === category);
+        setFilteredProducts(filtered);
     };
 
     // Nedan useState kollar efter produkter i localstorage, finns inget lagrat, blir cart en tom array
@@ -119,19 +120,11 @@ const HomePage = () => {
 
                 <div className="main-container">
                     <Navbar onSelectCategory={handleSelectCategory} />
-                    {filteredProducts.length > 0 ? (
-                        <RenderProductCards
-                            products={filteredProducts > 0 ? filteredProducts : products}
-                            addToCart={addToCart}
-                            cart={cart}
-                        />
-                    ) : (
-                        <RenderProductCards
-                            products={products}
-                            addToCart={addToCart}
-                            cart={cart}
-                        />
-                    )}
+                    <RenderProductCards
+                        products={filteredProducts}
+                        addToCart={addToCart}
+                        cart={cart}
+                    />
                 </div>
                 {/* <button onClick={async () => {
                 await getProducts()

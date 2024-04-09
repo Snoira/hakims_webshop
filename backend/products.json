@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Apple",
+    "category": "Fruit",
+    "price": 10
+  },
+  {
+    "name": "Banana",
+    "category": "fruit",
+    "price": 8
+  },
+  {
+    "name": "Coca Cola",
+    "category": "Drink",
+    "price": 15
+  },
+  {
+    "name": "Nocco",
+    "category": "6614f99ee5f12b677dd667e7",
+    "price": "19"
+  }
+]
