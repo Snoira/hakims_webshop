@@ -21,6 +21,7 @@ app.use(express.json())
 app.use('/products', productsRouter)
 app.use('/categories', categoryRouter);
 
+
 app.get('/', (req, res) => res.send('Hello World from /!'))
 
 
