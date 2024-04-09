@@ -35,7 +35,7 @@ async function addProducts() {
     fs.writeFileSync("./test/products.json", JSON.stringify(products, null, 2));
 
     console.log(
-      `Product has been added successfully to the products.json file.\n New product:\n Name: ${product.name} \n Category: ${product.category} \n Price: ${product.price}.\n`
+      `Product has been added successfully to the products.json file.\n ----------------------------\n New product:\n Name: ${product.name} \n Category: ${product.category} \n Price: ${product.price} \n----------------------------\n`
     );
 
     const { addAnother } = await inquirer.default.prompt([
