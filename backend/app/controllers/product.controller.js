@@ -12,11 +12,11 @@ async function createProduct(req, res) {
 
         let categoryId;
 
-        // Check if category is a valid ObjectId
+        
         if (mongoose.Types.ObjectId.isValid(category)) {
             categoryId = category;
         } else {
-            // Try to find category by name
+            // hitta kategori med namn
             const foundCategory = await Category.findOne({ name: category });
             if (!foundCategory) {
                 return res.status(404).json({ message: "Category not found" });
@@ -44,7 +44,7 @@ async function createProduct(req, res) {
 
 async function getProducts(req, res){
     try{
-        const products = await Product.find()
+        const products = await Product.find().populate('category');
         res.status(200).send(products)
         console.log("Products: ", products)
     } catch(error){
@@ -56,7 +56,16 @@ async function getProducts(req, res){
 async function searchProducts(req, res) {
     try {
         const { query } = req.body;
-        const products = await Product.find({ $text: { $search: query } });
+        console.log("Sökterm:", query);
+
+        const products = await Product.find({ 
+            $or: [
+                { name: { $regex: query, $options: 'i' } }, // Sök i produktnamn
+                { category: { $in: await Category.find({ name: { $regex: query, $options: 'i' } }).select('_id') } } // Sök i kategorinamn
+            ] 
+        }).populate('category');
+
+        console.log("Sökresultat:", products);
         res.status(200).send(products);
     } catch(error) {
         console.error("Error searching products", error);

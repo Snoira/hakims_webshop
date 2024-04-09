@@ -3,28 +3,14 @@ import axios from 'axios';
 
 const SearchBar = () => {
     const [query, setQuery] = useState('');
-    const [category, setCategory] = useState('');
-    const [categories, setCategories] = useState([]);
     const [searchRes, setSearchRes] = useState([]);
     const [searching, setSearching] = useState(false);
     const searchRef = useRef(null);
 
-    useEffect(() => {
-        async function fetchCategories() {
-            try {
-                const res = await axios.get('http://localhost:5173/categories');
-                setCategories(res.data);
-            } catch (error) {
-                console.error("Error fetching Categories ", error);
-            }
-        }
-        fetchCategories();
-    }, []);
-
     const handleSearch = async () => {
         setSearching(true);
         try {
-            const res = await axios.post('https://hakims-webshop-1.onrender.com/products/search', { query, category });
+            const res = await axios.post('https://hakims-webshop-1.onrender.com/products/search', { query });
             console.log("search results", res.data);
             setSearchRes(res.data);
         } catch (error) {
@@ -49,20 +35,12 @@ const SearchBar = () => {
     }, []);
 
     useEffect(() => {
-        if (query.trim() !== '' || category !== '') {
+        if (query.trim() !== '') {
             handleSearch();
         } else {
             setSearchRes([]);
         }
-    }, [query, category]);
-
-    const filterResults = (results, searchTerm) => {
-        return results.filter(product =>
-            product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-            (!category || product.category === category) // Filtrera endast om en kategori har valts
-        );
-    };
-
+    }, [query]);
 
     return (
         <div className="Search-container">
@@ -76,17 +54,11 @@ const SearchBar = () => {
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                     />
-                    <select value={category} onChange={(e) => setCategory(e.target.value)}>
-                        <option value="">All categories</option>
-                        <option value="Bread and Pastries">Bread and Pastries</option>
-                        <option value="Fruit">Fruit</option>
-                        <option value="Hygiene">Hygiene</option>
-                    </select>
                 </form>
                 {searchRes.length > 0 && (
                     <div className="search-results">
                         <ul className="list-group">
-                            {filterResults(searchRes, query).map((product, index) => (
+                            {searchRes.map((product, index) => (
                                 <li key={index} className="list-group-item">
                                     {product.name}
                                 </li>
