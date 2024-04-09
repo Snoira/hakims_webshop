@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Product = require("../app/models/product.model");
 const fs = require("fs");
+const Category = require("../app/models/category.model");
 
 require("dotenv").config();
 
@@ -13,6 +14,16 @@ async function updateDatabase() {
     const products = JSON.parse(data);
 
     for (let product of products) {
+
+      let category = await Category.findOne({ name: product.category });
+      if (!category) {
+        category = await Category.create({ name: product.category });
+      }
+
+      product.category = [category._id];
+
+
+
       await Product.create(product);
     }
 
