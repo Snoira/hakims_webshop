@@ -45,6 +45,7 @@ const HomePage = () => {
 
     const handleSelectCategory = (category) => {
         const filtered = products.filter(product => product.category === category);
+        console.log(filtered)
         setFilteredProducts(filtered);
     };
 
