@@ -5,6 +5,7 @@ import SearchBar from './SearchBar';
 import ShoppingCartModal from './CartModal';
 
 
+
 const Header = () => {
     const [showCartModal, setShowCartModal] = useState(false);  
 
