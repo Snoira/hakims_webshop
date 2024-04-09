@@ -17,6 +17,7 @@ const HomePage = () => {
     const getProducts = async () => {
         try {
             const res = await axios.get('https://hakims-webshop-1.onrender.com/products')
+            console.log("res.data:", res.data)
             setProducts(res.data)
             setFilteredProducts(res.data);
         } catch (error) {
