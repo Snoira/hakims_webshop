@@ -73,24 +73,20 @@ async function searchProducts(req, res) {
     }
 }
 
-async function getProductbyCategory (req, res){
+async function getProductbyCategory(req, res) {
     try {
         const { category } = req.body;
-        const products = await Product.find({}).populate({
-            path: 'category',
-            match: { name: category }
-        });
-
-        const filteredProducts = products.filter(product => product.category !== null);
-
-        res.json(filteredProducts);
+        // Ändra från att använda populate för att matcha kategorinamnet
+        const products = await Product.find({ 'category.name': category });
+        console.log(products)
+        res.json(products);
     } catch (error) {
-        res.status(500).json({ 
+        res.status(500).json({
             message: error.message
         });
     }
-
 }
+
 
 async function startMessage(req, res){
     res.status(200).send("Hello from the server")

@@ -2,7 +2,6 @@ import React from 'react';
 
 
 const Navbar = ({ onSelectCategory }) => {
-
   const handleCategory = (category) => {
     onSelectCategory(category);
   };
@@ -34,8 +33,8 @@ const Navbar = ({ onSelectCategory }) => {
           </a>
         </li>
         <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Frukt och Grönt')}>
-            Frukt och Grönt
+          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Frukt')}>
+            Frukt
           </a>
         </li>
         <li>
