@@ -20,7 +20,7 @@ async function updateDatabase() {
         category = await Category.create({ name: product.category });
       }
 
-      product.category = [category._id];
+      product.category = category._id;
 
 
 
@@ -38,4 +38,6 @@ async function updateDatabase() {
   }
 }
 
-updateDatabase();
+// updateDatabase();
+
+module.exports = updateDatabase;
