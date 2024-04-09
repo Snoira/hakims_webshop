@@ -8,7 +8,7 @@ require("dotenv").config();
 async function updateDatabase() {
   try {
     await mongoose.connect(process.env.MONGOOSE_LIVE_URI);
-    // await Product.deleteMany({});
+    await Product.deleteMany({});
 
     const data = fs.readFileSync("./test/products.json");
     const products = JSON.parse(data);
@@ -20,14 +20,6 @@ async function updateDatabase() {
       }
 
       product.category = category._id;
-
-      const existingProduct = await Product.findOne({ name: product.name });
-      if (existingProduct) {
-        console.log(
-          `Product with name ${product.name} already exists. Skipping.`
-        );
-        continue;
-      }
 
       await Product.create(product);
     }
