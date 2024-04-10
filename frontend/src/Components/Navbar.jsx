@@ -1,9 +1,9 @@
 import React from 'react';
 
 
-const Navbar = ({ onSelectCategory }) => {
+const Navbar = ({ handleSelectCategory }) => {
   const handleCategory = (category) => {
-    onSelectCategory(category);
+    handleSelectCategory(category);
   };
 
   return (
@@ -53,8 +53,8 @@ const Navbar = ({ onSelectCategory }) => {
           </a>
         </li>
         <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Snacks och Godis')}>
-            Snacks & Godis
+          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Snacks')}>
+            Snacks
           </a>
         </li>
         <li>

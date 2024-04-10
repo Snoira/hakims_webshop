@@ -6,7 +6,7 @@ const productsRouter = Router()
 productsRouter.post('/', createProduct)
 productsRouter.get('/', getProducts)
 productsRouter.post('/search', searchProducts)
-productsRouter.post('/products/category', getProductbyCategory);
+productsRouter.post('/category', getProductbyCategory);
 productsRouter.get('/start', startMessage)
 
 

@@ -76,14 +76,17 @@ async function searchProducts(req, res) {
 async function getProductbyCategory(req, res) {
     try {
         const { category } = req.body;
-        // Ändra från att använda populate för att matcha kategorinamnet
-        const products = await Product.find({ 'category.name': category });
-        console.log(products)
-        res.json(products);
-    } catch (error) {
-        res.status(500).json({
-            message: error.message
-        });
+        console.log("Sökning efter kategori:", category);
+
+        const products = await Product.find({ 
+            category: { $in: await Category.find({ name: { $regex: category, $options: 'i' } }).select('_id') } 
+        }).populate('category');
+
+        console.log("Sökresultat baserat på kategori:", products);
+        res.status(200).send(products);
+    } catch(error) {
+        console.error("Fel vid sökning efter produkter baserat på kategori", error);
+        res.status(500).json({ message: "Fel"});
     }
 }
 

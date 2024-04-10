@@ -13,14 +13,20 @@ const HomePage = () => {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
 
+    useEffect(() => {
+        getProducts()
+    }, [])
+
 
     const getProducts = async () => {
         try {
-            const res = await axios.get('https://hakims-webshop-1.onrender.com/products')
-            console.log("res.data:", res.data)
+            const res = await axios.get('https://hakims-webshop-1.onrender.com/products');
             setProducts(res.data)
+            console.log("res.data:", res.data)
+
             setFilteredProducts(res.data);
             console.log("filtered:", filteredProducts)
+
         } catch (error) {
             if (error.response) {
                 // The request was made and the server responded with a status code
@@ -41,17 +47,16 @@ const HomePage = () => {
         }
     }
 
-    useEffect(() => {
-        getProducts()
-    }, [])
+
 
     const handleSelectCategory = async (category) => {
         console.log("cat:", category)
         try {
-            const res = await axios.post('https://hakims-webshop-1.onrender.com/products/category', { category });
+            const res = await axios.post('https://hakims-webshop-1.onrender.com/products/category', { category: category.name });
             console.log("res.data:", res.data)
-            console.log(filteredProducts)
+
             setFilteredProducts(res.data);
+            console.log("filt: ", filteredProducts)
         } catch (error) {
             console.error("Error filtering products by category:", error);
         }
@@ -128,7 +133,7 @@ const HomePage = () => {
                 <HeroSection />
 
                 <div className="main-container">
-                    <Navbar onSelectCategory={handleSelectCategory} />
+                    <Navbar handleSelectCategory={handleSelectCategory} />
                     <RenderProductCards
                         products={filteredProducts}
                         addToCart={addToCart}
