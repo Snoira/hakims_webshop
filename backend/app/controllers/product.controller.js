@@ -92,20 +92,20 @@ async function editProduct(req, res) {
     try{
         const id = req.params.id;
         const { name, category, price, imageURL, description } = req.body;
-        if (!id || !name || !category || !price || !imageURL ) {
-            return res.status(400).json({ message: "Missing required fields" });
-        } 
-        // if(!id){
-        //     return res.status(400).json({ message: "Missing id" });
-        // } else if(!name){
-        //     return res.status(400).json({ message: "Missing name" });
-        // } else if(!category){
-        //     return res.status(400).json({ message: "Missing category" });
-        // } else if(!price){
-        //     return res.status(400).json({ message: "Missing price" });
-        // } else if(!imageURL){
-        //     return res.status(400).json({ message: "Missing imageURL" });
-        // }
+        // if (!id || !name || !category || !price || !imageURL ) {
+        //     return res.status(400).json({ message: "Missing required fields" });
+        // } 
+        if(!id){
+            return res.status(400).json({ message: "Missing id" });
+        } else if(!name){
+            return res.status(400).json({ message: "Missing name" });
+        } else if(!category){
+            return res.status(400).json({ message: "Missing category" });
+        } else if(!price){
+            return res.status(400).json({ message: "Missing price" });
+        } else if(!imageURL){
+            return res.status(400).json({ message: "Missing imageURL" });
+        }
 
         const updatedProduct = await Product.findByIdAndUpdate(id, { name, category, price, imageURL }); //,{new: true}
         console.log(updatedProduct)
@@ -120,7 +120,7 @@ async function editProduct(req, res) {
 
 async function deleteProduct(req, res) {
     try {
-        const { id } = req.params.id;
+        const id = req.params.id;
         console.log(id)
         // const { id } = req.body;
         if (!id) {
