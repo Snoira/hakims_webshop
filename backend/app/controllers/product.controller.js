@@ -56,7 +56,6 @@ async function getProducts(req, res){
 async function searchProducts(req, res) {
     try {
         const { query } = req.body;
-        console.log("Sökterm:", query);
 
         const products = await Product.find({ 
             $or: [
@@ -64,8 +63,6 @@ async function searchProducts(req, res) {
                 { category: { $in: await Category.find({ name: { $regex: query, $options: 'i' } }).select('_id') } } // Sök i kategorinamn
             ] 
         }).populate('category');
-
-        console.log("Sökresultat:", products);
         res.status(200).send(products);
     } catch(error) {
         console.error("Error searching products", error);
