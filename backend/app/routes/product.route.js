@@ -8,8 +8,8 @@ productsRouter.post('/', createProduct)
 productsRouter.get('/', getProducts)
 productsRouter.post('/search', searchProducts)
 productsRouter.get('/start', startMessage)
-productsRouter.put('/edit/', editProduct)
-productsRouter.delete('/delete/', deleteProduct)
+productsRouter.put('/edit/:id', editProduct)
+productsRouter.delete('/delete/:id', deleteProduct)
 
 
 
