@@ -1,32 +1,74 @@
 [
   {
-    "name": "Äpple",
+    "name": "Äpple Pink Lady 4 pack",
     "category": "Frukt",
-    "price": 10,
-    "imageURL": "https://handlaprivatkund.ica.se/images-v3/bf7a00ca-390e-4769-865f-dc369586872e/f889f2cf-de4f-457e-ad25-c141b8de55a1/300x300.jpg"
+    "price": "28.90",
+    "imageURL": "https://handlaprivatkund.ica.se/images-v3/bf7a00ca-390e-4769-865f-dc369586872e/8dcf13ca-783b-4e1d-b5f9-92853017fb04/1280x1280.webp"
   },
   {
-    "name": "Banan",
+    "name": "Banan 5-7 pack",
     "category": "Frukt",
-    "price": 8,
+    "price": "26.90",
     "imageURL": "https://handlaprivatkund.ica.se/images-v3/bf7a00ca-390e-4769-865f-dc369586872e/a6201739-6638-4d2f-950e-99c3f94ac874/300x300.jpg"
   },
   {
-    "name": "Coca Cola",
+    "name": "Coca-Cola 50cl",
     "category": "Drycker",
-    "price": 15,
+    "price": "15.90",
     "imageURL": "https://handlaprivatkund.ica.se/images-v3/bf7a00ca-390e-4769-865f-dc369586872e/ff912367-e5b7-49c1-9ff8-79132069cf39/300x300.jpg"
   },
   {
-    "name": "Bacon",
+    "name": "Bacon 140g",
     "category": "Kött",
-    "price": "25",
+    "price": "16.90",
     "imageURL": "https://handlaprivatkund.ica.se/images-v3/bf7a00ca-390e-4769-865f-dc369586872e/83e1c282-f28b-4271-8cc3-f914feeb60c1/300x300.jpg"
   },
   {
-    "name": "Grill chips",
+    "name": "Chips Grill 275g",
     "category": "Snacks",
-    "price": "21",
+    "price": "30.90",
     "imageURL": "https://handlaprivatkund.ica.se/images-v3/bf7a00ca-390e-4769-865f-dc369586872e/c128f1d8-4a6a-491c-a8d2-3a6afa624837/300x300.jpg"
+  },
+  {
+    "name": "Nocco Ramonade 330ml",
+    "category": "Drycker",
+    "price": "19.99",
+    "imageURL": "https://assets.icanet.se/image/upload/cs_srgb/t_product_large_2x_v1/v1689166920/lvmdgdmoyv2zmb5nbk9g.webp"
+  },
+  {
+    "name": "Tofu Naturell Ekologisk 400g",
+    "category": "Vegetariskt",
+    "price": "30.90",
+    "imageURL": "https://assets.icanet.se/image/upload/cs_srgb/t_product_large_2x_v1/v1668868658/kug8yj5viqgztvdtqfin.webp"
+  },
+  {
+    "name": "Chips Brynt smör & chili 275g",
+    "category": "Snacks",
+    "price": "32.90",
+    "imageURL": "https://handlaprivatkund.ica.se/images-v3/bf7a00ca-390e-4769-865f-dc369586872e/f8da86b8-cbc4-4d7d-8892-083b03e8c365/1280x1280.webp"
+  },
+  {
+    "name": "Ben & Jerrys Half Baked 465ml",
+    "category": "Glass",
+    "price": "54.90",
+    "imageURL": "https://handlaprivatkund.ica.se/images-v3/bf7a00ca-390e-4769-865f-dc369586872e/8b198876-6617-49ae-836a-403a3a396858/1280x1280.webp"
+  },
+  {
+    "name": "Choklad Polly Röd 200g",
+    "category": "Godis",
+    "price": "25.90",
+    "imageURL": "https://handlaprivatkund.ica.se/images-v3/bf7a00ca-390e-4769-865f-dc369586872e/0f052fff-8861-4284-bacc-fc17eaac7a9f/1280x1280.webp"
+  },
+  {
+    "name": "Kvisttomat 4 pack",
+    "category": "Grönsaker",
+    "price": "20.11",
+    "imageURL": "https://handlaprivatkund.ica.se/images-v3/bf7a00ca-390e-4769-865f-dc369586872e/f8bebf36-e66d-428d-9f30-60e92bf4e293/1280x1280.webp"
+  },
+  {
+    "name": "Mandeldryck Osötad 1l",
+    "category": "Drycker",
+    "price": "27.90",
+    "imageURL": "https://handlaprivatkund.ica.se/images-v3/bf7a00ca-390e-4769-865f-dc369586872e/a298ce46-ae4b-4515-ae69-bf403f949c2d/1280x1280.webp"
   }
 ]
