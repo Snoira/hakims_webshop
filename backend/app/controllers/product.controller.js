@@ -73,6 +73,21 @@ async function searchProducts(req, res) {
     }
 }
 
+async function getProductbyCategory(req, res) {
+    try {
+        const { category } = req.body;
+        // Ändra från att använda populate för att matcha kategorinamnet
+        const products = await Product.find({ 'category.name': category });
+        console.log(products)
+        res.json(products);
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+}
+
+
 async function startMessage(req, res){
     res.status(200).send("Hello from the server")
 }
@@ -81,5 +96,6 @@ module.exports = {
     createProduct,
     getProducts,
     searchProducts,
+    getProductbyCategory,
     startMessage
 };

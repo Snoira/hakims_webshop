@@ -1,16 +1,31 @@
 import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import SearchBar from './SearchBar';
 import ShoppingCartModal from './CartModal';
 
-const Header = ({ cart, deleteProductFromCart, changeQuantityCart, calculateTotal }) => {
-    const [showCartModal, setShowCartModal] = useState(false);  
+
+
+const Header = () => {
+    const [showCartModal, setShowCartModal] = useState(false); 
+    const cartModalRef = useRef(); 
 
     const toggleCartModal  = () => {
         setShowCartModal(prevState => !prevState);
-        console.log(showCartModal)
         };
+
+        useEffect(() => {
+            const handleClickOutside = (event) => {
+                if (cartModalRef.current && !cartModalRef.current.contains(event.target)) {
+                    setShowCartModal(false);
+                }
+            };
+            document.addEventListener('mousedown', handleClickOutside);
+
+            return () => {
+                document.removeEventListener('mousedown', handleClickOutside);
+            };
+        }, []);
 
 
     return (
@@ -36,11 +51,11 @@ const Header = ({ cart, deleteProductFromCart, changeQuantityCart, calculateTota
             </div>
 
         </nav>
-        {showCartModal && <ShoppingCartModal 
-        cart={cart} 
-        deleteProductFromCart={deleteProductFromCart} 
-        changeQuantityCart={changeQuantityCart} 
-        calculateTotal={calculateTotal} />}
+        {showCartModal && 
+        <div ref={cartModalRef}> 
+        <ShoppingCartModal  
+        />
+        </div>}
 
         
         
