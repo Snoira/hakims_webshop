@@ -6,16 +6,6 @@ import CreateCategory from '../Components/admin/createCategory';
 
 const AdminPage = () => {
 
-    const [success, setSuccess] = useState(false);
-    const [categories, setCategories] = useState([]);
-    const [newCategory, setNewCategory] = useState('');
-
-   
-    const [products, setProducts] = useState([]);
-    const [showProducts, setShowProducts] = useState(false);
-
-
-
     return (
         <>
             <h1>Admin Page</h1>

@@ -11,7 +11,6 @@ const RenderProducts = () => {
                 const res = await axios.get('https://hakims-webshop-1.onrender.com/products/');
                 console.log("products:", res.data);
                 setProducts(res.data);
-                setShowProducts(true);
             } catch (error) {
                 console.error("Error fetching products", error);
             }
@@ -20,7 +19,9 @@ const RenderProducts = () => {
     }, []);
 
     return (
-        <div>
+        <>
+            <button onClick={() => {setShowProducts(!showProducts)}} >show products</button>
+            
             {showProducts && products.map((product, i) => (
                 <div key={i}>
                     <h4>{product.name}</h4>
@@ -28,7 +29,7 @@ const RenderProducts = () => {
                     <p>Pris: {product.price} kr</p>
                 </div>
             ))}
-        </div>
+        </>
     );
 
 }
