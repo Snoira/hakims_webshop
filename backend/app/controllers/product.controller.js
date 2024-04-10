@@ -71,23 +71,6 @@ async function searchProducts(req, res) {
     }
 }
 
-// async function getProductbyCategory(req, res) {
-//     try {
-//         const { category } = req.body;
-//         console.log("Sökning efter kategori:", category);
-
-//         const products = await Product.find({ 
-//             category: { $in: await Category.find({ name: { $regex: category, $options: 'i' } }).select('_id') } 
-//         }).populate('category');
-
-//         console.log("Sökresultat baserat på kategori:", products);
-//         res.status(200).send(products);
-//     } catch(error) {
-//         console.error("Fel vid sökning efter produkter baserat på kategori", error);
-//         res.status(500).json({ message: "Fel"});
-//     }
-// }
-
 async function editProduct(req, res) {
     try{
         const id = req.params.id;
@@ -145,7 +128,6 @@ module.exports = {
     createProduct,
     getProducts,
     searchProducts,
-    
     startMessage,
     editProduct,
     deleteProduct
