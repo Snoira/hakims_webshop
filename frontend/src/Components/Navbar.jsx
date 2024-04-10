@@ -19,7 +19,7 @@ const Navbar = ({ handleSelectCategory, handleResetHome }) => {
       <ul className="nav nav-pills flex-column mb-auto">
 
         <li className="nav-item">
-          <a href="#" className="nav-link active" aria-current="page" onClick={handleHomeClick}>
+          <a href="#" className="nav-link active" aria-current="page" onClick={(e) => { e.preventDefault(); handleHomeClick(); }}>
             {/* Lägg till svg logga här om vi vill */}
             {/* <svg className="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>  */}
             Home
@@ -27,77 +27,77 @@ const Navbar = ({ handleSelectCategory, handleResetHome }) => {
         </li>
         <li>
 
-          <a href='#' className='nav-link text-dark me-md-auto' onClick={() => handleCategory('Skafferi')}>
+          <a href='#' className='nav-link text-dark me-md-auto' onClick={(e) => { e.preventDefault(); handleCategory('Skafferi') }}>
             Skafferi
           </a>
         </li>
         <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Storpack')}>
+          <a href="#" className="nav-link text-dark me-md-auto" onClick={(e) => { e.preventDefault(); handleCategory('Storpack') }}>
             Storpack
           </a>
         </li>
         <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Frukt')}>
+          <a href="#" className="nav-link text-dark me-md-auto" onClick={(e) => { e.preventDefault(); handleCategory('Frukt') }}>
             Frukt
           </a>
         </li>
         <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Grönsaker')}>
+          <a href="#" className="nav-link text-dark me-md-auto" onClick={(e) => { e.preventDefault(); handleCategory('Grönsaker') }}>
             Grönsaker
           </a>
         </li>
         <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Bröd')}>
+          <a href="#" className="nav-link text-dark me-md-auto" onClick={(e) => { e.preventDefault(); handleCategory('Bröd') }}>
             Bröd
           </a>
         </li>
         <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Kött')}>
+          <a href="#" className="nav-link text-dark me-md-auto" onClick={(e) => { e.preventDefault(); handleCategory('Kött') }}>
             Kött
           </a>
         </li>
         <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Vegetariskt')}>
+          <a href="#" className="nav-link text-dark me-md-auto" onClick={(e) => { e.preventDefault(); handleCategory('Vegetariskt') }}>
             Vegetariskt
           </a>
         </li>
         <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Mejeri')}>
+          <a href="#" className="nav-link text-dark me-md-auto" onClick={(e) => { e.preventDefault(); handleCategory('Mejeri') }}>
             Mejeri
           </a>
         </li>
         <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Bakverk')}>
+          <a href="#" className="nav-link text-dark me-md-auto" onClick={(e) => { e.preventDefault(); handleCategory('Bakverk') }}>
             Bakverk
           </a>
         </li>
         <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Snacks')}>
+          <a href="#" className="nav-link text-dark me-md-auto" onClick={(e) => { e.preventDefault(); handleCategory('Snacks') }}>
             Snacks
           </a>
         </li>
         <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Godis')}>
+          <a href="#" className="nav-link text-dark me-md-auto" onClick={(e) => { e.preventDefault(); handleCategory('Godis') }}>
             Godis
           </a>
         </li>
         <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Glass')}>
+          <a href="#" className="nav-link text-dark me-md-auto" onClick={(e) => { e.preventDefault(); handleCategory('Glass') }}>
             Glass
           </a>
         </li>
         <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Drycker')}>
+          <a href="#" className="nav-link text-dark me-md-auto" onClick={(e) => { e.preventDefault(); handleCategory('Drycker') }}>
             Drycker
           </a>
         </li>
         <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Hygien')}>
+          <a href="#" className="nav-link text-dark me-md-auto" onClick={(e) => { e.preventDefault(); handleCategory('Hygien') }}>
             Hygien
           </a>
         </li>
         <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Hem och Städning')}>
+          <a href="#" className="nav-link text-dark me-md-auto" onClick={(e) => { e.preventDefault(); handleCategory('Hem och Städning') }}>
             Hem och städning
           </a>
         </li>
