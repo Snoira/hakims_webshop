@@ -46,8 +46,11 @@ const HomePage = () => {
     }, [])
 
     const handleSelectCategory = async (category) => {
+        console.log("cat:", category)
         try {
-            const res = await axios.post('http://localhost:8000/products/category', { category });
+            const res = await axios.post('https://hakims-webshop-1.onrender.com/products/category', { category });
+            console.log("res.data:", res.data)
+            console.log(filteredProducts)
             setFilteredProducts(res.data);
         } catch (error) {
             console.error("Error filtering products by category:", error);
