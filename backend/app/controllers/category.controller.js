@@ -8,7 +8,7 @@ async function createCategory(req, res) {
             return res.status(400).json({ message: "Missing required fields" });
         }
         const newCategory = new Category({
-            name: name
+            "name": name
         });
         console.log("newCategory: ", newCategory);
         await newCategory.save();
