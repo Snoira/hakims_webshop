@@ -12,20 +12,24 @@ import { CartProvider } from "../Context/Cart.contex";
 const HomePage = () => {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
+    const [originalProducts, setOriginalProducts] = useState([]);
 
-    useEffect(() => {
-        getProducts()
-    }, [])
+
 
 
     const getProducts = async () => {
         try {
             const res = await axios.get('https://hakims-webshop-1.onrender.com/products');
-            setProducts(res.data)
-            console.log("res.data:", res.data)
 
-            setFilteredProducts(res.data);
-            console.log("filtered:", filteredProducts)
+            const productsWithCategoryNames = res.data.map(product => ({
+                ...product,
+                categoryName: product.category[0].name
+            }));
+
+            setProducts(res.data)
+            setOriginalProducts(productsWithCategoryNames);
+            setFilteredProducts(productsWithCategoryNames);
+
 
         } catch (error) {
             if (error.response) {
@@ -47,20 +51,22 @@ const HomePage = () => {
         }
     }
 
-
-
     const handleSelectCategory = async (category) => {
-        console.log("cat:", category)
         try {
-            const res = await axios.post('https://hakims-webshop-1.onrender.com/products/category', { category: category.name });
-            console.log("res.data:", res.data)
-
-            setFilteredProducts(res.data);
-            console.log("filt: ", filteredProducts)
+            // Filtrera produkter baserat på kategorinamn
+            const filteredProductsByCategory = originalProducts.filter(product => product.categoryName === category);
+            setFilteredProducts(filteredProductsByCategory);
         } catch (error) {
             console.error("Error filtering products by category:", error);
         }
     };
+
+    useEffect(() => {
+        getProducts()
+    }, [])
+
+    useEffect(() => {
+    }, [filteredProducts]);
 
     // Nedan useState kollar efter produkter i localstorage, finns inget lagrat, blir cart en tom array
     const [cart, setCart] = useState(localStorage.getItem('cart') ? JSON.parse(localStorage.getItem("cart")) : []);

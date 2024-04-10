@@ -11,7 +11,6 @@ const SearchBar = () => {
         setSearching(true);
         try {
             const res = await axios.post('https://hakims-webshop-1.onrender.com/products/search', { query });
-            console.log("search results", res.data);
             setSearchRes(res.data);
         } catch (error) {
             console.error("Error searching products", error);
