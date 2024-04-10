@@ -61,6 +61,10 @@ const HomePage = () => {
         }
     };
 
+    const handleResetHome = () => {
+        setFilteredProducts(originalProducts); // Återställ filter för produkter
+    };
+
     useEffect(() => {
         getProducts()
     }, [])
@@ -130,7 +134,7 @@ const HomePage = () => {
     return (
         <div>
             <CartProvider>
-                <Header
+                <Header handleResetHome={handleResetHome}
                 // cart={cart}
                 // deleteProductFromCart={deleteProductFromCart}
                 // changeQuantityCart={changeQuantityCart}
@@ -139,7 +143,10 @@ const HomePage = () => {
                 <HeroSection />
 
                 <div className="main-container">
-                    <Navbar handleSelectCategory={handleSelectCategory} />
+                    <Navbar
+                        handleSelectCategory={handleSelectCategory}
+                        handleResetHome={handleResetHome}
+                    />
                     <RenderProductCards
                         products={filteredProducts}
                         addToCart={addToCart}
