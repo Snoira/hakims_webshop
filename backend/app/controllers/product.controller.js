@@ -4,7 +4,7 @@ const Category = require('../models/category.model.js');
 
 async function createProduct(req, res) {
     try {
-        const { name, category, price } = req.body;
+        const { name, category, price, imageURL } = req.body;
 
         if (!name || !price) {
             return res.status(400).json({ message: "Missing required fields" });
@@ -27,7 +27,8 @@ async function createProduct(req, res) {
         const newProduct = new Product({
             "name": name,
             "category": categoryId,
-            "price": price
+            "price": price,
+            "imageURL": imageURL
         });
 
         console.log("newProduct: ", newProduct);
@@ -90,6 +91,53 @@ async function getProductbyCategory(req, res) {
     }
 }
 
+async function editProduct(req, res) {
+    try{
+        // const id = req.params.id;
+        const { id, name, category, price, imageURL } = req.body;
+        if (!id || !name || !category || !price || !imageURL) {
+            return res.status(400).json({ message: "Missing required fields" });
+        } 
+        // if(!id){
+        //     return res.status(400).json({ message: "Missing id" });
+        // } else if(!name){
+        //     return res.status(400).json({ message: "Missing name" });
+        // } else if(!category){
+        //     return res.status(400).json({ message: "Missing category" });
+        // } else if(!price){
+        //     return res.status(400).json({ message: "Missing price" });
+        // } else if(!imageURL){
+        //     return res.status(400).json({ message: "Missing imageURL" });
+        // }
+
+        const updatedProduct = await Product.findByIdAndUpdate(id, { name, category, price, imageURL }); //,{new: true}
+        console.log(updatedProduct)
+        res.status(200).send(updatedProduct)    
+
+    }catch(error){
+        res.status(500).json({
+            message: error.message
+        });
+    }
+}
+
+async function deleteProduct(req, res) {
+    try {
+        // const { id } = req.params.id;
+        const { id } = req.body;
+        if (!id) {
+            return res.status(400).json({ message: "Missing required fields" });
+        }
+        const deletedProduct = await Product.findByIdAndDelete(id);
+        console.log(deletedProduct)
+        res.status(200).send(deletedProduct)    
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+}
 
 async function startMessage(req, res){
     res.status(200).send("Hello from the server")
@@ -100,5 +148,7 @@ module.exports = {
     getProducts,
     searchProducts,
     getProductbyCategory,
-    startMessage
+    startMessage,
+    editProduct,
+    deleteProduct
 };

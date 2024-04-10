@@ -1,5 +1,6 @@
 const Router = require('express')
-const { createProduct, getProducts, startMessage, searchProducts, getProductbyCategory } = require('../controllers/product.controller.js')
+const { createProduct, getProducts, startMessage, searchProducts, getProductbyCategory, editProduct,
+    deleteProduct } = require('../controllers/product.controller.js')
 
 const productsRouter = Router()
 
@@ -8,6 +9,8 @@ productsRouter.get('/', getProducts)
 productsRouter.post('/search', searchProducts)
 productsRouter.post('/category', getProductbyCategory);
 productsRouter.get('/start', startMessage)
+productsRouter.put('/edit/', editProduct)
+productsRouter.delete('/delete/', deleteProduct)
 
 
 
