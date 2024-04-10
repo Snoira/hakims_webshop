@@ -9,8 +9,8 @@ productsRouter.get('/', getProducts)
 productsRouter.post('/search', searchProducts)
 // productsRouter.post('/category', getProductbyCategory);
 productsRouter.get('/start', startMessage)
-productsRouter.put('/edit/', editProduct)
-productsRouter.delete('/delete/', deleteProduct)
+productsRouter.put('/edit/:id', editProduct)
+productsRouter.delete('/delete/:id', deleteProduct)
 
 
 
