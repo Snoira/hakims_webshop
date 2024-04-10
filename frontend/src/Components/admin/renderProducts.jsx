@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import ProductCardAdmin from './productCardAdmin';
 
 const RenderProducts = () => {
     const [products, setProducts] = useState([]);
     const [showProducts, setShowProducts] = useState(false);
+    const [categoryList, setCategoryList] = useState([])
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -15,19 +17,27 @@ const RenderProducts = () => {
                 console.error("Error fetching products", error);
             }
         }
+
+        const fetchCategories = async () => {
+            try {
+                const res = await axios.get('https://hakims-webshop-1.onrender.com/categories/');
+                console.log("categories:", res.data);
+                setCategoryList(res.data);
+            } catch (error) {
+                console.error("Error fetching categories", error);
+            }
+        }
+
         fetchProducts();
+        fetchCategories();
     }, []);
 
     return (
         <>
-            <button onClick={() => {setShowProducts(!showProducts)}} >show products</button>
-            
+            <button onClick={() => { setShowProducts(!showProducts) }} >show products</button>
+
             {showProducts && products.map((product, i) => (
-                <div key={i}>
-                    <h4>{product.name}</h4>
-                    <p>Kategori: {product.category[0].name}</p>
-                    <p>Pris: {product.price} kr</p>
-                </div>
+                < ProductCardAdmin key={i} product={product} categoryList={categoryList} />
             ))}
         </>
     );

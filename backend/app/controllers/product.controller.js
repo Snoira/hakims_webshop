@@ -4,7 +4,7 @@ const Category = require('../models/category.model.js');
 
 async function createProduct(req, res) {
     try {
-        const { name, category, price, imageURL } = req.body;
+        const { name, category, price, imageURL, description } = req.body;
 
         if (!name || !price) {
             return res.status(400).json({ message: "Missing required fields" });
@@ -90,9 +90,9 @@ async function getProductbyCategory(req, res) {
 
 async function editProduct(req, res) {
     try{
-        // const id = req.params.id;
-        const { id, name, category, price, imageURL } = req.body;
-        if (!id || !name || !category || !price || !imageURL) {
+        const id = req.params.id;
+        const { name, category, price, imageURL, description } = req.body;
+        if (!id || !name || !category || !price || !imageURL ) {
             return res.status(400).json({ message: "Missing required fields" });
         } 
         // if(!id){
@@ -120,8 +120,9 @@ async function editProduct(req, res) {
 
 async function deleteProduct(req, res) {
     try {
-        // const { id } = req.params.id;
-        const { id } = req.body;
+        const { id } = req.params.id;
+        console.log(id)
+        // const { id } = req.body;
         if (!id) {
             return res.status(400).json({ message: "Missing required fields" });
         }
