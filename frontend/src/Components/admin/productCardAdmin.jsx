@@ -42,6 +42,13 @@ const ProductCardAdmin = ({ product, categoryList }) => {
         }
     }
 
+    const handleNameChange = (e) => {
+        const name = e.target.value;
+        const nameRegex = /^[a-zA-ZåäöÅÄÖ\s]*$/;
+        setEmail(enteredEmail);
+        setValidEmail(emailRegex.test(enteredEmail));
+      };
+
     return (
         <div className="product-card gap-2">
             <img src={imageURL} alt="..." />
@@ -67,7 +74,7 @@ const ProductCardAdmin = ({ product, categoryList }) => {
                             <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
                         </label>
                         <label> namn:
-                            <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                            <input type="text" value={name} max={50}  onChange={(e) => setName(e.target.value)} />
                         </label>
                         <label> Kategori:
                             <select name="category" id="category" placeholder="product category" onChange={(e) => setCategory(e.target.value)} >
