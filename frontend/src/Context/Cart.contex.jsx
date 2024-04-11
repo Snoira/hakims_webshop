@@ -7,6 +7,8 @@ const DeleteProductFromCart = React.createContext();
 const CartUpdateQuantity = React.createContext();
 
 
+
+
 // funktion för att kunna använda kundkorgsdatan, alltså själva arrayen som finns i CartContex
 export function useCart() {
     return useContext(CartContext);
@@ -24,6 +26,7 @@ export function useDeleteProduct() {
 export function useChangeQuantity() {
     return useContext(CartUpdateQuantity);
 }
+
 
  
 // Huvud-context-komponent som innehåller data och funktioner, dvs kundvagnsarray + tillhörande funktioner
@@ -52,6 +55,7 @@ export function CartProvider( {children } ) {
             const updatedCart = cart.filter(item => item.name !== productToRemove.name);
             setCart(updatedCart);
         }
+ 
 
         const changeQuantityCart = (product, change) => {
             const updatedCart = [...cart];
@@ -68,8 +72,12 @@ export function CartProvider( {children } ) {
                 }
                 setCart(updatedCart);
                 localStorage.setItem('cart', JSON.stringify(updatedCart));
+                console.log(cart);
               }
           }
+
+        
+
 
 
     return (
