@@ -14,6 +14,7 @@ const Navbar = ({ handleSelectCategory, handleResetHome }) => {
   };
 
   useEffect(() => {
+    
     const fetchCategories = async () => {
       try {
         const res = await axios.get('https://hakims-webshop-1.onrender.com/categories/');
@@ -23,7 +24,7 @@ const Navbar = ({ handleSelectCategory, handleResetHome }) => {
         console.error("Error fetching categories", error);
       }
     }
-    fetchCategories();
+    if(categoryList.length === 0){fetchCategories();}
   })
 
   return (
