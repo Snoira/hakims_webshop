@@ -1,7 +1,10 @@
 import React from 'react';
-
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 const Navbar = ({ handleSelectCategory, handleResetHome }) => {
+  const [categoryList, setCategoryList] = useState([]);
+
   const handleCategory = (category) => {
     handleSelectCategory(category);
   };
@@ -10,6 +13,19 @@ const Navbar = ({ handleSelectCategory, handleResetHome }) => {
     handleResetHome();
   };
 
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await axios.get('https://hakims-webshop-1.onrender.com/categories/');
+        console.log("categories:", res.data);
+        setCategoryList(res.data);
+      } catch (error) {
+        console.error("Error fetching categories", error);
+      }
+    }
+    fetchCategories();
+  })
+
   return (
     <div className="navbar-container d-flex flex-column flex-shrink-0 p-3 text-bg-dark" >
       <p href="/" className="d-flex text-dark align-items-center justify-content-center mb-3 mb-md-0 text-decoration-none">
@@ -17,96 +33,23 @@ const Navbar = ({ handleSelectCategory, handleResetHome }) => {
       </p>
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
-
         <li className="nav-item">
-          <a href="#" className="nav-link active" aria-current="page" onClick={handleHomeClick}>
+          <a href="#" className="nav-link active" aria-current="page" onClick={(e) => { e.preventDefault(); handleHomeClick(); }}>
             {/* Lägg till svg logga här om vi vill */}
             {/* <svg className="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>  */}
             Home
           </a>
         </li>
-        <li>
-
-          <a href='#' className='nav-link text-dark me-md-auto' onClick={() => handleCategory('Skafferi')}>
-            Skafferi
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Storpack')}>
-            Storpack
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Frukt')}>
-            Frukt
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Grönsaker')}>
-            Grönsaker
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Bröd')}>
-            Bröd
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Kött')}>
-            Kött
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Vegetariskt')}>
-            Vegetariskt
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Mejeri')}>
-            Mejeri
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Bakverk')}>
-            Bakverk
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Snacks')}>
-            Snacks
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Godis')}>
-            Godis
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Glass')}>
-            Glass
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Drycker')}>
-            Drycker
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Hygien')}>
-            Hygien
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-dark me-md-auto" onClick={() => handleCategory('Hem och Städning')}>
-            Hem och städning
-          </a>
-        </li>
+    {categoryList && categoryList.map((category, i) => {
+        return (
+          <li key={i}>
+            <a href='#' className='nav-link text-dark me-md-auto' onClick={(e) => { e.preventDefault(); handleCategory(category.name) }}>
+              {category.name}
+            </a>
+          </li>
+        )
+    })}
       </ul>
-
-
-
-
-
     </div>
 
   )
