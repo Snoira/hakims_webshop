@@ -1,4 +1,4 @@
-import { useCart, useDeleteProduct, useChangeQuantity, useChangeInputQuantity } from "../Context/Cart.contex";
+import { useCart, useDeleteProduct, useChangeQuantity } from "../Context/Cart.contex";
 import { useEffect } from "react";
 import { Link }  from "react-router-dom";
 
@@ -7,7 +7,7 @@ const ShoppingCartmodal = () => {
     const cart = useCart();
     const deleteProductFromCart = useDeleteProduct();
     const changeQuantiy = useChangeQuantity();
-    const changeInputQuantity = useChangeInputQuantity();
+  
 
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart));
