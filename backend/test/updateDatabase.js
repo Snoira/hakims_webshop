@@ -7,7 +7,7 @@ require("dotenv").config();
 
 async function updateDatabase() {
   try {
-    await mongoose.connect(process.env.MONGOOSE_LIVE_URI);
+    await mongoose.connect(process.env.MONGOOSE_TEST_URI);
     await Product.deleteMany({});
 
     const data = fs.readFileSync("./test/products.json");
