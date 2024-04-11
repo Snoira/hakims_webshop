@@ -4,6 +4,7 @@ const { urlencoded } = require("express");
 const productsRouter = require("./routes/product.route.js");
 const categoryRouter = require("./routes/category.route.js");
 const orderRouter = require("./routes/order.route.js");
+const customerRouter = require("./routes/customer.route.js");
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use("/products", productsRouter);
 app.use("/categories", categoryRouter);
 app.use("/orders", orderRouter);
+app.use("/customers", customerRouter);
 
 app.get("/", (req, res) => res.send("Hello World from /!"));
 
