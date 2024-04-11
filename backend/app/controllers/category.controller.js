@@ -31,7 +31,55 @@ async function getCategories(req, res){
     }
 }
 
+async function editCategory(req, res) {
+    try{
+        const id = req.params.id;
+        const name = req.body;
+        console.log("name: ", name)
+        // if (!id || !name || !category || !price || !imageURL ) {
+        //     return res.status(400).json({ message: "Missing required fields" });
+        // } 
+        if(!id){
+            return res.status(400).json({ message: "Missing id" });
+        } else if(!name){
+            return res.status(400).json({ message: "Missing name" });
+        }
+        const updatedCategory = await Category.findByIdAndUpdate(id, name); //,{new: true}
+        console.log(updatedCategory)
+        res.status(200).send(updatedCategory)    
+
+    }catch(error){
+        res.status(500).json({
+            message: error.message
+        });
+    }
+}
+
+async function deleteCategory(req, res) {
+    try {
+        const id = req.params.id;
+        console.log(id)
+        // const { id } = req.body;
+        if (!id) {
+            return res.status(400).json({ message: "Missing required fields" });
+        }
+        const deletedCategory = await Category.findByIdAndDelete(id);
+        console.log("deleted: ", deletedCategory)
+        if(!deletedCategory){
+            return res.status(404).json({ message: "Category not found" });
+        }
+        res.status(200).send(deletedCategory)    
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+}
+
 module.exports = {
     createCategory,
     getCategories, 
+    editCategory, 
+    deleteCategory
 };
