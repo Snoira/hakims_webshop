@@ -34,16 +34,15 @@ const ProductCards = ({ product }) => {
                 ReactDOM.createPortal(
                     <div className="popup-overlay">
                         <div className="popup-content">
-                            {/* Innehåll för popup-rutan, kan du anpassa enligt dina behov */}
                             <p>{product.name}</p>
-                            <p>{product.description}</p>
+                            {/* <p>{product.description}</p> */}
                             <div className="m-1 mt-0 d-flex">
                                 <a onClick={() => addToCart(product)} className="btn btn-primary button font-bold">KÖP</a>
                                 <button onClick={closePopup}>Stäng</button>
                             </div>
                         </div>
                     </div>,
-                    document.getElementById('popup-root') // Id på DOM-noden där portalen ska renderas
+                    document.getElementById('popup-root')
                 )
             }
 
