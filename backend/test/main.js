@@ -10,7 +10,7 @@ require("dotenv").config();
 const menu = async () => {
   try {
     
-    await mongoose.connect(process.env.MONGOOSE_LIVE_URI);
+    await mongoose.connect(process.env.MONGOOSE_TEST_URI);
     while (true) {
       const { choice } = await inquirer.prompt([
         {
