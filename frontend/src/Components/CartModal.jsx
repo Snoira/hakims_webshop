@@ -1,5 +1,6 @@
 import { useCart, useDeleteProduct, useChangeQuantity } from "../Context/Cart.contex";
 import { useEffect } from "react";
+import { Link }  from "react-router-dom";
 
 
 const ShoppingCartmodal = () => {
@@ -50,6 +51,9 @@ const ShoppingCartmodal = () => {
                             </div>
                         ))}
                         <p>Total: {total} kr</p>
+                        <Link to="/CheckoutPage"  > 
+                        <button className="btn btn-primary btn-sm" >Till Kassan</button>
+                        </Link>
                     </ul>
                     
                 ) : (
