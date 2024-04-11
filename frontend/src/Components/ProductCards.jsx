@@ -34,9 +34,12 @@ const ProductCards = ({ product }) => {
                 ReactDOM.createPortal(
                     <div className="popup-overlay">
                         <div className="popup-content">
-                            <p>{product.name}</p>
-                            {/* <p>{product.description}</p> */}
-                            <div className="m-1 mt-0 d-flex">
+                            <img className="img-prod" src={product.imageURL} alt="..." />
+                            <div className="text-content">
+                                <p>{product.name}</p>
+                                {/* <p>{product.description}</p> */}
+                            </div>
+                            <div className="m-1 mt-0 d-flex justify-content-around">
                                 <a onClick={() => addToCart(product)} className="btn btn-primary button font-bold">KÖP</a>
                                 <button onClick={closePopup}>Stäng</button>
                             </div>
