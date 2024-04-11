@@ -1,4 +1,4 @@
-import { useCart, useDeleteProduct, useChangeQuantity } from "../Context/Cart.contex";
+import { useCart, useDeleteProduct, useChangeQuantity, useChangeInputQuantity } from "../Context/Cart.contex";
 import { useEffect } from "react";
 import { Link }  from "react-router-dom";
 
@@ -7,6 +7,7 @@ const ShoppingCartmodal = () => {
     const cart = useCart();
     const deleteProductFromCart = useDeleteProduct();
     const changeQuantiy = useChangeQuantity();
+    const changeInputQuantity = useChangeInputQuantity();
 
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart));
@@ -28,6 +29,9 @@ const ShoppingCartmodal = () => {
 
       const total = calculateTotal(cart);
 
+      
+    
+
 
     return (
         <>
@@ -43,7 +47,9 @@ const ShoppingCartmodal = () => {
                             <div className="cart-item-details" key={index}>
                                 <p>{item.name}</p>
                                 <button className="btn-secondary btn-sm" onClick={() => changeQuantiy(item, "decrease")}>-</button>
-                                <p>{item.quantity}</p>
+                                <p>                           
+                                {item.quantity} 
+                                </p>
                                 <button className="btn-success btn-sm" onClick={() => changeQuantiy(item, "increase")}>+</button>
                                 <p> {item.price}kr/st</p>
                                 <button className="btn-danger btn-sm" onClick={() => deleteProductFromCart(item)}>Ta bort</button> 

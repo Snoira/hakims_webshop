@@ -5,6 +5,8 @@ const CartContext = React.createContext();
 const CartUpdateContext = React.createContext();
 const DeleteProductFromCart = React.createContext();
 const CartUpdateQuantity = React.createContext();
+const CartInputQuantity = React.createContext();
+
 
 
 // funktion för att kunna använda kundkorgsdatan, alltså själva arrayen som finns i CartContex
@@ -24,6 +26,11 @@ export function useDeleteProduct() {
 export function useChangeQuantity() {
     return useContext(CartUpdateQuantity);
 }
+
+export function useChangeInputQuantity() {
+    return useContext(CartInputQuantity);
+}
+
 
  
 // Huvud-context-komponent som innehåller data och funktioner, dvs kundvagnsarray + tillhörande funktioner
@@ -53,6 +60,25 @@ export function CartProvider( {children } ) {
             setCart(updatedCart);
         }
 
+        //   Ändra antal manuellt i inputfält
+        const handleInputChange = (newValue) => {
+            if ((newValue === "")){
+                newValue = 0;
+            } else if (!isNaN(newValue)) {
+                newValue = parseInt(newValue);
+                console.log("New quantity: ", newValue);
+            }   
+
+            if (newValue !== undefined && newValue > 0) {
+                const updatedQuantity = newValue;
+                const updatedItem = {...cart[0], quantity: updatedQuantity};
+                const updatedCart = [...cart];
+                updatedCart[0] = updatedItem;
+                setCart([updatedItem]);
+                localStorage.setItem('cart', JSON.stringify(updatedItem));
+                } 
+            }    
+
         const changeQuantityCart = (product, change) => {
             const updatedCart = [...cart];
             const index = updatedCart.findIndex(item => item.name === product.name);
@@ -68,8 +94,12 @@ export function CartProvider( {children } ) {
                 }
                 setCart(updatedCart);
                 localStorage.setItem('cart', JSON.stringify(updatedCart));
+                console.log(cart);
               }
           }
+
+        
+
 
 
     return (
@@ -78,7 +108,9 @@ export function CartProvider( {children } ) {
         <CartUpdateContext.Provider value={addToCart}> 
         <DeleteProductFromCart.Provider value={deleteFromCart}> 
         <CartUpdateQuantity.Provider value={changeQuantityCart}>
+         <CartInputQuantity.Provider value={handleInputChange}> 
             {children}
+        </CartInputQuantity.Provider>
         </CartUpdateQuantity.Provider>
         </DeleteProductFromCart.Provider>
         </CartUpdateContext.Provider>
