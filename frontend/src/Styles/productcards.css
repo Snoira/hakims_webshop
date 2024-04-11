@@ -83,6 +83,10 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.text-content {
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .products {
     grid-template-columns: repeat(3, 1fr);
