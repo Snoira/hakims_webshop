@@ -5,7 +5,7 @@ const CartContext = React.createContext();
 const CartUpdateContext = React.createContext();
 const DeleteProductFromCart = React.createContext();
 const CartUpdateQuantity = React.createContext();
-const CartInputQuantity = React.createContext();
+
 
 
 
@@ -25,10 +25,6 @@ export function useDeleteProduct() {
 
 export function useChangeQuantity() {
     return useContext(CartUpdateQuantity);
-}
-
-export function useChangeInputQuantity() {
-    return useContext(CartInputQuantity);
 }
 
 
@@ -59,25 +55,7 @@ export function CartProvider( {children } ) {
             const updatedCart = cart.filter(item => item.name !== productToRemove.name);
             setCart(updatedCart);
         }
-
-        //   Ändra antal manuellt i inputfält
-        const handleInputChange = (newValue) => {
-            if ((newValue === "")){
-                newValue = 0;
-            } else if (!isNaN(newValue)) {
-                newValue = parseInt(newValue);
-                console.log("New quantity: ", newValue);
-            }   
-
-            if (newValue !== undefined && newValue > 0) {
-                const updatedQuantity = newValue;
-                const updatedItem = {...cart[0], quantity: updatedQuantity};
-                const updatedCart = [...cart];
-                updatedCart[0] = updatedItem;
-                setCart([updatedItem]);
-                localStorage.setItem('cart', JSON.stringify(updatedItem));
-                } 
-            }    
+ 
 
         const changeQuantityCart = (product, change) => {
             const updatedCart = [...cart];
@@ -108,9 +86,7 @@ export function CartProvider( {children } ) {
         <CartUpdateContext.Provider value={addToCart}> 
         <DeleteProductFromCart.Provider value={deleteFromCart}> 
         <CartUpdateQuantity.Provider value={changeQuantityCart}>
-         <CartInputQuantity.Provider value={handleInputChange}> 
             {children}
-        </CartInputQuantity.Provider>
         </CartUpdateQuantity.Provider>
         </DeleteProductFromCart.Provider>
         </CartUpdateContext.Provider>
