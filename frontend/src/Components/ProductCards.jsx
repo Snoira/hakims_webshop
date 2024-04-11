@@ -34,7 +34,7 @@ const ProductCards = ({ product }) => {
                 ReactDOM.createPortal(
                     <div className="popup-overlay">
                         <div className="popup-content">
-                            <img src={product.imageURL} alt="..." />
+                            <img className="img-prod" src={product.imageURL} alt="..." />
                             <div className="text-content">
                                 <p>{product.name}</p>
                                 {/* <p>{product.description}</p> */}
