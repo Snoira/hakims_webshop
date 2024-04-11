@@ -7,7 +7,7 @@ require("dotenv").config();
 
 async function addProducts() {
   try {
-    await mongoose.connect(process.env.MONGOOSE_LIVE_URI);
+    await mongoose.connect(process.env.MONGOOSE_TEST_URI);
 
     let addAnother = "Yes";
     while (addAnother === "Yes") {
