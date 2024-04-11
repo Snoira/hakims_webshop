@@ -24,7 +24,7 @@ const Navbar = ({ handleSelectCategory, handleResetHome }) => {
       }
     }
     fetchCategories();
-  })
+  }, [])
 
   return (
     <div className="navbar-container d-flex flex-column flex-shrink-0 p-3 text-bg-dark" >
@@ -40,15 +40,15 @@ const Navbar = ({ handleSelectCategory, handleResetHome }) => {
             Home
           </a>
         </li>
-    {categoryList && categoryList.map((category, i) => {
-        return (
-          <li key={i}>
-            <a href='#' className='nav-link text-dark me-md-auto' onClick={(e) => { e.preventDefault(); handleCategory(category.name) }}>
-              {category.name}
-            </a>
-          </li>
-        )
-    })}
+        {categoryList && categoryList.map((category, i) => {
+          return (
+            <li key={i}>
+              <a href='#' className='nav-link text-dark me-md-auto' onClick={(e) => { e.preventDefault(); handleCategory(category.name) }}>
+                {category.name}
+              </a>
+            </li>
+          )
+        })}
       </ul>
     </div>
 
