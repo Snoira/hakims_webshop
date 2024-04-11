@@ -10,7 +10,7 @@ const customerSchema = new mongoose.Schema({
     required: true,
   },
   email: {
-    type: Email,
+    type: String,
     required: true,
   },
   address: {
