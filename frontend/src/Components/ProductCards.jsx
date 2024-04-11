@@ -34,7 +34,6 @@ const ProductCards = ({ product }) => {
                 ReactDOM.createPortal(
                     <div className="popup-overlay">
                         <div className="popup-content">
-
                             <p>{product.name}</p>
                             {/* <p>{product.description}</p> */}
                             <div className="m-1 mt-0 d-flex">
