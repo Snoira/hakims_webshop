@@ -51,7 +51,7 @@ const ShoppingCartmodal = () => {
                             </div>
                         ))}
                         <p>Total: {total} kr</p>
-                        <Link to="/CheckoutPage"  > 
+                        <Link to="/checkout"  > 
                         <button className="btn btn-primary btn-sm" >Till Kassan</button>
                         </Link>
                     </ul>
