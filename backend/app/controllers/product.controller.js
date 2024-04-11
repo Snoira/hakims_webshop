@@ -71,6 +71,18 @@ async function searchProducts(req, res) {
     }
 }
 
+async function getProductsByCategoryAndDeleteThem(req, res) {
+    try {
+        const categoryId = req.params;
+        const products = await Product.find({ category: categoryId }) //.deleteMany();
+        console.log("products that will be deleted ", products)
+        res.status(200).send(products); 
+    } catch(error) {
+        console.error("Error getting products by category", error);
+        res.status(500).json({ message: "Error"});
+    }
+}
+
 async function editProduct(req, res) {
     try{
         const id = req.params.id;
@@ -130,5 +142,6 @@ module.exports = {
     searchProducts,
     startMessage,
     editProduct,
-    deleteProduct
+    deleteProduct,
+    getProductsByCategoryAndDeleteThem
 };
