@@ -1,5 +1,6 @@
 import { useCart, useDeleteProduct, useChangeQuantity } from "../Context/Cart.contex";
 import { useEffect } from "react";
+import { Link }  from "react-router-dom";
 
 
 const ShoppingCartmodal = () => {
@@ -19,8 +20,10 @@ const ShoppingCartmodal = () => {
         const total = cart.reduce((accumulator, currentItem) => {
           return accumulator + (currentItem.price * currentItem.quantity);
         }, 0);
+
+        const formatTotal = total.toFixed(2);
       
-        return total;
+        return formatTotal.replace('.', ',').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
       };
 
       const total = calculateTotal(cart);
@@ -48,6 +51,9 @@ const ShoppingCartmodal = () => {
                             </div>
                         ))}
                         <p>Total: {total} kr</p>
+                        <Link to="/checkout"  > 
+                        <button className="btn btn-primary btn-sm" >Till Kassan</button>
+                        </Link>
                     </ul>
                     
                 ) : (
