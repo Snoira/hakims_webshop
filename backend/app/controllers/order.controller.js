@@ -1,21 +1,10 @@
 const Order = require("../models/order.model");
 const Product = require("../models/product.model");
 const Customer = require("../models/customer.model");
-const { useEffect } = require("react");
 
 async function createOrder(req, res) {
   try {
-    const {
-      orderNummer,
-      date,
-      orderItems,
-      customerInfo,
-      address,
-      street,
-      streetNumber,
-      postNumber,
-      city,
-    } = req.body;
+    const { orderNummer, date, orderItems, customerInfo } = req.body;
 
     const missingFields = [];
 
@@ -68,8 +57,7 @@ async function createOrder(req, res) {
       })
     );
 
-    // const customerInfoArray = Array.from(customerInfo);
-
+    // Hämta kunddata till ordern
     const savedCustomerInfo = await Promise.all(
       customerInfo.map(async (cust) => {
         const customer = await Customer.findById(cust.customerId);
