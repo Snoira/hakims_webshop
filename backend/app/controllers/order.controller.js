@@ -1,12 +1,48 @@
 const Order = require("../models/order.model");
 const Product = require("../models/product.model");
+const Customer = require("../models/customer.model");
+const { useEffect } = require("react");
 
 async function createOrder(req, res) {
   try {
-    const { orderNummer, date, totalPriceWithTax, orderItems } = req.body;
+    const {
+      orderNummer,
+      date,
+      orderItems,
+      customerInfo,
+      address,
+      street,
+      streetNumber,
+      postNumber,
+      city,
+    } = req.body;
 
-    if (!orderNummer || !date || !orderItems || orderItems.length === 0) {
-      return res.status(400).json({ message: "Missing required fields" });
+    const missingFields = [];
+
+    if (!orderNummer) {
+      missingFields.push("orderNummer");
+    }
+
+    if (!date) {
+      missingFields.push("date");
+    }
+
+    if (!orderItems || orderItems.length === 0) {
+      missingFields.push("orderItems");
+    }
+
+    if (!customerInfo) {
+      missingFields.push("customerInfo");
+    }
+
+    if (missingFields.length > 0) {
+      return res
+
+        .status(400)
+
+        .json({
+          message: `Missing required fields: ${missingFields.join(", ")}`,
+        });
     }
 
     // Hämta dagens datum
@@ -32,6 +68,25 @@ async function createOrder(req, res) {
       })
     );
 
+    // const customerInfoArray = Array.from(customerInfo);
+
+    const savedCustomerInfo = await Promise.all(
+      customerInfo.map(async (cust) => {
+        const customer = await Customer.findById(cust.customerId);
+        if (!customer) {
+          throw new Error(`Customer with ID ${cust.customerId} not found`);
+        }
+
+        return {
+          customerId: customer._id,
+          firstName: customer.firstName,
+          lastName: customer.lastName,
+          email: customer.email,
+          address: customer.address,
+        };
+      })
+    );
+
     const totalOrderPrice = populatedOrderItems.reduce(
       (acc, item) => acc + item.totalProductPrice,
       0
@@ -46,6 +101,7 @@ async function createOrder(req, res) {
       totalPrice: totalOrderPrice,
       totalPriceWithTax: totalPriceWithVat,
       orderItems: populatedOrderItems,
+      customerInfo: savedCustomerInfo,
     });
 
     console.log("newOrder: ", newOrder);
@@ -53,8 +109,8 @@ async function createOrder(req, res) {
 
     res.status(201).send(newOrder);
   } catch (error) {
-    console.log("fel i createOrder:", error);
-    res.status(400).json({ message: "Error in createOrder" });
+    console.log("fel i createOrder:", error.message);
+    res.status(400).json({ message: `Error in createOrder: ${error.message}` });
   }
 }
 
