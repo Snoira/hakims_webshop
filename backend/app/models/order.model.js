@@ -39,6 +39,38 @@ const orderSchema = new mongoose.Schema({
       },
     },
   ],
+  customerInfo: [
+    {
+      customerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Customer",
+        required: true,
+      },
+      firstName: {
+        type: String,
+      },
+      lastName: {
+        type: String,
+      },
+      email: {
+        type: String,
+      },
+      address: {
+        adress: {
+          street: { type: String },
+        },
+        streetNumber: {
+          type: Number,
+        },
+        postNumber: {
+          type: Number,
+        },
+        city: {
+          type: String,
+        },
+      },
+    },
+  ],
 });
 
 const Order = mongoose.model("Orders", orderSchema);
