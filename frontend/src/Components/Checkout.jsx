@@ -3,7 +3,7 @@ const CheckOut = () => {
    
     return (
         <> 
-        <div className="py-5 text-center">
+        <div className="py-5 text-center checkout-container">
            <h2>checkout form</h2>
            <p className="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
         </div>
@@ -12,29 +12,29 @@ const CheckOut = () => {
                 <h4 className="d-flex justify-content-between align-items-center md-3">
                     <span className="text-primary">Varukorg</span>
                 </h4>
-                <ul class="list-group mb-3">
-          <li class="list-group-item d-flex justify-content-between lh-sm">
+                <ul className="list-group mb-3">
+          <li className="list-group-item d-flex justify-content-between lh-sm">
             <div>
-              <h6 class="my-0">Produkt namn</h6>
-              <small class="text-body-secondary">Kort beskrivning</small>
+              <h6 className="my-0">Produkt namn</h6>
+              <small className="text-body-secondary">Kort beskrivning</small>
             </div>
-            <span class="text-body-secondary">12kr</span>
+            <span className="text-body-secondary">12kr</span>
           </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
+          <li className="list-group-item d-flex justify-content-between lh-sm">
             <div>
-              <h6 class="my-0">Produkt namn</h6>
-              <small class="text-body-secondary">Kort beskrivning</small>
+              <h6 className="my-0">Produkt namn</h6>
+              <small className="text-body-secondary">Kort beskrivning</small>
             </div>
-            <span class="text-body-secondary">80kr</span>
+            <span className="text-body-secondary">80kr</span>
           </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
+          <li className="list-group-item d-flex justify-content-between lh-sm">
             <div>
-              <h6 class="my-0">Produkt namn</h6>
-              <small class="text-body-secondary">Kort beskrivning</small>
+              <h6 className="my-0">Produkt namn</h6>
+              <small className="text-body-secondary">Kort beskrivning</small>
             </div>
-            <span class="text-body-secondary">5kr</span>
+            <span className="text-body-secondary">5kr</span>
           </li>
-          <li class="list-group-item d-flex justify-content-between">
+          <li className="list-group-item d-flex justify-content-between">
             <span>Totalt (kronor)</span>
             <strong>200kr</strong>
           </li>
