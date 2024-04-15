@@ -3,6 +3,7 @@ import { useState } from 'react';
 import RenderProducts from '../Components/admin/renderProducts';
 import CreateProduct from '../Components/admin/createProduct';
 import CreateCategory from '../Components/admin/createCategory';
+import RenderCategories from '../Components/admin/RenderCategories';
 
 const AdminPage = () => {
 
@@ -23,6 +24,10 @@ const AdminPage = () => {
             <div>
                 <h2>Create Category:</h2>
                 <CreateCategory />
+            </div>
+            <div>
+                <h2>Categories:</h2>
+                <RenderCategories />
             </div>
         </>
     );

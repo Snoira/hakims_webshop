@@ -1,12 +1,17 @@
 import { Link } from 'react-router-dom';
 import Header from '../Components/Header';
+import Footer from '../Components/Footer';
+import CheckOut from '../Components/Checkout';
 
 const CheckoutPage = () => {
     return (
         <>
             <Header />
+            <div>
+                <CheckOut />
+            </div>
 
-            <h1>Checkout Page</h1>
+            <Footer />
         </>
     )
 }
