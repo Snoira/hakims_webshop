@@ -78,9 +78,9 @@ const ProductCardAdmin = ({ product, categoryList }) => {
             <div className="product-card-details">
                 {!editMode ?
                     <>
-                        <h2 className="font-bold">{product.price} sek</h2>
-                        <p className="card-text">{product.description}</p>
-                        <p className="font-bold">{product.name}</p>
+                        <h2 className="font-bold">{price} sek</h2>
+                        <p className="card-text">{description}</p>
+                        <p className="font-bold">{name}</p>
                         <div className="m-1 mt-0">
                             <a onClick={() => { setEditMode(!editMode) }
                             } className="btn btn-primary button font-bold">Redigera</a>
