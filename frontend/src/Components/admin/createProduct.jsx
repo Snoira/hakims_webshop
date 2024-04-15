@@ -68,7 +68,7 @@ const CreateProduct = () => {
                 </label>
                 <button type="submit">Create Product</button>
             </form>
-            {success && <p>Category created successfully</p>}
+            {success && <p>Product created successfully</p>}
         </>
     )
 

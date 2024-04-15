@@ -44,28 +44,31 @@ const ProductCardAdmin = ({ product, categoryList }) => {
 
     const handleNameChange = (e) => {
         const name = e.target.value; //input value
-        const nameRegex = /^[a-zA-ZåäöÅÄÖ\s]*$/;
-        setName(nameRegex.test(name));
+        setName(name)
+        // const nameRegex = /^[a-zA-ZåäöÅÄÖ\s]*$/;
+        // setName(nameRegex.test(name));
         //en godkänd sträng/input måste läggas in i setName(godkända Inputen)
       };
 
       const handlePriceChange = (e) => {
         const price = e.target.value;//input value
-        const priceRegex = /^[a-zA-ZåäöÅÄÖ\s]*$/;
-        setPrice(priceRegex.test(price))
+        setPrice(price)
+        // const priceRegex = /^[a-zA-ZåäöÅÄÖ\s]*$/;
+        // setPrice(priceRegex.test(price))
       };
 
       const handleDescriptionChange = (e) => {
         const desc = e.target.value; //input value
-        const descRegex = /^[a-zA-ZåäöÅÄÖ\s]*$/;
-        setDescription(descRegex.test(desc))
+        setDescription(desc)
+        // const descRegex = /^[a-zA-ZåäöÅÄÖ\s]*$/;
+        // setDescription(descRegex.test(desc))
       };
 
       const handleImageURLChange = (e) => {
         const imageURL = e.target.value; //input value
-        const imageURLRegex = /^[a-zA-ZåäöÅÄÖ\s]*$/;
-        setImageURL(imageURLRegex.test(imageURL))
-
+        setImageURL(imageURL)
+        // const imageURLRegex = /^[a-zA-ZåäöÅÄÖ\s]*$/;
+        // setImageURL(imageURLRegex.test(imageURL))
       };
 
     return (
