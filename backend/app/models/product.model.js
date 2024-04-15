@@ -18,8 +18,28 @@ const productSchema = new mongoose.Schema({
     imageURL: {
         type: String,
         required: false
-    }
+    },
+    description: {
+        type: String,
+        required: false
+    },
+    comparisonPrice: {
+        type: String,
+        required: false
+    },
+    amount: {
+        type: String,
+        required: false
+    },
+    brand: {
+        type: String,
+        required: false
+    },
+
 });
+
+// jämförpris (typ kr/g)
+// mängd (t ex 2 st, 500 g, 3 liter)
 
 const Product = mongoose.model('Product', productSchema);
 module.exports = Product;
