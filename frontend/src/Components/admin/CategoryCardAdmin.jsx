@@ -11,7 +11,7 @@ const CategoryCardAdmin = ({ category }) => {
     const updateCategory = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.put(`https://hakims-webshop-1.onrender.com/categories/edit/${category._id}`, { name });
+            const res = await axios.put(`https://hakims-webshop-1.onrender.com/CATEGORIES/edit/${category._id}`, { name });
             console.log("updated Category:", res.data);
             if (res.status === 200) {
                 setEditMode(false);
@@ -22,17 +22,20 @@ const CategoryCardAdmin = ({ category }) => {
         }
     }
 
-    const deleteCategory = async (e) => {
-        e.preventDefault();
+    const deleteCategory = async () => {
         try {
-            const productsWithCategory = await axios.get(`https://hakims-webshop-1.onrender.com/products/category/${category._id}`);
+            const deletedProductsWithCategory = await axios.delete(`https://hakims-webshop-1.onrender.com/products/delete/category/${category._id}`);
+            // const deletedProductsWithCategory = await axios.delete(`http://localhost:8000/products/delete/category/${category._id}`);
 
-            const res = await axios.delete(`https://hakims-webshop-1.onrender.com/categories/delete/${category._id}`);
-            console.log("deleted product:", res.data);
-
-            if (res.status === 200) {
-                setEditMode(false);
-                setSuccessDelete(true);
+            if (deletedProductsWithCategory.status === 200) {
+                console.log("deleted products with category", category.name);
+                const res = await axios.delete(`https://hakims-webshop-1.onrender.com/categories/delete/${category._id}`);
+                // const res = await axios.delete(`http://localhost:8000/categories/delete/${category._id}`);
+                console.log("deleted category:", res.data);
+                if (res.status === 200) {
+                    setEditMode(false);
+                    setSuccessDelete(true);
+                }
             }
         } catch (error) {
             console.error("Error deleting category", error);
@@ -47,25 +50,25 @@ const CategoryCardAdmin = ({ category }) => {
         <>
             {!editMode ? <div>
                 <h3>{category.name}</h3>
-                <button onClick={() => { setEditMode(!editMode) }}>Redigera</button>
+                {!successDelete && <button onClick={() => { setEditMode(!editMode) }}>Redigera</button>}
             </div>
                 :
                 <div>
-                    <input type="text" defaultValue={category.name} />
-                    <div style={{display: "flex"}} >
+                    <input type="text" value={name} onChange={(e) => { setName(e.target.value) }} />
+                    <div style={{ display: "flex" }} >
                         <button onClick={() => { setName(category.name); setEditMode(!editMode) }} >Avbryt</button>
                         <button onClick={updateCategory} >Uppdatera</button>
                         <button onClick={() => { setIsModalOpen(true) }} >Ta bort</button>
                     </div>
                 </div>}
-            {successUpdate && <p>Category updated successfully</p>}
             {isModalOpen &&
                 <div>
                     <p>Är du säker på att du vill radera kategorin? Alla produkter i kategorin kommer också att raderas.</p>
-                    <button onClick={deleteCategory} >Ja, radera kategorin</button>
+                    <button onClick={() => { deleteCategory(); setIsModalOpen(false) }} >Ja, radera kategorin</button>
                     <button onClick={() => { setIsModalOpen(false) }}>Nej, radera inte kategorin</button>
                 </div>
             }
+            {(successUpdate||successDelete) && <p>Category successfully { successDelete?  "deleted": "updated"} </p>}
         </>
 
     )

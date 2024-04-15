@@ -36,7 +36,7 @@ async function editCategory(req, res) {
     try{
         const id = req.params.id;
         const name = req.body;
-        console.log("name: ", name)
+        console.log("req.body:", name)
         // if (!id || !name || !category || !price || !imageURL ) {
         //     return res.status(400).json({ message: "Missing required fields" });
         // } 
@@ -59,8 +59,6 @@ async function editCategory(req, res) {
 async function deleteCategory(req, res) {
     try {
         const id = req.params.id;
-        console.log(id)
-        // const { id } = req.body;
         if (!id) {
             return res.status(400).json({ message: "Missing required fields" });
         }

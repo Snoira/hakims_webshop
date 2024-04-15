@@ -5,7 +5,7 @@ import axios from 'axios'
 const ProductCardAdmin = ({ product, categoryList }) => {
     const [editMode, setEditMode] = useState(false)
     const [name, setName] = useState(product.name)
-    const [category, setCategory] = useState(product.category)
+    const [category, setCategory] = useState(product.category.name)
     const [price, setPrice] = useState(product.price)
     const [imageURL, setImageURL] = useState(product.imageURL)
     // const [description, setDescription] = useState(product.description)
@@ -109,7 +109,7 @@ const ProductCardAdmin = ({ product, categoryList }) => {
                     <a onClick={() => {
                         // if (editMode) {
                             setName(product.name)
-                            setCategory(product.category)
+                            setCategory(product.category.name)
                             setPrice(product.price)
                             setImageURL(product.imageURL)
                             setDescription(product.description)
