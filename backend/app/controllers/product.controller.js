@@ -12,7 +12,7 @@ async function createProduct(req, res) {
 
         let categoryId;
 
-        
+
         if (mongoose.Types.ObjectId.isValid(category)) {
             categoryId = category;
         } else {
@@ -32,7 +32,7 @@ async function createProduct(req, res) {
         });
 
         console.log("newProduct: ", newProduct);
-        
+
         const savedProduct = await newProduct.save();
         res.status(201).send(savedProduct);
     } catch (error) {
@@ -43,14 +43,14 @@ async function createProduct(req, res) {
 
 
 
-async function getProducts(req, res){
-    try{
+async function getProducts(req, res) {
+    try {
         const products = await Product.find().populate('category');
         res.status(200).send(products)
         console.log("Products: ", products)
-    } catch(error){
+    } catch (error) {
         console.log("fel i getProducts")
-        res.status(400).json({message: "Error in getProducts"})
+        res.status(400).json({ message: "Error in getProducts" })
     }
 }
 
@@ -58,43 +58,56 @@ async function searchProducts(req, res) {
     try {
         const { query } = req.body;
 
-        const products = await Product.find({ 
+        const products = await Product.find({
             $or: [
                 { name: { $regex: query, $options: 'i' } }, // Sök i produktnamn
                 { category: { $in: await Category.find({ name: { $regex: query, $options: 'i' } }).select('_id') } } // Sök i kategorinamn
-            ] 
+            ]
         }).populate('category');
         res.status(200).send(products);
-    } catch(error) {
+    } catch (error) {
         console.error("Error searching products", error);
-        res.status(500).json({ message: "Error"});
+        res.status(500).json({ message: "Error" });
+    }
+}
+
+async function getProductsByCategoryAndDeleteThem(req, res) {
+    try {
+        const categoryId = req.params.id;
+        console.log(categoryId)
+        const products = await Product.find({ category: categoryId }).deleteMany();
+        console.log("products that will be deleted ", products)
+        res.status(200).send(products);
+    } catch (error) {
+        console.error("Error getting products by category", error);
+        res.status(500).json({ message: "Error" });
     }
 }
 
 async function editProduct(req, res) {
-    try{
+    try {
         const id = req.params.id;
         const { name, category, price, imageURL, description } = req.body;
-        // if (!id || !name || !category || !price || !imageURL ) {
-        //     return res.status(400).json({ message: "Missing required fields" });
-        // } 
-        if(!id){
-            return res.status(400).json({ message: "Missing id" });
-        } else if(!name){
-            return res.status(400).json({ message: "Missing name" });
-        } else if(!category){
-            return res.status(400).json({ message: "Missing category" });
-        } else if(!price){
-            return res.status(400).json({ message: "Missing price" });
-        } else if(!imageURL){
-            return res.status(400).json({ message: "Missing imageURL" });
-        }
+        if (!id || !name || !category || !price || !imageURL ) {
+            return res.status(400).json({ message: "Missing required fields" });
+        } 
+        // if (!id) {
+        //     return res.status(400).json({ message: "Missing id" });
+        // } else if (!name) {
+        //     return res.status(400).json({ message: "Missing name" });
+        // } else if (!category) {
+        //     return res.status(400).json({ message: "Missing category" });
+        // } else if (!price) {
+        //     return res.status(400).json({ message: "Missing price" });
+        // } else if (!imageURL) {
+        //     return res.status(400).json({ message: "Missing imageURL" });
+        // }
 
         const updatedProduct = await Product.findByIdAndUpdate(id, { name, category, price, imageURL }); //,{new: true}
         console.log(updatedProduct)
-        res.status(200).send(updatedProduct)    
+        res.status(200).send(updatedProduct)
 
-    }catch(error){
+    } catch (error) {
         res.status(500).json({
             message: error.message
         });
@@ -111,7 +124,7 @@ async function deleteProduct(req, res) {
         }
         const deletedProduct = await Product.findByIdAndDelete(id);
         console.log(deletedProduct)
-        res.status(200).send(deletedProduct)    
+        res.status(200).send(deletedProduct)
 
     } catch (error) {
         res.status(500).json({
@@ -120,7 +133,7 @@ async function deleteProduct(req, res) {
     }
 }
 
-async function startMessage(req, res){
+async function startMessage(req, res) {
     res.status(200).send("Hello from the server")
 }
 
@@ -130,5 +143,6 @@ module.exports = {
     searchProducts,
     startMessage,
     editProduct,
-    deleteProduct
+    deleteProduct,
+    getProductsByCategoryAndDeleteThem
 };
