@@ -21,14 +21,16 @@ const HomePage = () => {
         try {
             const res = await axios.get('https://hakims-webshop-1.onrender.com/products');
 
-            const productsWithCategoryNames = res.data.map(product => ({
-                ...product,
-                categoryName: product.category[0].name
-            }));
+
+            // const productsWithCategoryNames = res.data.map(product => ({
+            //     ...product,
+            //     categoryName: product.category
+            // }));
 
             setProducts(res.data)
-            setOriginalProducts(productsWithCategoryNames);
-            setFilteredProducts(productsWithCategoryNames);
+            console.log("products: ", products)
+            setOriginalProducts(res.data);
+            setFilteredProducts(res.data);
 
 
         } catch (error) {
@@ -54,7 +56,12 @@ const HomePage = () => {
     const handleSelectCategory = async (category) => {
         try {
             // Filtrera produkter baserat på kategorinamn
-            const filteredProductsByCategory = originalProducts.filter(product => product.categoryName === category);
+            const filteredProductsByCategory = originalProducts.filter(product => {
+                if (product.category && product.category.name) {
+                    return product.category.name === category;
+                }
+                return false;
+            });
             setFilteredProducts(filteredProductsByCategory);
         } catch (error) {
             console.error("Error filtering products by category:", error);

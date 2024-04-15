@@ -36,12 +36,13 @@ const ProductCards = ({ product }) => {
                             <img className="img-prod" src={product.imageURL} alt="..." />
                             <div className="text-content">
                                 <b>{product.name}</b>
+                                <p>{product.amount}</p>
                                 <p><b>Kategori: </b>{product.categoryName}</p>
                                 <p><b>Pris: </b> {product.price} kr</p>
                                 <b>Beskrivning:</b>
-                                <p>{product.description.replace(/Jämförelsepris:(.*)/, '')}</p>
+                                <p>{product.description}</p>
                                 <b>Jämförelsepris:</b>
-                                <p>{product.description.match(/Jämförelsepris:(.*)/)[1]}</p>
+                                <p> {product.comparisonPrice} </p>
                                 <b>Märke: </b> <br /> <p>{product.brand}</p>
                             </div>
                             <div className="m-1 mt-0 d-flex justify-content-around">
