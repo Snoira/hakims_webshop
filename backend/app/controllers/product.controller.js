@@ -4,7 +4,7 @@ const Category = require('../models/category.model.js');
 
 async function createProduct(req, res) {
     try {
-        const { name, category, price, imageURL, description } = req.body;
+        const { name, category, price, imageURL, description, brand} = req.body;
 
         if (!name || !price) {
             return res.status(400).json({ message: "Missing required fields" });
@@ -28,7 +28,9 @@ async function createProduct(req, res) {
             "name": name,
             "category": categoryId,
             "price": price,
-            "imageURL": imageURL
+            "imageURL": imageURL,
+            "description": description,
+            "brand": brand
         });
 
         console.log("newProduct: ", newProduct);
