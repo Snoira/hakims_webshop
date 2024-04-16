@@ -50,7 +50,8 @@ const Header = ({ handleResetHome }) => {
                         <div className="d-lg-none">
                             <Link to="/SearchPage" className="nav-link"><FaSearch /></Link>
                         </div>
-                        <a className="nav-link" href="#">Logga in</a>
+                        {/* <a className="nav-link" href="#">Logga in</a> */}
+                        <Link className="nav-link" to="/admin">Logga in</Link>
                         <a className="nav-link" onClick={() => toggleCartModal()} >Varukorg</a>
                     </div>
                 </div>

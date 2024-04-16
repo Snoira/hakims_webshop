@@ -9,7 +9,7 @@ const RenderCategories = () => {
     const fetchCategories = async () => {
         try{
             const res = await axios.get('https://hakims-webshop-1.onrender.com/categories/');
-            console.log("categories:", res.data);
+            // console.log("categories:", res.data);
             setCategories(res.data);
         } catch(error){
             console.error("Error fetching categories", error);

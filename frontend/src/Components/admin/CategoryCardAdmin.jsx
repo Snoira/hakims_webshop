@@ -42,10 +42,6 @@ const CategoryCardAdmin = ({ category }) => {
         }
     }
 
-    // const confirmDelete = () => {
-    //     setIsModalOpen(true)
-    // }
-
     return (
         <>
             {!editMode ? <div>

@@ -44,9 +44,9 @@ const CreateProduct = () => {
 
     const createProduct = async (values) => {
         try {
-            console.log("values:", values);
+            // console.log("values:", values);
             const { name, category, price, imageURL } = values
-            console.log("name:", name, "category:", category, "price:", price, "imageURL:", imageURL)
+            // console.log("name:", name, "category:", category, "price:", price, "imageURL:", imageURL)
             const res = await axios.post('https://hakims-webshop-1.onrender.com/products/', { name, category, price, imageURL });
             console.log("new product:", res.data);
             if (res.status === 201) {
