@@ -4,13 +4,13 @@ const Customer = require("../models/customer.model");
 
 async function createOrder(req, res) {
   try {
-    const { date, orderItems, customerInfo } = req.body;
+    const { orderNummer, date, orderItems, customerInfo } = req.body;
 
     const missingFields = [];
 
-    // if (!orderNummer) {
-    //   missingFields.push("orderNummer");
-    // }
+    if (!orderNummer) {
+      missingFields.push("orderNummer");
+    }
 
     if (!date) {
       missingFields.push("date");
