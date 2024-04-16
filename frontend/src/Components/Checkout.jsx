@@ -89,13 +89,11 @@ const formik = useFormik({
   };
 
   const total = calculateTotal(cartProducts);
-  console.log("Total after formatting:", total);
 
   // Moms
   const Vat = 0.12;
   const getTotalVat = parseFloat(total) * Vat;
 
-  console.log("Total VAT:", getTotalVat);
 
    
     return (
@@ -153,9 +151,12 @@ const formik = useFormik({
             </li>
           
         </ul>
-        {/* <div>
+        {customerSaved && (
+          <div>
             <button className="w-100 btn btn-primary btn-lg" type="submit">Lägg order</button>
-        </div> */}
+        </div>
+        )} 
+        
         </div>
 
         {/* formulär för kundinfo */}
@@ -292,9 +293,7 @@ const formik = useFormik({
             >
               Spara kundinfo
             </button>
-            <button 
-            className="w-50 btn btn-primary btn-lg" 
-            type="submit">Lägg order</button>
+            
             </div>
                 </div>
 
