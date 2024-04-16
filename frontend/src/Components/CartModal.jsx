@@ -43,23 +43,25 @@ const ShoppingCartmodal = () => {
             {cart.length > 0 ? (
                     <ul className="cart-list">
                         {cart.map((item, index) => (
-                            <div> 
-                            <div className="cart-item-details" key={index}>
-                                <p>{item.name}</p>
-                                <button className="btn-secondary btn-sm" onClick={() => changeQuantiy(item, "decrease")}>-</button>
-                                <p>                           
-                                {item.quantity} 
-                                </p>
-                                <button className="btn-success btn-sm" onClick={() => changeQuantiy(item, "increase")}>+</button>
-                                <p> {item.price}kr/st</p>
-                                <button className="btn-danger btn-sm" onClick={() => deleteProductFromCart(item)}>Ta bort</button> 
+                            <li className="cart-item" key={index}> 
+                            <div className="cart-item-details">
+                                <p className="item-name">{item.name}</p>
+                                <div className="quantity-buttons">
+                                    <button className="button-change btn-secondary btn-sm" onClick={() => changeQuantiy(item, "decrease")}>-</button>
+                                    <strong className="item-quantity">{item.quantity}</strong>
+                                <button className="button-change btn-secondary btn-sm" onClick={() => changeQuantiy(item, "increase")}>+</button>
+                                 </div>
+                                <p className="item-price"> {item.price}kr/st</p>
+                                <button className="button-delete btn-danger btn-sm" onClick={() => deleteProductFromCart(item)}>Ta bort</button> 
                             </div>                            
-                            </div>
+                            </li>
                         ))}
-                        <p>Total: {total} kr</p>
+                        <div className="checkout"> 
+                        <strong>Total: {total} kr</strong>
                         <Link to="/checkout"  > 
                         <button className="btn btn-primary btn-sm" >Till Kassan</button>
                         </Link>
+                        </div>
                     </ul>
                     
                 ) : (
