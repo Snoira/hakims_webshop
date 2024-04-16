@@ -5,6 +5,8 @@ import Footer from '../Components/Footer';
 import CheckOut from '../Components/Checkout';
 
 const CheckoutPage = () => {
+
+    
     
 
 
