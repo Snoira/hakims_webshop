@@ -9,10 +9,10 @@ async function createCustomer(req, res) {
     }
 
     const newCustomer = new Customer({
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      address: address,
+      firstName,
+      lastName,
+      email,
+      address,
     });
 
     console.log("newCustomer: ", newCustomer);

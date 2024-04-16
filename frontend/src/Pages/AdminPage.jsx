@@ -4,11 +4,13 @@ import RenderProducts from '../Components/admin/renderProducts';
 import CreateProduct from '../Components/admin/createProduct';
 import CreateCategory from '../Components/admin/createCategory';
 import RenderCategories from '../Components/admin/RenderCategories';
+import Header from '../Components/Header';
 
 const AdminPage = () => {
 
     return (
         <>
+            <Header />
             <h1>Admin Page</h1>
 
             <div>

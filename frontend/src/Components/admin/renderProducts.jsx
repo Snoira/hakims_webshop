@@ -11,7 +11,7 @@ const RenderProducts = () => {
         const fetchProducts = async () => {
             try {
                 const res = await axios.get('https://hakims-webshop-1.onrender.com/products/');
-                console.log("products:", res.data);
+                // console.log("products:", res.data);
                 setProducts(res.data);
             } catch (error) {
                 console.error("Error fetching products", error);
@@ -21,7 +21,7 @@ const RenderProducts = () => {
         const fetchCategories = async () => {
             try {
                 const res = await axios.get('https://hakims-webshop-1.onrender.com/categories/');
-                console.log("categories:", res.data);
+                // console.log("categories:", res.data);
                 setCategoryList(res.data);
             } catch (error) {
                 console.error("Error fetching categories", error);
@@ -36,7 +36,7 @@ const RenderProducts = () => {
         <>
             <button onClick={() => { setShowProducts(!showProducts) }} >show products</button>
 
-            {showProducts && products.map((product, i) => (
+            {(showProducts && products.length>0) && products.map((product, i) => (
                 < ProductCardAdmin key={i} product={product} categoryList={categoryList} />
             ))}
         </>
