@@ -67,7 +67,6 @@ const formik = useFormik({
           { firstName, lastName, email, address });
           console.log("new customer: ", res.data);
           setCustomerSaved(true);
-          console.log(customerSaved)
       } catch (error) {
           console.error('Error creating customer:', error);
       }
@@ -95,6 +94,50 @@ const formik = useFormik({
 
   // total summa inkl frakt och moms, 59kr i fraktkostnad
   const getTotalCost = parseFloat(total) + getTotalVat + 59;
+
+  // skapa random ordernummer
+  const generateOrderNumber = () => {
+    return Math.floor(Math.random() * 1000000);
+  };
+
+    // SKAPA ORDER inkl kundinfon som precis sparades
+  const createOrder = async () => {
+   try {
+    const customerInfo = {
+      customerId: savedValues.Object_Id,
+      firstName: savedValues.firstName,
+      lastName: savedValues.lastName,
+      email: savedValues.email,
+      address: {
+        street: savedValues.address.street,
+        streetNumber: savedValues.address.streetNumber,
+        postNumber: savedValues.address.postNumber,
+        city: savedValues.address.city,
+      },
+    };
+
+    const order = {
+      orderNummer: generateOrderNumber(), 
+      date: new Date().toISOString(),
+      totalPrice: getTotalCost,
+      totalPriceWithTax: getTotalCost,
+      orderItems: cartProducts.map(product => ({
+        productId: product.id, 
+        name: product.name,
+        quantity: product.quantity,
+        price: product.price,
+        totalProductPrice: product.price * product.quantity,
+      })),
+      customerInfo: [customerInfo], // Använd en array eftersom det finns en array av customerInfo i Order-modellen
+    };
+
+    const res = await axios.post("https://hakims-webshop-1.onrender.com/customers/orders", order)
+    console.log('Order created successfully:', res.data)
+   } catch (error) {
+    console.error('Error creating order:', error);
+   }
+}
+    
 
 
    
@@ -155,7 +198,11 @@ const formik = useFormik({
         </ul>
         {customerSaved && (
           <div>
-            <button className="w-100 btn btn-primary btn-lg" type="submit">Lägg order</button>
+            <button 
+            className="w-100 btn btn-primary btn-lg" 
+            type="submit"
+            onClick={createOrder}
+            >Lägg order</button>
         </div>
         )} 
         
