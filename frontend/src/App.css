@@ -3,6 +3,7 @@
 @import url("Styles/productcards.css");
 @import url("Styles/herosection.css");
 @import url("Styles/footer.css");
+@import url("Styles/checkout.css");
 
 #root {
   width: 100%;
