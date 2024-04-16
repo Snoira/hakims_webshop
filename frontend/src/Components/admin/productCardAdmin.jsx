@@ -5,7 +5,7 @@ import axios from 'axios'
 const ProductCardAdmin = ({ product, categoryList }) => {
     const [editMode, setEditMode] = useState(false)
     const [name, setName] = useState(product.name)
-    const [category, setCategory] = useState(product.category)
+    const [category, setCategory] = useState(product.category.name)
     const [price, setPrice] = useState(product.price)
     const [imageURL, setImageURL] = useState(product.imageURL)
     // const [description, setDescription] = useState(product.description)
@@ -44,28 +44,31 @@ const ProductCardAdmin = ({ product, categoryList }) => {
 
     const handleNameChange = (e) => {
         const name = e.target.value; //input value
-        const nameRegex = /^[a-zA-ZåäöÅÄÖ\s]*$/;
-        setName(nameRegex.test(name));
+        setName(name)
+        // const nameRegex = /^[a-zA-ZåäöÅÄÖ\s]*$/;
+        // setName(nameRegex.test(name));
         //en godkänd sträng/input måste läggas in i setName(godkända Inputen)
       };
 
       const handlePriceChange = (e) => {
         const price = e.target.value;//input value
-        const priceRegex = /^[a-zA-ZåäöÅÄÖ\s]*$/;
-        setPrice(priceRegex.test(price))
+        setPrice(price)
+        // const priceRegex = /^[a-zA-ZåäöÅÄÖ\s]*$/;
+        // setPrice(priceRegex.test(price))
       };
 
       const handleDescriptionChange = (e) => {
         const desc = e.target.value; //input value
-        const descRegex = /^[a-zA-ZåäöÅÄÖ\s]*$/;
-        setDescription(descRegex.test(desc))
+        setDescription(desc)
+        // const descRegex = /^[a-zA-ZåäöÅÄÖ\s]*$/;
+        // setDescription(descRegex.test(desc))
       };
 
       const handleImageURLChange = (e) => {
         const imageURL = e.target.value; //input value
-        const imageURLRegex = /^[a-zA-ZåäöÅÄÖ\s]*$/;
-        setImageURL(imageURLRegex.test(imageURL))
-
+        setImageURL(imageURL)
+        // const imageURLRegex = /^[a-zA-ZåäöÅÄÖ\s]*$/;
+        // setImageURL(imageURLRegex.test(imageURL))
       };
 
     return (
@@ -78,9 +81,9 @@ const ProductCardAdmin = ({ product, categoryList }) => {
             <div className="product-card-details">
                 {!editMode ?
                     <>
-                        <h2 className="font-bold">{product.price} sek</h2>
-                        <p className="card-text">{product.description}</p>
-                        <p className="font-bold">{product.name}</p>
+                        <h2 className="font-bold">{price} sek</h2>
+                        <p className="card-text">{description}</p>
+                        <p className="font-bold">{name}</p>
                         <div className="m-1 mt-0">
                             <a onClick={() => { setEditMode(!editMode) }
                             } className="btn btn-primary button font-bold">Redigera</a>
@@ -109,7 +112,7 @@ const ProductCardAdmin = ({ product, categoryList }) => {
                     <a onClick={() => {
                         // if (editMode) {
                             setName(product.name)
-                            setCategory(product.category)
+                            setCategory(product.category.name)
                             setPrice(product.price)
                             setImageURL(product.imageURL)
                             setDescription(product.description)
