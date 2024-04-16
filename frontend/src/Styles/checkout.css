@@ -3,13 +3,36 @@
 }
 
 .form-container {
-    padding-right: 1rem !important;
-    padding-left: 1rem !important;
+    padding-right: 4rem !important;
+    padding-left: 4rem !important;
 }
 
 .button-box {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     gap: 10px;
 }
+
+.customer-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .customer-info h4 {
+    margin-bottom: 10px;
+  }
+  
+  .customer-info p {
+    margin-bottom: 5px;
+  }
+  
+  .customer-info p:last-child {
+    margin-bottom: 0;
+  }

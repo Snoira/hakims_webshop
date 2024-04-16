@@ -5,14 +5,16 @@ import SearchBar from "./SearchBar";
 import ShoppingCartModal from "./CartModal";
 import { useCart } from "../Context/Cart.contex";
 
-
 const Header = ({ handleResetHome }) => {
   const [showCartModal, setShowCartModal] = useState(false);
   const cartModalRef = useRef();
   const cart = useCart();
 
-   const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
+  let totalQuantity = 0;
 
+  if (cart) {
+    totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
+  }
 
 
   const toggleCartModal = () => {
@@ -60,10 +62,11 @@ const Header = ({ handleResetHome }) => {
                 <FaSearch />
               </Link>
             </div>
-            <a className="nav-link" href="#">
+            {/* <a className="nav-link" href="#">Logga in</a> */}
+            <Link className="nav-link" to="/admin">
               Logga in
-            </a>
-            <a className="nav-link" onClick={() => toggleCartModal()}>
+            </Link>
+           <a className="nav-link" onClick={() => toggleCartModal()}>
               <svg
                 class="w-6 h-6 text-gray-800 dark:text-white"
                 aria-hidden="true"
@@ -83,9 +86,9 @@ const Header = ({ handleResetHome }) => {
               </svg>
               <span className="position-absolute translate-middle badge rounded-pill bg-danger icon-num">
                 {totalQuantity}
-                <span className="visually-hidden">items in cart</span>
               </span>
             </a>
+
           </div>
         </div>
       </nav>
