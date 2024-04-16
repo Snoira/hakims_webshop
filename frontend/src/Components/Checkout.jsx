@@ -131,7 +131,7 @@ const formik = useFormik({
       customerInfo: [customerInfo], // Använd en array eftersom det finns en array av customerInfo i Order-modellen
     };
 
-    const res = await axios.post("https://hakims-webshop-1.onrender.com/customers/orders", order)
+    const res = await axios.post("https://hakims-webshop-1.onrender.com/orders", order)
     console.log('Order created successfully:', res.data)
    } catch (error) {
     console.error('Error creating order:', error);
