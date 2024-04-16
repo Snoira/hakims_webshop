@@ -36,7 +36,7 @@ const RenderProducts = () => {
         <>
             <button onClick={() => { setShowProducts(!showProducts) }} >show products</button>
 
-            {showProducts && products.map((product, i) => (
+            {(showProducts && products.length>0) && products.map((product, i) => (
                 < ProductCardAdmin key={i} product={product} categoryList={categoryList} />
             ))}
         </>

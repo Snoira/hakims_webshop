@@ -1,28 +1,59 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const CreateProduct = () => {
 
-    const [name, setName] = useState('');
-    const [category, setCategory] = useState('');
-    const [price, setPrice] = useState(0);
-    const [imageURL, setImageURL] = useState('');
     const [categorieList, setCategorieList] = useState([]);
     const [success, setSuccess] = useState(false);
 
-    const createProduct = async (e) => {
-        e.preventDefault();
+    const validationSchema = Yup.object({
+        name: Yup.string()
+            .min(2, "Too short")
+            .max(50, "Too long")
+            .required("Required")
+            .matches(/^[a-öA-Ö\s]*$/, "Only Swedish characters are allowed")
+            .matches(/^[\p{L}\p{N}\p{P}\p{Z}]*$/gu, "Emojis are not allowed"),
+        category: Yup.string()
+            .required("Required"),
+        price: Yup.number()
+            .required("Required"),
+        imageURL: Yup.string()
+            .required("Required")
+            .url("Invalid URL"),
+    });
+
+    const formik = useFormik({
+        initialValues: {
+            name: "",
+            category: "",
+            price: 0,
+            imageURL: "",
+        },
+        validationSchema: validationSchema,
+        onSubmit: async (values, { setSubmitting, resetForm }) => {
+            setSubmitting(true)
+            await createProduct(values)
+            setSubmitting(false)
+            console.log(values);
+            resetForm()
+        },
+    })
+
+
+    const createProduct = async (values) => {
         try {
+            console.log("values:", values);
+            const { name, category, price, imageURL } = values
+            console.log("name:", name, "category:", category, "price:", price, "imageURL:", imageURL)
             const res = await axios.post('https://hakims-webshop-1.onrender.com/products/', { name, category, price, imageURL });
             console.log("new product:", res.data);
             if (res.status === 201) {
                 setSuccess(true);
+            } else {
+                console.error("Unexpected status code:", res.status);
             }
-            setName('');
-            setCategory('');
-            setPrice('');
-            setImageURL('');
         } catch (error) {
             console.error("Error creating product", error);
         }
@@ -44,14 +75,17 @@ const CreateProduct = () => {
 
     return (
         <>
-            <form onSubmit={createProduct}>
+            <form onSubmit={formik.handleSubmit}>
                 <label>
                     Name:
-                    <input type="text" value={name} placeholder="product name" onChange={(e) => setName(e.target.value)} />
+                    <input type="text" id="name" placeholder="product name" {...formik.getFieldProps('name')} /> {/* value={formik.values.name} onChange={formik.handleChange} /> */}
+                    {formik.touched.name && formik.errors.name ? (
+                        <div>{formik.errors.name}</div>
+                    ) : null}
                 </label>
                 <label>
                     Category:
-                    <select name="category" id="category" placeholder="product category" onChange={(e) => setCategory(e.target.value)} >
+                    <select name="category" value={formik.values.category} placeholder="product category" onChange={formik.handleChange} >
                         <option value="">product category</option>
                         {categorieList.map((category, i) => (
                             <option key={i} value={category._id}>{category.name}</option>
@@ -60,11 +94,17 @@ const CreateProduct = () => {
                 </label>
                 <label>
                     Price:
-                    <input type="number" value={price} placeholder="product price" onChange={(e) => setPrice(e.target.value)} />
+                    <input type="number" id="price" placeholder="product price" {...formik.getFieldProps('price')} /> {/* value={formik.values.price} onChange={formik.handleChange} /> */}
+                    {formik.touched.price && formik.errors.price ? (
+                        <div>{formik.errors.price}</div>
+                    ) : null}
                 </label>
                 <label>
                     Picture:
-                    <input type="text" value={imageURL} placeholder="product picture address" onChange={(e) => setImageURL(e.target.value)} />
+                    <input type="text" id="imageURL" placeholder="product picture address" {...formik.getFieldProps('imageURL')} /> {/* value={formik.values.imageURL} onChange={formik.handleChange} /> */}
+                    {formik.touched.imageURL && formik.errors.imageURL ? (
+                        <div>{formik.errors.imageURL}</div>
+                    ) : null}
                 </label>
                 <button type="submit">Create Product</button>
             </form>
