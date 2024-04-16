@@ -10,11 +10,11 @@ const Header = ({ handleResetHome }) => {
   const cartModalRef = useRef();
   const cart = useCart();
 
-  let totalQuantity = 0;
+    let totalQuantity = 0;
 
-  if (cart) {
-    totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
-  }
+    if (cart) {
+      totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
+    }
 
 
   const toggleCartModal = () => {
