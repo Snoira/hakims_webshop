@@ -1,5 +1,7 @@
 const CheckOut = () => {
 
+    const cartProducts = JSON.parse(localStorage.getItem('cart'));
+
    
     return (
         <> 
@@ -13,27 +15,20 @@ const CheckOut = () => {
                     <span className="text-primary">Varukorg</span>
                 </h4>
                 <ul className="list-group mb-3">
-          <li className="list-group-item d-flex justify-content-between lh-sm">
+                    {cartProducts.map(product => (
+                        <li className="list-group-item d-flex justify-content-between lh-sm"
+                        key={product.id}>
+                        <h6 className="my-0">{product.name}</h6>
+                        <small className="text-body-secondary">Kort beskrivning</small>
+                        <span className="text-body-secondary">{product.price}</span>
+                        </li>
+                    ))}
             <div>
-              <h6 className="my-0">Produkt namn</h6>
-              <small className="text-body-secondary">Kort beskrivning</small>
             </div>
-            <span className="text-body-secondary">12kr</span>
-          </li>
-          <li className="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 className="my-0">Produkt namn</h6>
-              <small className="text-body-secondary">Kort beskrivning</small>
-            </div>
-            <span className="text-body-secondary">80kr</span>
-          </li>
-          <li className="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 className="my-0">Produkt namn</h6>
-              <small className="text-body-secondary">Kort beskrivning</small>
-            </div>
-            <span className="text-body-secondary">5kr</span>
-          </li>
+           
+          
+        
+          
           <li className="list-group-item d-flex justify-content-between">
             <span>Totalt (kronor)</span>
             <strong>200kr</strong>

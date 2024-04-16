@@ -1,9 +1,13 @@
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import CheckOut from '../Components/Checkout';
 
-const CheckoutPage = () => {
+const CheckoutPage = async () => {
+    
+
+
     return (
         <>
             <Header />
