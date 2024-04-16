@@ -11,6 +11,16 @@ const CheckOut = () => {
 
 const cartProducts = JSON.parse(localStorage.getItem('cart'));
 
+const getProductIdsFromLocalStorage = () => {
+  const cartProducts = JSON.parse(localStorage.getItem('cart'));
+  if (cartProducts) {
+    // Returnera en array av produkt-ID:n
+    return cartProducts.map(product => product.id);
+  } else {
+    return [];
+  }
+};
+
 const validationSchema = Yup.object({
   firstName: Yup.string()
   .min(2, "Too Short")
@@ -102,6 +112,7 @@ const formik = useFormik({
 
     // SKAPA ORDER inkl kundinfon som precis sparades
   const createOrder = async () => {
+    const productIds = getProductIdsFromLocalStorage();
    try {
     const customerInfo = {
       customerId: savedValues.Object_Id,
@@ -116,18 +127,23 @@ const formik = useFormik({
       },
     };
 
+    const orderItems = productIds.map(productId => {
+      const product = cartProducts.find(product => product.id === productId);
+      return {
+        productId: productId,
+        name: product.name,
+        quantity: product.quantity,
+        price: product.price,
+        totalProductPrice: product.price * product.quantity,
+      };
+    });
+
     const order = {
       orderNummer: generateOrderNumber(), 
       date: new Date().toISOString(),
       totalPrice: getTotalCost,
       totalPriceWithTax: getTotalCost,
-      orderItems: cartProducts.map(product => ({
-        productId: product.id, 
-        name: product.name,
-        quantity: product.quantity,
-        price: product.price,
-        totalProductPrice: product.price * product.quantity,
-      })),
+      orderItems: [orderItems],
       customerInfo: [customerInfo], // Använd en array eftersom det finns en array av customerInfo i Order-modellen
     };
 
