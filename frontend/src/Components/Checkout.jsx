@@ -9,8 +9,7 @@ const CheckOut = () => {
 
   
 
-
-  const cartProducts = JSON.parse(localStorage.getItem('cart'));
+const cartProducts = JSON.parse(localStorage.getItem('cart'));
 
 const validationSchema = Yup.object({
   firstName: Yup.string()
@@ -94,6 +93,9 @@ const formik = useFormik({
   const Vat = 0.12;
   const getTotalVat = parseFloat(total) * Vat;
 
+  // total summa inkl frakt och moms
+  const getTotalCost = parseFloat(total) + getTotalVat + 59;
+
 
    
     return (
@@ -134,7 +136,7 @@ const formik = useFormik({
             <div>
             </div>
             <li className="list-group-item d-flex justify-content-between">
-            <strong>Summa produkter (kronor)</strong>
+            <strong>Summa produkter</strong>
             <strong>{total} kr</strong>
           </li>
           <li className="list-group-item d-flex justify-content-between">
@@ -143,7 +145,7 @@ const formik = useFormik({
           </li>
             <li className="list-group-item d-flex justify-content-between">
             <strong>TOTALSUMMA</strong>
-            <strong>{total} kr</strong>
+            <strong>{getTotalCost} kr</strong>
           </li>
           <li className="list-group-item d-flex justify-content-between" >
             <small>Moms (12%)</small>
