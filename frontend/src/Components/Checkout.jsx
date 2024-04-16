@@ -93,7 +93,7 @@ const formik = useFormik({
   const Vat = 0.12;
   const getTotalVat = parseFloat(total) * Vat;
 
-  // total summa inkl frakt och moms
+  // total summa inkl frakt och moms, 59kr i fraktkostnad
   const getTotalCost = parseFloat(total) + getTotalVat + 59;
 
 
@@ -129,7 +129,7 @@ const formik = useFormik({
                     {cartProducts.map(product => (
                         <li className="list-group-item d-flex justify-content-between lh-sm"
                         key={product.id}>
-                        <span className="my-0">{product.name}</span> <small>{product.quantity} st</small>
+                        <span className="my-0">{product.name}</span> <small>{product.quantity}st</small>
                         <small className="text-body-secondary">{product.price} kr</small>
                         </li>
                     ))}
