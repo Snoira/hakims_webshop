@@ -1,8 +1,11 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { useState } from "react";
 
 const CheckOut = () => {
+  const [customerSaved, setCustomerSaved] = useState(false);
+  const [savedValues, setSavedValues] = useState();
 
     const cartProducts = JSON.parse(localStorage.getItem('cart'));
 
@@ -47,9 +50,10 @@ const formik = useFormik({
   onSubmit: async (values, { setSubmitting, resetForm }) => {
     setSubmitting(true)
     await createCustomer(values)
-    setSubmitting(false)
-    console.log(values)
     resetForm()
+    console.log(values)
+    setSubmitting(false)
+    setSavedValues(values);
   }
 })
 
@@ -57,11 +61,11 @@ const formik = useFormik({
       try {
         const { firstName, lastName, email, address } = values
         console.log("Creating customer with values:", values);
-        // const res = await axios.post("http://localhost:3000/customers", 
-        // { firstName, lastName, email, address });
-          const res = await axios.post("https://hakims-webshop-frontend.onrender.com/customers", 
+          const res = await axios.post("https://hakims-webshop-1.onrender.com/customers", 
           { firstName, lastName, email, address });
           console.log("new customer: ", res.data);
+          setCustomerSaved(true);
+          console.log(customerSaved)
       } catch (error) {
           console.error('Error creating customer:', error);
       }
@@ -75,7 +79,23 @@ const formik = useFormik({
            <p className="lead"> Fyll i och spara dina kunduppgifter. Därefter kan du lägga din beställning!</p>
         </div>
         <div className="row g-5 form-container">
+        
+       {/* varukorg */}
             <div className="col-md-5 col-lg-4 order-md-last">
+            {customerSaved && (
+        
+        <div className="col-md-12 customer-info">
+          <h4>Dina uppgifter:</h4>
+          <p>Förnamn: {savedValues.firstName}</p>
+          <p>Efternamn: {savedValues.lastName}</p>
+          <p>Email: {savedValues.email}</p>
+          <p>
+            Adress: {savedValues.address.street}{" "}
+            {savedValues.address.streetNumber},{" "}
+            {savedValues.address.postNumber} {savedValues.address.city}
+          </p>
+        </div>
+    )}
                 <h4 className="d-flex justify-content-between align-items-center md-3">
                     <span className="text-primary">Varukorg</span>
                 </h4>
