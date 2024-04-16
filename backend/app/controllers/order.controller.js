@@ -4,13 +4,13 @@ const Customer = require("../models/customer.model");
 
 async function createOrder(req, res) {
   try {
-    const { orderNummer, date, orderItems, customerInfo } = req.body;
+    const { date, orderItems, customerInfo } = req.body;
 
     const missingFields = [];
 
-    if (!orderNummer) {
-      missingFields.push("orderNummer");
-    }
+    // if (!orderNummer) {
+    //   missingFields.push("orderNummer");
+    // }
 
     if (!date) {
       missingFields.push("date");
@@ -83,8 +83,12 @@ async function createOrder(req, res) {
     const VAT = 0.25;
     const totalPriceWithVat = totalOrderPrice * (1 + VAT);
 
+    const generateOrderNumber = () => {
+      return Math.floor(Math.random() * 1000000);
+    };
+
     const newOrder = new Order({
-      orderNummer: orderNummer,
+      orderNummer: generateOrderNumber(),
       date: formattedDate,
       totalPrice: totalOrderPrice,
       totalPriceWithTax: totalPriceWithVat,
