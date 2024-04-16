@@ -30,6 +30,7 @@ const ProductCardAdmin = ({ product, categoryList }) => {
         initialValues: {
             name: `${product.name}`,
             // category: `${product.category.name}`,
+            category: "",
             price: `${product.price}`,
             imageURL: `${product.imageURL}`,
         },
