@@ -39,9 +39,9 @@ const CheckOut = () => {
             <strong>200kr</strong>
           </li>
         </ul>
-        <div>
+        {/* <div>
             <button className="w-100 btn btn-primary btn-lg" type="submit">Lägg order</button>
-        </div>
+        </div> */}
         </div>
 
         {/* formulär för kundinfo */}
@@ -76,7 +76,10 @@ const CheckOut = () => {
               <label for="address2" className="form-label">City</label>
               <input type="text" className="form-control" id="address2"  />
             </div>
-            <button className="w-100 btn btn-primary btn-lg" type="submit">Spara kundinfo</button>
+            <div className="button-box"> 
+            <button className="w-50 btn btn-primary btn-lg" type="submit">Spara kundinfo</button>
+            <button className="w-50 btn btn-primary btn-lg" type="submit">Lägg order</button>
+            </div>
                 </div>
 
             </form>

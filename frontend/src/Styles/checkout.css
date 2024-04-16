@@ -6,3 +6,10 @@
     padding-right: 1rem !important;
     padding-left: 1rem !important;
 }
+
+.button-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+}
