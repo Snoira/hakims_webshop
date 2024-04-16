@@ -30,6 +30,7 @@ const Header = ({ handleResetHome }) => {
         setShowCartModal(false);
       }
     };
+    
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
