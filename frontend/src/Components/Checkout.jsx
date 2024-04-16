@@ -7,7 +7,10 @@ const CheckOut = () => {
   const [customerSaved, setCustomerSaved] = useState(false);
   const [savedValues, setSavedValues] = useState();
 
-    const cartProducts = JSON.parse(localStorage.getItem('cart'));
+  
+
+
+  const cartProducts = JSON.parse(localStorage.getItem('cart'));
 
 const validationSchema = Yup.object({
   firstName: Yup.string()
@@ -71,6 +74,29 @@ const formik = useFormik({
       }
   }
 
+  const calculateTotal = (cartProducts) => {
+    if (cartProducts.length === 0) {
+      return 0;
+    }
+  
+    const total = cartProducts.reduce((accumulator, currentItem) => {
+      return accumulator + (currentItem.price * currentItem.quantity);
+    }, 0);
+
+    const formatTotal = total.toFixed(2);
+  
+    return formatTotal.replace('.', ',').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+  };
+
+  const total = calculateTotal(cartProducts);
+  console.log("Total after formatting:", total);
+
+  // Moms
+  const Vat = 0.12;
+  const getTotalVat = parseFloat(total) * Vat;
+
+  console.log("Total VAT:", getTotalVat);
+
    
     return (
         <> 
@@ -103,17 +129,29 @@ const formik = useFormik({
                     {cartProducts.map(product => (
                         <li className="list-group-item d-flex justify-content-between lh-sm"
                         key={product.id}>
-                        <h6 className="my-0">{product.name}</h6>
-                        <small className="text-body-secondary">Kort beskrivning</small>
-                        <span className="text-body-secondary">{product.price}</span>
+                        <span className="my-0">{product.name}</span> <small>{product.quantity} st</small>
+                        <small className="text-body-secondary">{product.price} kr</small>
                         </li>
                     ))}
             <div>
             </div>
-          <li className="list-group-item d-flex justify-content-between">
-            <span>Totalt (kronor)</span>
-            <strong>200kr</strong>
+            <li className="list-group-item d-flex justify-content-between">
+            <strong>Summa produkter (kronor)</strong>
+            <strong>{total} kr</strong>
           </li>
+          <li className="list-group-item d-flex justify-content-between">
+            <strong>Leveranskostnad</strong>
+            <strong>59kr</strong>
+          </li>
+            <li className="list-group-item d-flex justify-content-between">
+            <strong>TOTALSUMMA</strong>
+            <strong>{total} kr</strong>
+          </li>
+          <li className="list-group-item d-flex justify-content-between" >
+            <small>Moms (12%)</small>
+            <small>{getTotalVat} kr</small>
+            </li>
+          
         </ul>
         {/* <div>
             <button className="w-100 btn btn-primary btn-lg" type="submit">Lägg order</button>
