@@ -13,3 +13,26 @@
     justify-content: space-between;
     gap: 10px;
 }
+
+.customer-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .customer-info h4 {
+    margin-bottom: 10px;
+  }
+  
+  .customer-info p {
+    margin-bottom: 5px;
+  }
+  
+  .customer-info p:last-child {
+    margin-bottom: 0;
+  }
