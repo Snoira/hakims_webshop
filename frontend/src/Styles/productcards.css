@@ -74,6 +74,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 .popup-overlay .popup-content {
@@ -88,6 +89,7 @@
   max-height: 80vh;
   max-width: 60%;
   overflow-y: auto;
+
 }
 
 .popup-overlay .popup-content .img-prod {
