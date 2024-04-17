@@ -31,4 +31,8 @@ app.use("/customers", customerRouter);
 
 app.get("/", (req, res) => res.send("Hello World from /!"));
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'path till din index.html fil'));
+});
+
 module.exports = app;
