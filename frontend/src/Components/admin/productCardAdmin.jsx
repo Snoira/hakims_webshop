@@ -7,8 +7,8 @@ import * as Yup from "yup";
 const ProductCardAdmin = ({ product, categoryList }) => {
     const [editMode, setEditMode] = useState(false)
     const id = product._id
-    // const [successUpdate, setSuccessUpdate] = useState(false)
-    // const [successDelete, setSuccessDelete] = useState(false)
+    const [successUpdate, setSuccessUpdate] = useState(false)
+    const [successDelete, setSuccessDelete] = useState(false)
 
     const validationSchema = Yup.object({
         name: Yup.string()
@@ -37,10 +37,11 @@ const ProductCardAdmin = ({ product, categoryList }) => {
         validationSchema: validationSchema,
         onSubmit: async (values, { setSubmitting }) => {
             setSubmitting(true)
-            await createProduct(values)
+            await updateProduct(values)
             setSubmitting(false)
             console.log(values);
         },
+
     })
 
 
@@ -124,6 +125,7 @@ const ProductCardAdmin = ({ product, categoryList }) => {
                         </div>
                     </form>
                 }
+                {(successUpdate || successDelete) && <p>Product successfully {successUpdate ? "updated" : "deleted"}</p>}
 
             </div>
         </div>
