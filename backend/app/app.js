@@ -12,6 +12,7 @@ app.use(
   cors({
     origin: [
       "https://hakims-webshop-frontend.onrender.com",
+      "https://hakims-webshop-frontend.onrender.com/admin",
       "http://localhost:5173",
       "http://127.0.0.1:5173",
     ],
