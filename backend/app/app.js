@@ -29,10 +29,12 @@ app.use("/categories", categoryRouter);
 app.use("/orders", orderRouter);
 app.use("/customers", customerRouter);
 
+app.use(express.static(path.join(__dirname, 'dist')));
+
 app.get("/", (req, res) => res.send("Hello World from /!"));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/'));
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 module.exports = app;
