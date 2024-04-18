@@ -35,21 +35,21 @@ export function CartProvider( {children } ) {
     const [showCartModal, setShowCartModal] = useState(false);
 
 
-    const addToCart = (productToAdd) => {
-        const existingProductIndex = cart.findIndex((item) => item.name === productToAdd.name);
-        if (existingProductIndex !== -1) {
-            const updatedCart = [...cart];
-            updatedCart[existingProductIndex].quantity += 1;
-            setCart(updatedCart, () => {
-                localStorage.setItem('cart', JSON.stringify(cart));
-            });
-          } else {
-            const updatedCart = [...cart, { ...productToAdd, quantity: 1 }];
-            setCart(updatedCart, () => {
-                localStorage.setItem('cart', JSON.stringify(cart))
-            });
-          }
-        };
+     const addToCart = (productToAdd) => {
+       const existingProductIndex = cart.findIndex(
+         (item) => item.name === productToAdd.name
+       );
+       if (existingProductIndex !== -1) {
+         const updatedCart = [...cart];
+         updatedCart[existingProductIndex].quantity += 1;
+         setCart(updatedCart);
+         localStorage.setItem("cart", JSON.stringify(updatedCart));
+       } else {
+         const updatedCart = [...cart, { ...productToAdd, quantity: 1 }];
+         setCart(updatedCart);
+         localStorage.setItem("cart", JSON.stringify(updatedCart));
+       }
+     };
 
         const deleteFromCart = (productToRemove) => {
             const updatedCart = cart.filter(item => item.name !== productToRemove.name);
