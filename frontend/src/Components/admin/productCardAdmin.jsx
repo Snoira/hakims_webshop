@@ -50,8 +50,7 @@ console.log(_id)
     const formik = useFormik({
         initialValues: {
             name: `${product.name}`,
-            // category: `${product.category._id}`,
-            category: "",
+            category: _id,
             price: `${product.price}`,
             imageURL: `${product.imageURL}`,
         },
