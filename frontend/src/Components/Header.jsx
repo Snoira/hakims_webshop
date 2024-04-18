@@ -9,12 +9,18 @@ const Header = ({ handleResetHome, openPopup }) => {
   const [showCartModal, setShowCartModal] = useState(false);
   const cartModalRef = useRef();
   const cart = useCart();
+  const [totalQuantity, setTotalQuantity] = useState(0);
 
-  let totalQuantity = 0;
+  useEffect(() => {
+    let total = 0;
 
-  if (cart) {
-    totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
-  }
+    if (cart) {
+      total = cart.reduce((total, item) => total + item.quantity, 0);
+    }
+
+    setTotalQuantity(total);
+  }, [cart]);
+
 
 
   const toggleCartModal = () => {
