@@ -146,7 +146,7 @@ const extractCustomerInfo = (data) => {
   
    try {
     const customerInfo = {
-      customerId: custInfo,
+      customerId: custInfo.customerId,
     };
 
     // Ny hämta produkter: 
@@ -163,13 +163,13 @@ const extractCustomerInfo = (data) => {
       date: new Date().toISOString(),
       totalPrice: getTotalCost,
       totalPriceWithTax: getTotalCost,
-      orderItems: [orderItems],
+      orderItems: orderItems,
       customerInfo: customerInfo, // Använd en array eftersom det finns en array av customerInfo i Order-modellen
     };
 
     console.log(order);
-    // const res = await axios.post("https://localhost:3000/orders", order)
-    const res = await axios.post("https://hakims-webshop-1.onrender.com/orders", order)
+    const res = await axios.post("http://localhost:8000/orders", order)
+    //const res = await axios.post("https://hakims-webshop-1.onrender.com/orders", order)
     console.log('Order created successfully:', res.data)
    } catch (error) {
     console.error('Error creating order:', error);
