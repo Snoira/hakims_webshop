@@ -7,12 +7,15 @@ import Footer from '../Components/Footer';
 import HeroSection from '../Components/HeroSection';
 import { useState, useEffect } from 'react';
 import { CartProvider } from "../Context/Cart.contex";
+import ProductPopup from '../Components/ProductPopup';
 
 
 const HomePage = () => {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [originalProducts, setOriginalProducts] = useState([]);
+    const [infoPopup, setInfoPopup] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
     const [sortOption, setSortOption] = useState("default");
 
 
@@ -95,6 +98,16 @@ const HomePage = () => {
         setFilteredProducts(originalProducts); // Återställ filter för produkter
     };
 
+    const openPopup = (product) => {
+        setSelectedProduct(product);
+        setInfoPopup(true);
+    };
+
+    const closePopup = () => {
+        setSelectedProduct(null);
+        setInfoPopup(false);
+    };
+
     useEffect(() => {
         getProducts()
     }, [])
@@ -108,7 +121,9 @@ const HomePage = () => {
     return (
         <div>
             <CartProvider>
-                <Header handleResetHome={handleResetHome}
+                <Header
+                    handleResetHome={handleResetHome}
+                    openPopup={openPopup}
                 />
                 <HeroSection />
 
@@ -121,6 +136,7 @@ const HomePage = () => {
                     />
                     <RenderProductCards
                         products={filteredProducts}
+                        openPopup={openPopup}
                     />
                 </div>
 
@@ -131,6 +147,14 @@ const HomePage = () => {
             }} >klicka</button> */}
                 <Footer />
             </CartProvider>
+
+            {infoPopup && (
+                <ProductPopup
+                    product={selectedProduct}
+                    closePopup={closePopup}
+
+                />
+            )}
         </div>
     );
 }
