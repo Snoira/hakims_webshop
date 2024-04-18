@@ -5,16 +5,22 @@ import SearchBar from "./SearchBar";
 import ShoppingCartModal from "./CartModal";
 import { useCart } from "../Context/Cart.contex";
 
-const Header = ({ handleResetHome }) => {
+const Header = ({ handleResetHome, openPopup }) => {
   const [showCartModal, setShowCartModal] = useState(false);
   const cartModalRef = useRef();
   const cart = useCart();
+  const [totalQuantity, setTotalQuantity] = useState(0);
 
-    let totalQuantity = 0;
+  useEffect(() => {
+    let total = 0;
 
     if (cart) {
-      totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
+      total = cart.reduce((total, item) => total + item.quantity, 0);
     }
+
+    setTotalQuantity(total);
+  }, [cart]);
+
 
 
   const toggleCartModal = () => {
@@ -30,7 +36,7 @@ const Header = ({ handleResetHome }) => {
         setShowCartModal(false);
       }
     };
-    
+
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
@@ -48,13 +54,13 @@ const Header = ({ handleResetHome }) => {
       <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top p-0">
         <div className="header-container d-flex align-items-center justify-content-between ">
           <div className="logo">
-            <Link to="/" onClick={handleHomeClick}>
+            <Link to="/" onClick={handleHomeClick} className="link">
               <b>Hakim Livs</b>
             </Link>
           </div>
 
           <div className="d-lg-block">
-            <SearchBar />
+            <SearchBar openPopup={openPopup} />
           </div>
 
           <div className="d-flex justify-content ml-auto">
@@ -67,7 +73,7 @@ const Header = ({ handleResetHome }) => {
             <Link className="nav-link" to="/admin">
               Logga in
             </Link>
-           <a className="nav-link" onClick={() => toggleCartModal()}>
+            <a className="nav-link" onClick={() => toggleCartModal()}>
               <svg
                 class="w-6 h-6 text-gray-800 dark:text-white"
                 aria-hidden="true"

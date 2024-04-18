@@ -102,6 +102,7 @@ const extractCustomerInfo = (data) => {
           const customerInfo = extractCustomerInfo(res.data);
           setCustInfo(customerInfo);
           console.log("cust info", custInfo);
+
       } catch (error) {
           console.error('Error creating customer:', error);
       }
