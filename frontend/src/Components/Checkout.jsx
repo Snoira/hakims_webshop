@@ -1,10 +1,25 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { useState } from "react";
 
 const CheckOut = () => {
+  const [customerSaved, setCustomerSaved] = useState(false);
+  const [savedValues, setSavedValues] = useState();
 
-    const cartProducts = JSON.parse(localStorage.getItem('cart'));
+  
+
+const cartProducts = JSON.parse(localStorage.getItem('cart'));
+
+const getProductIdsFromLocalStorage = () => {
+  const cartProducts = JSON.parse(localStorage.getItem('cart'));
+  if (cartProducts) {
+    // Returnera en array av produkt-ID:n
+    return cartProducts.map(product => product.id);
+  } else {
+    return [];
+  }
+};
 
 const validationSchema = Yup.object({
   firstName: Yup.string()
@@ -47,9 +62,10 @@ const formik = useFormik({
   onSubmit: async (values, { setSubmitting, resetForm }) => {
     setSubmitting(true)
     await createCustomer(values)
-    setSubmitting(false)
-    console.log(values)
     resetForm()
+    console.log(values)
+    setSubmitting(false)
+    setSavedValues(values);
   }
 })
 
@@ -57,15 +73,88 @@ const formik = useFormik({
       try {
         const { firstName, lastName, email, address } = values
         console.log("Creating customer with values:", values);
-        // const res = await axios.post("http://localhost:3000/customers", 
-        // { firstName, lastName, email, address });
-          const res = await axios.post("https://hakims-webshop-frontend.onrender.com/customers", 
+          const res = await axios.post("https://hakims-webshop-1.onrender.com/customers", 
           { firstName, lastName, email, address });
           console.log("new customer: ", res.data);
+          setCustomerSaved(true);
       } catch (error) {
           console.error('Error creating customer:', error);
       }
   }
+
+  const calculateTotal = (cartProducts) => {
+    if (cartProducts.length === 0) {
+      return 0;
+    }
+  
+    const total = cartProducts.reduce((accumulator, currentItem) => {
+      return accumulator + (currentItem.price * currentItem.quantity);
+    }, 0);
+
+    const formatTotal = total.toFixed(2);
+  
+    return formatTotal.replace('.', ',').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+  };
+
+  const total = calculateTotal(cartProducts);
+
+  // Moms
+  const Vat = 0.12;
+  const getTotalVat = parseFloat(total) * Vat;
+
+  // total summa inkl frakt och moms, 59kr i fraktkostnad
+  const getTotalCost = parseFloat(total) + getTotalVat + 59;
+
+  // skapa random ordernummer
+  const generateOrderNumber = () => {
+    return Math.floor(Math.random() * 1000000);
+  };
+
+    // SKAPA ORDER inkl kundinfon som precis sparades
+  const createOrder = async () => {
+    const productIds = getProductIdsFromLocalStorage();
+   try {
+    const customerInfo = {
+      customerId: savedValues.Object_Id,
+      firstName: savedValues.firstName,
+      lastName: savedValues.lastName,
+      email: savedValues.email,
+      address: {
+        street: savedValues.address.street,
+        streetNumber: savedValues.address.streetNumber,
+        postNumber: savedValues.address.postNumber,
+        city: savedValues.address.city,
+      },
+    };
+
+    const orderItems = productIds.map(productId => {
+      const product = cartProducts.find(product => product.id === productId);
+      return {
+        productId: productId,
+        name: product.name,
+        quantity: product.quantity,
+        price: product.price,
+        totalProductPrice: product.price * product.quantity,
+      };
+    });
+
+    const order = {
+      orderNummer: generateOrderNumber(), 
+      date: new Date().toISOString(),
+      totalPrice: getTotalCost,
+      totalPriceWithTax: getTotalCost,
+      orderItems: [orderItems],
+      customerInfo: [customerInfo], // Använd en array eftersom det finns en array av customerInfo i Order-modellen
+    };
+
+    const res = await axios.post("https://hakims-webshop-1.onrender.com/orders", order)
+    console.log('Order created successfully:', res.data)
+   } catch (error) {
+    console.error('Error creating order:', error);
+   }
+}
+    
+
 
    
     return (
@@ -75,7 +164,23 @@ const formik = useFormik({
            <p className="lead"> Fyll i och spara dina kunduppgifter. Därefter kan du lägga din beställning!</p>
         </div>
         <div className="row g-5 form-container">
+        
+       {/* varukorg */}
             <div className="col-md-5 col-lg-4 order-md-last">
+            {customerSaved && (
+        
+        <div className="col-md-12 customer-info">
+          <h4>Dina uppgifter:</h4>
+          <p>Förnamn: {savedValues.firstName}</p>
+          <p>Efternamn: {savedValues.lastName}</p>
+          <p>Email: {savedValues.email}</p>
+          <p>
+            Adress: {savedValues.address.street}{" "}
+            {savedValues.address.streetNumber},{" "}
+            {savedValues.address.postNumber} {savedValues.address.city}
+          </p>
+        </div>
+    )}
                 <h4 className="d-flex justify-content-between align-items-center md-3">
                     <span className="text-primary">Varukorg</span>
                 </h4>
@@ -83,21 +188,40 @@ const formik = useFormik({
                     {cartProducts.map(product => (
                         <li className="list-group-item d-flex justify-content-between lh-sm"
                         key={product.id}>
-                        <h6 className="my-0">{product.name}</h6>
-                        <small className="text-body-secondary">Kort beskrivning</small>
-                        <span className="text-body-secondary">{product.price}</span>
+                        <span className="my-0">{product.name}</span> <small>{product.quantity}st</small>
+                        <small className="text-body-secondary">{product.price} kr</small>
                         </li>
                     ))}
             <div>
             </div>
-          <li className="list-group-item d-flex justify-content-between">
-            <span>Totalt (kronor)</span>
-            <strong>200kr</strong>
+            <li className="list-group-item d-flex justify-content-between">
+            <strong>Summa produkter</strong>
+            <strong>{total} kr</strong>
           </li>
+          <li className="list-group-item d-flex justify-content-between">
+            <strong>Leveranskostnad</strong>
+            <strong>59kr</strong>
+          </li>
+            <li className="list-group-item d-flex justify-content-between">
+            <strong>TOTALSUMMA</strong>
+            <strong>{getTotalCost} kr</strong>
+          </li>
+          <li className="list-group-item d-flex justify-content-between" >
+            <small>Moms (12%)</small>
+            <small>{getTotalVat} kr</small>
+            </li>
+          
         </ul>
-        {/* <div>
-            <button className="w-100 btn btn-primary btn-lg" type="submit">Lägg order</button>
-        </div> */}
+        {customerSaved && (
+          <div>
+            <button 
+            className="w-100 btn btn-primary btn-lg" 
+            type="submit"
+            onClick={createOrder}
+            >Lägg order</button>
+        </div>
+        )} 
+        
         </div>
 
         {/* formulär för kundinfo */}
@@ -234,9 +358,7 @@ const formik = useFormik({
             >
               Spara kundinfo
             </button>
-            <button 
-            className="w-50 btn btn-primary btn-lg" 
-            type="submit">Lägg order</button>
+            
             </div>
                 </div>
 

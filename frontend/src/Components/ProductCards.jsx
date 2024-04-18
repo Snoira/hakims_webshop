@@ -1,11 +1,12 @@
 import { useCartUpdate } from "../Context/Cart.contex";
 import ReactDOM from 'react-dom';
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 
 const ProductCards = ({ product }) => {
     const addToCart = useCartUpdate(product);
     const [infoPopup, setInfoPopup] = useState(false);
+    const productInfoRef = useRef();
 
     const openPopup = () => {
         setInfoPopup(true);
@@ -15,6 +16,32 @@ const ProductCards = ({ product }) => {
     const closePopup = () => {
         setInfoPopup(false);
     };
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (productInfoRef.current && 
+            !productInfoRef.current.contains(event.target)
+        ) {
+            setInfoPopup(false)
+        }
+        };
+
+        const handleEscape = (event) => {
+            if (event.keyCode === 27) {
+              // Escape key code
+              setInfoPopup(false);
+            }
+          };
+
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+
+       return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
 
     return (
         <>
@@ -32,7 +59,7 @@ const ProductCards = ({ product }) => {
             {infoPopup &&
                 ReactDOM.createPortal(
                     <div className="popup-overlay">
-                        <div className="popup-content">
+                        <div className="popup-content" ref={productInfoRef}>
                             <img className="img-prod" src={product.imageURL} alt="..." />
                             <div className="text-content">
                                 <b>{product.name}</b>

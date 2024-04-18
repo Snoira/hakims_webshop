@@ -3,12 +3,33 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useFormik } from 'formik'
 import * as Yup from "yup";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductCardAdmin = ({ product, categoryList }) => {
     const [editMode, setEditMode] = useState(false)
     const id = product._id
     // const [successUpdate, setSuccessUpdate] = useState(false)
     // const [successDelete, setSuccessDelete] = useState(false)
+    const { _id } = product.category
+
+// console.log("product:", product)
+// console.log("prod.category", product.category)
+// console.log("category.id", product.category._id)
+console.log(_id)
+
+    const getCategory = async() => {
+        try {
+            // const res = await axios.get(`https://hakims-webshop-1.onrender.com/categories/${product.category}`);
+            const res = await axios.get(`https://localhost:8000/categories/${product.category}`);
+            console.log("category:", res.data);
+            if (res.status === 200) {
+                formik.setFieldValue("category", res.data.name)
+            }
+        } catch (error) {
+            console.error("Error fetching category", error);
+        }
+    }
 
     const validationSchema = Yup.object({
         name: Yup.string()
@@ -29,7 +50,7 @@ const ProductCardAdmin = ({ product, categoryList }) => {
     const formik = useFormik({
         initialValues: {
             name: `${product.name}`,
-            // category: `${product.category.name}`,
+            // category: `${product.category._id}`,
             category: "",
             price: `${product.price}`,
             imageURL: `${product.imageURL}`,
@@ -37,12 +58,12 @@ const ProductCardAdmin = ({ product, categoryList }) => {
         validationSchema: validationSchema,
         onSubmit: async (values, { setSubmitting }) => {
             setSubmitting(true)
-            await createProduct(values)
+            await updateProduct(values)
             setSubmitting(false)
             console.log(values);
         },
-    })
 
+    })
 
     const updateProduct = async (values) => {
         // e.preventDefault();
@@ -52,7 +73,8 @@ const ProductCardAdmin = ({ product, categoryList }) => {
             console.log("updated product:", res.data);
             if (res.status === 200) {
                 setEditMode(false);
-                setSuccessUpdate(true);
+                // setSuccessUpdate(true);
+                successUpdate(name)
             }
         } catch (error) {
             console.error("Error updating product", error);
@@ -66,67 +88,97 @@ const ProductCardAdmin = ({ product, categoryList }) => {
             console.log("deleted product:", res.data);
             if (res.status === 200) {
                 setEditMode(false);
-                setSuccessDelete(true);
+                // setSuccessDelete(true);
+                successDelete(product.name)
             }
         } catch (error) {
             console.error("Error deleting product", error);
         }
     }
 
+    const successUpdate = (product) => toast.success(`Product: ${product}, successfully updated!`, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        // transition: Slide,
+    });
+    const successDelete = (product) => toast.success(`Product: ${product}, successfully deleted!`, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        // transition: Slide,
+    });
+
     return (
-        <div className="product-card gap-2">
-            <img src={product.imageURL} alt="..." />
-            <div className="product-card-details">
-                {!editMode ?
-                    <>
-                        <h2 className="font-bold">{product.price} sek</h2>
-                        {/* <p className="card-text">{description}</p> */}
-                        <p className="font-bold">{product.name}</p>
-                        <div className="m-1 mt-0">
-                            <a onClick={() => { setEditMode(!editMode) }
-                            } className="btn btn-primary button font-bold">Redigera</a>
-                        </div>
-                    </> :
-                    <form onSubmit={formik.handleSubmit}>
-                        <label> Bild URL:
-                            <input type="text" id='imageURL' {...formik.getFieldProps('imageURL')} />
-                            {formik.touched.imageURL && formik.errors.imageURL ? (
-                                <div>{formik.errors.imageURL}</div>
-                            ) : null}
-                        </label>
-                        <label> Pris, kr:
-                            <input type="text" id='price' placeholder={formik.values.category} {...formik.getFieldProps('price')} />
-                            {formik.touched.price && formik.errors.price ? (
-                                <div>{formik.errors.price}</div>
-                            ) : null}
-                        </label>
-                        {/* <label> Beskrivning:
+        <>
+            <div className="product-card gap-2">
+                <img src={product.imageURL} alt="..." />
+                <div className="product-card-details">
+                    {/* <button onClick={()=> {
+                        console.log("category", product.category, "ca.id", product.category._id )
+                    }}>test </button> */}
+                    {!editMode ?
+                        <>
+                            <h2 className="font-bold">{product.price} sek</h2>
+                            {/* <p className="card-text">{description}</p> */}
+                            <p className="font-bold">{product.name}</p>
+                            <div className="m-1 mt-0">
+                                <a onClick={() => { setEditMode(!editMode) }
+                                } className="btn btn-primary button font-bold">Redigera</a>
+                            </div>
+                        </> :
+                        <form onSubmit={formik.handleSubmit}>
+                            <label> Bild URL:
+                                <input type="text" id='imageURL' {...formik.getFieldProps('imageURL')} />
+                                {formik.touched.imageURL && formik.errors.imageURL ? (
+                                    <div>{formik.errors.imageURL}</div>
+                                ) : null}
+                            </label>
+                            <label> Pris, kr:
+                                <input type="text" id='price' placeholder={formik.values.category} {...formik.getFieldProps('price')} />
+                                {formik.touched.price && formik.errors.price ? (
+                                    <div>{formik.errors.price}</div>
+                                ) : null}
+                            </label>
+                            {/* <label> Beskrivning:
                             <input type="text" id='description' {...formik.getFieldProps('description')} />
                             {formik.touched.description && formik.errors.description ? (
                                 <div>{formik.errors.description}</div>
                             ) : null}
                         </label> */}
-                        <label> namn:
-                            <input type="text" id='name' placeholder={formik.values.name} {...formik.getFieldProps('name')} />
-                        </label>
-                        <label> Kategori:
-                            <select name="category" id="category" onChange={formik.handleChange} >
-                                <option value="">product category</option>
-                                {categoryList.map((category, i) => (
-                                    <option key={i} value={category._id}>{category.name}</option>
-                                ))}
-                            </select>
-                        </label>
-                        <div style={{ display: 'flex', justifyContent: 'space-around' }} >
-                            <button type='submit' className="btn btn-primary button font-bold" > update product </button>
-                            <button className="btn btn-primary button font-bold" onClick={() => { setEditMode(!editMode) }} > Avbryt </button>
-                            <button className="btn btn-primary button font-bold" onClick={deleteProduct} >Ta Bort</button>
-                        </div>
-                    </form>
-                }
-
+                            <label> namn:
+                                <input type="text" id='name' placeholder={formik.values.name} {...formik.getFieldProps('name')} />
+                            </label>
+                            <label> Kategori:
+                                <select name="category" id="category" onChange={formik.handleChange} >
+                                    <option value={product.category._id}>{product.category.name}</option>
+                                    {categoryList.map((category, i) => (
+                                        <option key={i} value={category._id}>{category.name}</option>
+                                    ))}
+                                </select>
+                            </label>
+                            <div style={{ display: 'flex', justifyContent: 'space-around' }} >
+                                <button type='submit' className="btn btn-primary button font-bold" > update product </button>
+                                <button className="btn btn-primary button font-bold" onClick={() => { setEditMode(!editMode) }} > Avbryt </button>
+                                <button className="btn btn-primary button font-bold" onClick={deleteProduct} >Ta Bort</button>
+                            </div>
+                        </form>
+                    }
+                    {/* {(successUpdate || successDelete) && <p>Product successfully {successUpdate ? "updated" : "deleted"}</p>} */}
+                </div>
             </div>
-        </div>
+        </>
+
     )
 }
 

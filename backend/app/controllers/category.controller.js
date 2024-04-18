@@ -20,6 +20,17 @@ async function createCategory(req, res) {
     }
 }
 
+async function getCategory(req, res){
+    try{
+        const id = req.params.id;
+        const category = await Category.findById(id)
+        res.status(200).send(category)
+        console.log("Category: ", category)
+    } catch(error){
+        console.log("fel i getCategory")
+        res.status(400).json({message: "Error in getCategory"})
+    }
+}
 
 async function getCategories(req, res){
     try{
@@ -80,5 +91,6 @@ module.exports = {
     createCategory,
     getCategories, 
     editCategory, 
-    deleteCategory
+    deleteCategory,
+    getCategory
 };
