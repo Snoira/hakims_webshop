@@ -9,6 +9,7 @@ import style from '../../Styles/productCardAdmin.module.css?module'
 
 const ProductCardAdmin = ({ product, categoryList, categoryId }) => {
     const [editMode, setEditMode] = useState(false)
+    const [description, setDescription] = useState(product.description)
     const id = product._id
     const { _id } = product.category
 
@@ -183,7 +184,7 @@ const ProductCardAdmin = ({ product, categoryList, categoryId }) => {
                                         </div>
 
                                         <label> Beskrivning:
-                                            <textarea id='description' {...formik.getFieldProps('description')} />
+                                            <textarea id='description' placeholder={product.description} {...formik.getFieldProps('description')} />
                                             {(formik.touched.description && formik.errors.description) && formikError(formik.errors.description)}
                                         </label>
 
