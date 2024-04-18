@@ -100,6 +100,7 @@ const extractCustomerInfo = (data) => {
           const customerInfo = extractCustomerInfo(res.data);
           setCustInfo(customerInfo);
           console.log("cust info", custInfo);
+
       } catch (error) {
           console.error('Error creating customer:', error);
       }
@@ -171,6 +172,8 @@ const extractCustomerInfo = (data) => {
     const res = await axios.post("http://localhost:8000/orders", order)
     //const res = await axios.post("https://hakims-webshop-1.onrender.com/orders", order)
     console.log('Order created successfully:', res.data)
+
+    localStorage.removeItem("cart");
    } catch (error) {
     console.error('Error creating order:', error);
     if (error.response) {
