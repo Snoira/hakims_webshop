@@ -77,6 +77,7 @@
 
 }
 
+
 .popup-overlay .popup-content {
   display: flex;
   flex-direction: column;
@@ -86,21 +87,44 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  max-height: 80vh;
+  max-height: 100vh;
   max-width: 60%;
   overflow-y: auto;
 
 }
 
-.popup-overlay .popup-content .img-prod {
-  max-width: 100%;
-  height: auto;
+.popup-header {
+  display: flex;
+  align-items: center;
 }
 
-.img-prod {
+.popup-header .img-prod {
   max-width: 100%;
   max-height: 200px;
+  height: auto;
+  margin-right: 100px;
 }
+
+.popup-footer {
+  display: flex;
+  gap: 150px;
+}
+
+.popup-divider {
+  border: 0;
+  border-top: 1px solid #7a7676;
+  /* Grey color */
+  margin: 10px 0;
+  /* Adjust margin as needed */
+}
+
+/* .popup-overlay .popup-content .img-prod {
+  max-width: 100%;
+  max-height: 200px;
+  height: auto;
+  margin-right: 20px;
+
+} */
 
 .text-content {
   text-align: center;

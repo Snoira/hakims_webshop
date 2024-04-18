@@ -5,6 +5,16 @@ const Customer = require("../models/customer.model");
 async function createOrder(req, res) {
   try {
     const { orderNummer, date, orderItems, customerInfo } = req.body;
+    console.log(
+      "ON",
+      orderNummer,
+      "date",
+      date,
+      "orderItems",
+      orderItems,
+      "customerInfo",
+      customerInfo
+    );
 
     const missingFields = [];
 
@@ -42,6 +52,7 @@ async function createOrder(req, res) {
     const populatedOrderItems = await Promise.all(
       orderItems.map(async (item) => {
         const product = await Product.findById(item.productId);
+        console.log("product", item);
         if (!product) {
           throw new Error(`Product with ID ${item.productId} not found`);
         }
@@ -58,22 +69,29 @@ async function createOrder(req, res) {
     );
 
     // Hämta kunddata till ordern
-    const savedCustomerInfo = await Promise.all(
-      customerInfo.map(async (cust) => {
-        const customer = await Customer.findById(cust.customerId);
-        if (!customer) {
-          throw new Error(`Customer with ID ${cust.customerId} not found`);
-        }
+    // const savedCustomerInfo = await Promise.all(
+    //   customerInfo.map(async (cust) => {
+    //     const customer = await Customer.findById(cust.customerId);
+    //     if (!customer) {
+    //       throw new Error(`Customer with ID ${cust.customerId} not found`);
+    //     }
 
-        return {
-          customerId: customer._id,
-          firstName: customer.firstName,
-          lastName: customer.lastName,
-          email: customer.email,
-          address: customer.address,
-        };
-      })
-    );
+    //     return {
+    //       customerId: customer._id,
+    //       firstName: customer.firstName,
+    //       lastName: customer.lastName,
+    //       email: customer.email,
+    //       address: customer.address,
+    //     };
+    //   })
+    // );
+
+    // NY hämta kundinfo:
+    const savedCustomerInfo = await Customer.findById(customerInfo.customerId);
+    console.log("CUSTOMER", savedCustomerInfo);
+    if (!savedCustomerInfo) {
+      throw new Error(`Customer with ID ${customerInfo.customerId} not found`);
+    }
 
     const totalOrderPrice = populatedOrderItems.reduce(
       (acc, item) => acc + item.totalProductPrice,
@@ -93,7 +111,8 @@ async function createOrder(req, res) {
       totalPrice: totalOrderPrice,
       totalPriceWithTax: totalPriceWithVat,
       orderItems: populatedOrderItems,
-      customerInfo: savedCustomerInfo,
+      customerInfo: { customerId: savedCustomerInfo._id },
+      // customerInfo: addCustomerInfo,
     });
 
     console.log("newOrder: ", newOrder);

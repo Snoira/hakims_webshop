@@ -35,10 +35,12 @@ const RenderProducts = () => {
     return (
         <>
             <button onClick={() => { setShowProducts(!showProducts) }} >show products</button>
+            {/* <div className="row-cols-md-2" > */}
+                {(showProducts && products.length > 0) && products.map((product, i) => (
+                    < ProductCardAdmin key={i} product={product} categoryList={categoryList} categoryId={product.category._id} />
 
-            {(showProducts && products.length>0) && products.map((product, i) => (
-                < ProductCardAdmin key={i} product={product} categoryList={categoryList} />
-            ))}
+                ))}
+            {/* </div> */}
         </>
     );
 
