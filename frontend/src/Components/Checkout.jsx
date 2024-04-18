@@ -6,6 +6,7 @@ import { useState } from "react";
 const CheckOut = () => {
   const [customerSaved, setCustomerSaved] = useState(false);
   const [savedValues, setSavedValues] = useState();
+  const [custInfo, setCustInfo] = useState();
 
   
 
@@ -16,6 +17,7 @@ const getProductIdsFromLocalStorage = () => {
   if (cartProducts) {
     // Returnera en array av produkt-ID:n
     return cartProducts.map(product => product.id);
+    
   } else {
     return [];
   }
@@ -69,6 +71,24 @@ const formik = useFormik({
   }
 })
 
+
+// ta ut kunddata från res.data nedan
+const extractCustomerInfo = (data) => {
+  if (!data) {
+    return null;
+  }
+
+  const { _id, firstName, lastName, email, address } = data;
+
+  return {
+    customerId: _id,
+    firstName,
+    lastName,
+    email,
+    address,
+  };
+};
+
     const createCustomer = async (values) => {
       try {
         const { firstName, lastName, email, address } = values
@@ -77,6 +97,9 @@ const formik = useFormik({
           { firstName, lastName, email, address });
           console.log("new customer: ", res.data);
           setCustomerSaved(true);
+          const customerInfo = extractCustomerInfo(res.data);
+          setCustInfo(customerInfo);
+          console.log("cust info", custInfo);
       } catch (error) {
           console.error('Error creating customer:', error);
       }
@@ -104,39 +127,36 @@ const formik = useFormik({
 
   // total summa inkl frakt och moms, 59kr i fraktkostnad
   const getTotalCost = parseFloat(total) + getTotalVat + 59;
+  const formatTotalCost = getTotalCost.toFixed(2);
 
   // skapa random ordernummer
   const generateOrderNumber = () => {
     return Math.floor(Math.random() * 1000000);
   };
 
+
+
+
+
+
+
     // SKAPA ORDER inkl kundinfon som precis sparades
   const createOrder = async () => {
-    const productIds = getProductIdsFromLocalStorage();
+    // const productIds = getProductIdsFromLocalStorage();
+  
    try {
     const customerInfo = {
-      customerId: savedValues.Object_Id,
-      firstName: savedValues.firstName,
-      lastName: savedValues.lastName,
-      email: savedValues.email,
-      address: {
-        street: savedValues.address.street,
-        streetNumber: savedValues.address.streetNumber,
-        postNumber: savedValues.address.postNumber,
-        city: savedValues.address.city,
-      },
+      customerId: custInfo,
     };
 
-    const orderItems = productIds.map(productId => {
-      const product = cartProducts.find(product => product.id === productId);
-      return {
-        productId: productId,
-        name: product.name,
-        quantity: product.quantity,
-        price: product.price,
-        totalProductPrice: product.price * product.quantity,
-      };
-    });
+    // Ny hämta produkter: 
+    const orderItems = cartProducts.map(product => ({
+      productId: product._id,
+      name: product.name,
+      quantity: product.quantity,
+      price: product.price,
+      totalProductPrice: product.price * product.quantity,
+    }));
 
     const order = {
       orderNummer: generateOrderNumber(), 
@@ -144,13 +164,22 @@ const formik = useFormik({
       totalPrice: getTotalCost,
       totalPriceWithTax: getTotalCost,
       orderItems: [orderItems],
-      customerInfo: [customerInfo], // Använd en array eftersom det finns en array av customerInfo i Order-modellen
+      customerInfo: customerInfo, // Använd en array eftersom det finns en array av customerInfo i Order-modellen
     };
 
+    console.log(order);
+    // const res = await axios.post("https://localhost:3000/orders", order)
     const res = await axios.post("https://hakims-webshop-1.onrender.com/orders", order)
     console.log('Order created successfully:', res.data)
    } catch (error) {
     console.error('Error creating order:', error);
+    if (error.response) {
+      console.log('Server responded with:', error.response.data);
+    } else if (error.request) {
+      console.log('No response received:', error.request);
+    } else {
+      console.log('Error setting up request:', error.message);
+    }
    }
 }
     
@@ -204,7 +233,7 @@ const formik = useFormik({
           </li>
             <li className="list-group-item d-flex justify-content-between">
             <strong>TOTALSUMMA</strong>
-            <strong>{getTotalCost} kr</strong>
+            <strong>{formatTotalCost} kr</strong>
           </li>
           <li className="list-group-item d-flex justify-content-between" >
             <small>Moms (12%)</small>
