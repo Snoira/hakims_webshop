@@ -19,29 +19,29 @@ const ProductCards = ({ product }) => {
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (productInfoRef.current && 
-            !productInfoRef.current.contains(event.target)
-        ) {
-            setInfoPopup(false)
-        }
+            if (productInfoRef.current &&
+                !productInfoRef.current.contains(event.target)
+            ) {
+                setInfoPopup(false)
+            }
         };
 
         const handleEscape = (event) => {
             if (event.keyCode === 27) {
-              // Escape key code
-              setInfoPopup(false);
+                // Escape key code
+                setInfoPopup(false);
             }
-          };
+        };
 
 
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("keydown", handleEscape);
+        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("keydown", handleEscape);
 
-       return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleEscape);
-    };
-  }, []);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("keydown", handleEscape);
+        };
+    }, []);
 
     return (
         <>
@@ -59,28 +59,34 @@ const ProductCards = ({ product }) => {
             {infoPopup &&
                 ReactDOM.createPortal(
                     <div className="popup-overlay">
-                        <div className="popup-content" ref={productInfoRef}>
-                            <img className="img-prod" src={product.imageURL} alt="..." />
-                            <div className="text-content">
-                                <b>{product.name}</b>
-                                <p>{product.amount}</p>
-                                <p><b>Kategori: </b>{product.categoryName}</p>
-                                <p><b>Pris: </b> {product.price} kr</p>
-                                <b>Beskrivning:</b>
-                                <p>{product.description}</p>
-                                <b>Jämförelsepris:</b>
-                                <p> {product.comparisonPrice} </p>
-                                <b>Märke: </b> <br /> <p>{product.brand}</p>
+                        <div className="popup-content card">
+                            <div className="popup-header">
+                                <img className="img-prod" src={product.imageURL} alt="..." />
+                                <div className="product-details">
+                                    <h5 className="card-title">{product.name}</h5>
+                                    <p> {product.amount}</p>
+                                    <p><b>Pris:</b> {product.price} kr</p>
+                                    <p><b>Jämförelsepris:</b> {product.comparisonPrice}</p>
+                                    <p><b>Kategori:</b> {product.category.name}</p>
+                                </div>
                             </div>
-                            <div className="m-1 mt-0 d-flex justify-content-around">
-                                <a onClick={() => addToCart(product)} className="btn btn-primary button font-bold">KÖP</a>
-                                <button onClick={closePopup}>Stäng</button>
+                            <hr className="popup-divider" />
+                            <div className="popup-body">
+                                <p><b>Beskrivning:</b> {product.description}</p>
+                                <p><b>Märke:</b> {product.brand}</p>
+                            </div>
+                            <div className="popup-footer">
+                                <button onClick={() => addToCart(product)} className="btn btn-primary">KÖP</button>
+                                <button onClick={closePopup} className="btn btn-secondary">Stäng</button>
                             </div>
                         </div>
                     </div>,
                     document.getElementById('popup-root')
                 )
             }
+
+
+
 
         </>
 
