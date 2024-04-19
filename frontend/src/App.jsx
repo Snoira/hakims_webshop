@@ -6,17 +6,21 @@ import './App.css'
 import SearchPage from './Pages/SearchPage.jsx'
 import AdminPage from './Pages/AdminPage.jsx'
 import { ToastContainer } from 'react-toastify';
+import { ToasterProvider } from './Context/Toaster.context.jsx'
 
 function App() {
 
   return (
     <>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/SearchPage" element={<SearchPage />} />
-        <Route path="/admin" element={<AdminPage />} />
-      </Routes>
+        <ToasterProvider>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/SearchPage" element={<SearchPage />} />
+            <Route path="/admin" element={<AdminPage />} />
+          </Routes>
+        </ToasterProvider>
+
       <ToastContainer position="bottom-right"
         autoClose={5000}
         hideProgressBar={false}
@@ -27,8 +31,8 @@ function App() {
         draggable
         pauseOnHover
         theme="light"
-        transition:Bounce 
-        />
+        transition:Bounce
+      />
     </>
   )
 }
