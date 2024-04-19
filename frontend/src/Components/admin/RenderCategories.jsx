@@ -24,8 +24,6 @@ const RenderCategories = () => {
                 <div key={i}>
                     <CategoryCardAdmin category={category} />
                 </div>
-            
-            
             ))}
         </>
     )
