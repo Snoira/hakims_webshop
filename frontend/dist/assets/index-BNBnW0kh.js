@@ -11715,6 +11715,7 @@ Error generating stack: ` +
             className: "product-card gap-2",
             children: [
               c.jsx("img", {
+                style: { maxWidth: "200px", maxHeight: "200px" },
                 src: e.imageURL,
                 alt: "...",
                 onClick: () => t(e),
@@ -12327,7 +12328,7 @@ Error generating stack: ` +
                   className: "nav-item",
                   children: c.jsx("a", {
                     href: "#",
-                    className: " px-2 text-body-secondary",
+                    className: "nav-link px-2 text-body-secondary",
                     children: "Home",
                   }),
                 }),
