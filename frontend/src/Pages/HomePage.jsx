@@ -146,15 +146,17 @@ const HomePage = () => {
                 console.log("klick")
             }} >klicka</button> */}
                 <Footer />
+
+
+                {infoPopup && (
+                    <ProductPopup
+                        product={selectedProduct}
+                        closePopup={closePopup}
+
+                    />
+                )}
+
             </CartProvider>
-
-            {infoPopup && (
-                <ProductPopup
-                    product={selectedProduct}
-                    closePopup={closePopup}
-
-                />
-            )}
         </div>
     );
 }
