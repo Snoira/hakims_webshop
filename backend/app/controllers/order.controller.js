@@ -52,6 +52,7 @@ async function createOrder(req, res) {
     const populatedOrderItems = await Promise.all(
       orderItems.map(async (item) => {
         const product = await Product.findById(item.productId);
+        console.log("product", item);
         if (!product) {
           throw new Error(`Product with ID ${item.productId} not found`);
         }
@@ -87,7 +88,8 @@ async function createOrder(req, res) {
 
     // NY hämta kundinfo:
     const savedCustomerInfo = await Customer.findById(customerInfo.customerId);
-    if (!customer) {
+    console.log("CUSTOMER", savedCustomerInfo);
+    if (!savedCustomerInfo) {
       throw new Error(`Customer with ID ${customerInfo.customerId} not found`);
     }
 

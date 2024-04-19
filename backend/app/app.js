@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const path = require('path');
+const path = require("path");
 const { urlencoded } = require("express");
 const productsRouter = require("./routes/product.route.js");
 const categoryRouter = require("./routes/category.route.js");
@@ -9,17 +9,7 @@ const customerRouter = require("./routes/customer.route.js");
 
 const app = express();
 
-app.use(
-  cors({
-    origin: [
-      "https://hakims-webshop-frontend.onrender.com",
-      "http://localhost:5173",
-      "http://127.0.0.1:5173",
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+app.use(cors("*"));
 
 app.use(urlencoded({ extended: true }));
 app.use(express.json());
@@ -31,10 +21,12 @@ app.use("/customers", customerRouter);
 
 app.get("/", (req, res) => res.send("Hello World from /!"));
 
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, "dist")));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname,'..', '..', 'frontend', 'dist', 'index.html'));
+app.get("*", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "..", "..", "frontend", "dist", "index.html")
+  );
 });
 
 module.exports = app;

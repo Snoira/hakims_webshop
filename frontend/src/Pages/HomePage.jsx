@@ -7,12 +7,16 @@ import Footer from '../Components/Footer';
 import HeroSection from '../Components/HeroSection';
 import { useState, useEffect } from 'react';
 import { CartProvider } from "../Context/Cart.contex";
+import ProductPopup from '../Components/ProductPopup';
 
 
 const HomePage = () => {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [originalProducts, setOriginalProducts] = useState([]);
+    const [infoPopup, setInfoPopup] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [sortOption, setSortOption] = useState("default");
 
 
 
@@ -53,6 +57,28 @@ const HomePage = () => {
         }
     }
 
+    const handleSort = (e) => {
+        const option = e.target.value;
+        setSortOption(option);
+        sortProducts(option);
+    };
+
+    const sortProducts = (option) => {
+        let sortedProducts = [...filteredProducts];
+        switch (option) {
+            case "lowToHigh":
+                sortedProducts.sort((a, b) => a.price - b.price);
+                break;
+            case "highToLow":
+                sortedProducts.sort((a, b) => b.price - a.price);
+                break;
+            default:
+                sortedProducts = [...originalProducts];
+                break;
+        }
+        setFilteredProducts(sortedProducts);
+    };
+
     const handleSelectCategory = async (category) => {
         try {
             // Filtrera produkter baserat på kategorinamn
@@ -72,6 +98,16 @@ const HomePage = () => {
         setFilteredProducts(originalProducts); // Återställ filter för produkter
     };
 
+    const openPopup = (product) => {
+        setSelectedProduct(product);
+        setInfoPopup(true);
+    };
+
+    const closePopup = () => {
+        setSelectedProduct(null);
+        setInfoPopup(false);
+    };
+
     useEffect(() => {
         getProducts()
     }, [])
@@ -80,10 +116,14 @@ const HomePage = () => {
     }, [filteredProducts]);
 
 
+
+
     return (
         <div>
             <CartProvider>
-                <Header handleResetHome={handleResetHome}
+                <Header
+                    handleResetHome={handleResetHome}
+                    openPopup={openPopup}
                 />
                 <HeroSection />
 
@@ -91,17 +131,30 @@ const HomePage = () => {
                     <Navbar
                         handleSelectCategory={handleSelectCategory}
                         handleResetHome={handleResetHome}
+                        handleSort={handleSort}
+                        sortOption={sortOption}
                     />
                     <RenderProductCards
                         products={filteredProducts}
+                        openPopup={openPopup}
                     />
                 </div>
+
+
                 {/* <button onClick={async () => {
                 await getProducts()
                 console.log("klick")
             }} >klicka</button> */}
                 <Footer />
             </CartProvider>
+
+            {infoPopup && (
+                <ProductPopup
+                    product={selectedProduct}
+                    closePopup={closePopup}
+
+                />
+            )}
         </div>
     );
 }
