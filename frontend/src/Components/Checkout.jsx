@@ -95,7 +95,7 @@ const extractCustomerInfo = (data) => {
       try {
         const { firstName, lastName, email, address } = values
         console.log("Creating customer with values:", values);
-          const res = await axios.post("https://hakims-webshop-1.onrender.com/customers", 
+          const res = await axios.post(import.meta.env.REACT_APP_BACKEND_URL+"/customers", 
           { firstName, lastName, email, address });
           console.log("new customer: ", res.data);
           setCustomerSaved(true);
@@ -166,7 +166,7 @@ const extractCustomerInfo = (data) => {
     };
 
     console.log(order);
-    const res = await axios.post("http://localhost:8000/orders", order)
+    const res = await axios.post(process.env.REACT_APP_BACKEND_URL+"/orders", order)
     //const res = await axios.post("https://hakims-webshop-1.onrender.com/orders", order)
     console.log('Order created successfully:', res.data)
     if(res.status === 201) {

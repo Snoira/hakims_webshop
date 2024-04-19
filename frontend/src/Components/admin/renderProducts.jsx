@@ -10,7 +10,7 @@ const RenderProducts = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await axios.get('https://hakims-webshop-1.onrender.com/products/');
+                const res = await axios.get(process.env.REACT_APP_BACKEND_URL+"/products");
                 // console.log("products:", res.data);
                 setProducts(res.data);
             } catch (error) {
@@ -20,7 +20,7 @@ const RenderProducts = () => {
 
         const fetchCategories = async () => {
             try {
-                const res = await axios.get('https://hakims-webshop-1.onrender.com/categories/');
+                const res = await axios.get(process.env.REACT_APP_BACKEND_URL+"/categories");
                 // console.log("categories:", res.data);
                 setCategoryList(res.data);
             } catch (error) {

@@ -23,7 +23,7 @@ const HomePage = () => {
 
     const getProducts = async () => {
         try {
-            const res = await axios.get('https://hakims-webshop-1.onrender.com/products');
+            const res = await axios.get(process.env.REACT_APP_BACKEND_URL+"/products");
 
 
             // const productsWithCategoryNames = res.data.map(product => ({

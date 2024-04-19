@@ -14,7 +14,7 @@ const ProductCardAdmin = ({ product, categoryList }) => {
     const updateProduct = async (values) => {
         const { name, category, brand, amount, price, comparisonPrice, imageURL, description } = values
         try {
-            const res = await axios.put(`https://hakims-webshop-1.onrender.com/products/edit/${product._id}`, { name, category, brand, amount, price, comparisonPrice, imageURL, description }); // (params)${product._id}
+            const res = await axios.put(process.env.REACT_APP_BACKEND_URL+`/products/edit/${product._id}`, { name, category, brand, amount, price, comparisonPrice, imageURL, description }); // (params)${product._id}
             if (res.status === 200) {
                 console.log("updated product:", res.data);
                 setEditMode(false);
@@ -29,7 +29,7 @@ const ProductCardAdmin = ({ product, categoryList }) => {
 
     const deleteProduct = async () => {
         try {
-            const res = await axios.delete(`https://hakims-webshop-1.onrender.com/products/delete/${product._id}`);
+            const res = await axios.delete(process.env.REACT_APP_BACKEND_URL+`/products/delete/${product._id}`);
             if (res.status === 200) {
                 console.log("deleted product:", res.data);
                 setEditMode(false);
