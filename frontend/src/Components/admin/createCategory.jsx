@@ -12,7 +12,7 @@ const CreateCategory = () => {
         const { category } = values
         try {
             console.log("category name: ", category);
-            const res = await axios.post(process.env.REACT_APP_BACKEND_URL+'/categories/', { "name": category });
+            const res = await axios.post(import.meta.env.VITE_BACKEND_URL+'/categories/', { "name": category });
             console.log("new category:", res.data);
             if (res.status === 201) {
                 successToaster(res.data.name, "created");

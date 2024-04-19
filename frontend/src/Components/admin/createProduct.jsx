@@ -15,7 +15,7 @@ const CreateProduct = () => {
             // console.log("values:", values);
             const { name, category, brand, price, amount, comparisonPrice, imageURL } = values
             // console.log("name:", name, "category:", category, "price:", price, "imageURL:", imageURL)
-            const res = await axios.post(process.env.REACT_APP_BACKEND_URL+"/products", { name, category, brand, price, amount, comparisonPrice, imageURL });
+            const res = await axios.post(import.meta.env.VITE_BACKEND_URL+"/products", { name, category, brand, price, amount, comparisonPrice, imageURL });
             console.log("new product:", res.data);
             if (res.status === 201) {
                 // successCreate(res.data.name);
@@ -31,7 +31,7 @@ const CreateProduct = () => {
     useEffect(() => {
         const getCategories = async () => {
             try {
-                const res = await axios.get(process.env.REACT_APP_BACKEND_URL+"/categories");
+                const res = await axios.get(import.meta.env.VITE_BACKEND_URL+"/categories");
                 console.log("categories:", res.data);
                 setCategoryList(res.data);
             } catch (error) {

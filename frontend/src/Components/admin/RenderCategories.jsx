@@ -8,7 +8,7 @@ const RenderCategories = () => {
 
     const fetchCategories = async () => {
         try{
-            const res = await axios.get(process.env.REACT_APP_BACKEND_URL+"/categories");
+            const res = await axios.get(import.meta.env.VITE_BACKEND_URL+"/categories");
             // console.log("categories:", res.data);
             setCategories(res.data);
         } catch(error){
