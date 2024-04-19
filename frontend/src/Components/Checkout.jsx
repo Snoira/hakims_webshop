@@ -172,6 +172,7 @@ const extractCustomerInfo = (data) => {
     if(res.status === 201) {
       successCreateOrder();
     }
+    localStorage.removeItem("cart");
    } catch (error) {
     console.error('Error creating order:', error);
     if (error.response) {
