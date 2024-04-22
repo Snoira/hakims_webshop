@@ -71,7 +71,7 @@ const Header = ({ handleResetHome, openPopup }) => {
             </div>
             {/* <a className="nav-link" href="#">Logga in</a> */}
             <Link className="nav-link" to="/admin">
-              Logga in
+              Admin
             </Link>
             <a className="nav-link" onClick={() => toggleCartModal()}>
               <svg
