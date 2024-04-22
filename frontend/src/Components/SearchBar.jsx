@@ -10,7 +10,7 @@ const SearchBar = ({ openPopup }) => {
     const handleSearch = async () => {
         setSearching(true);
         try {
-            const res = await axios.post('https://hakims-webshop-1.onrender.com/products/search', { query });
+            const res = await axios.post(import.meta.env.VITE_BACKEND_URL+'/products/search', { query });
             setSearchRes(res.data);
         } catch (error) {
             console.error("Error searching products", error);

@@ -2,6 +2,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useState } from "react";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CheckOut = () => {
   const [customerSaved, setCustomerSaved] = useState(false);
@@ -93,7 +95,7 @@ const extractCustomerInfo = (data) => {
       try {
         const { firstName, lastName, email, address } = values
         console.log("Creating customer with values:", values);
-          const res = await axios.post("https://hakims-webshop-1.onrender.com/customers", 
+          const res = await axios.post(import.meta.env.VITE_BACKEND_URL+"/customers", 
           { firstName, lastName, email, address });
           console.log("new customer: ", res.data);
           setCustomerSaved(true);
@@ -136,11 +138,6 @@ const extractCustomerInfo = (data) => {
   };
 
 
-
-
-
-
-
     // SKAPA ORDER inkl kundinfon som precis sparades
   const createOrder = async () => {
     // const productIds = getProductIdsFromLocalStorage();
@@ -169,10 +166,12 @@ const extractCustomerInfo = (data) => {
     };
 
     console.log(order);
-    const res = await axios.post("http://localhost:8000/orders", order)
+    const res = await axios.post(import.meta.env.VITE_BACKEND_URL+"/orders", order)
     //const res = await axios.post("https://hakims-webshop-1.onrender.com/orders", order)
     console.log('Order created successfully:', res.data)
-
+    if(res.status === 201) {
+      successCreateOrder();
+    }
     localStorage.removeItem("cart");
    } catch (error) {
     console.error('Error creating order:', error);
@@ -186,6 +185,16 @@ const extractCustomerInfo = (data) => {
    }
 }
     
+const successCreateOrder = () => toast.success(`Ordern är skapad!!`, {
+  position: "bottom-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
+});
 
 
    
@@ -267,7 +276,7 @@ const extractCustomerInfo = (data) => {
                     <div className="col-sm-6">
                     <label 
                     htmlFor="firstName" 
-                    className="form-label">First name</label>
+                    className="form-label">Förnamn</label>
                     <input 
                     className="form-control" 
                     type="text" 
@@ -283,7 +292,7 @@ const extractCustomerInfo = (data) => {
                     ) : null }
                     </div>
                     <div className="col-sm-6">
-                    <label htmlFor="lastName" className="form-label">Last name</label>
+                    <label htmlFor="lastName" className="form-label">Efternamn</label>
                     <input 
                     type="text" 
                     className="form-control"
@@ -314,7 +323,7 @@ const extractCustomerInfo = (data) => {
                 ) : null}
                     </div>
                     <div class="col-sm-9">
-              <label htmlFor="address.street" className="form-label">Adress</label>
+              <label htmlFor="address.street" className="form-label">Gatunamn (bokstäver)</label>
               <input 
               type="text" 
               className="form-control" 
@@ -365,7 +374,7 @@ const extractCustomerInfo = (data) => {
                 ) : null}
             </div>
             <div className="col-sm-9">
-              <label htmlFor="address.city" className="form-label">City</label>
+              <label htmlFor="address.city" className="form-label">Postort</label>
               <input 
               type="text" 
               className="form-control" 

@@ -23,7 +23,7 @@ const HomePage = () => {
 
     const getProducts = async () => {
         try {
-            const res = await axios.get('https://hakims-webshop-1.onrender.com/products');
+            const res = await axios.get(import.meta.env.VITE_BACKEND_URL+"/products");
 
 
             // const productsWithCategoryNames = res.data.map(product => ({
@@ -146,15 +146,17 @@ const HomePage = () => {
                 console.log("klick")
             }} >klicka</button> */}
                 <Footer />
+
+
+                {infoPopup && (
+                    <ProductPopup
+                        product={selectedProduct}
+                        closePopup={closePopup}
+
+                    />
+                )}
+
             </CartProvider>
-
-            {infoPopup && (
-                <ProductPopup
-                    product={selectedProduct}
-                    closePopup={closePopup}
-
-                />
-            )}
         </div>
     );
 }

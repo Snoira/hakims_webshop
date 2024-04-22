@@ -10,7 +10,7 @@ const RenderProducts = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const res = await axios.get('https://hakims-webshop-1.onrender.com/products/');
+                const res = await axios.get(import.meta.env.VITE_BACKEND_URL+"/products");
                 // console.log("products:", res.data);
                 setProducts(res.data);
             } catch (error) {
@@ -20,7 +20,7 @@ const RenderProducts = () => {
 
         const fetchCategories = async () => {
             try {
-                const res = await axios.get('https://hakims-webshop-1.onrender.com/categories/');
+                const res = await axios.get(import.meta.env.VITE_BACKEND_URL+"/categories");
                 // console.log("categories:", res.data);
                 setCategoryList(res.data);
             } catch (error) {
@@ -35,12 +35,10 @@ const RenderProducts = () => {
     return (
         <>
             <button onClick={() => { setShowProducts(!showProducts) }} >show products</button>
-            {/* <div className="row-cols-md-2" > */}
                 {(showProducts && products.length > 0) && products.map((product, i) => (
-                    < ProductCardAdmin key={i} product={product} categoryList={categoryList} categoryId={product.category._id} />
+                    < ProductCardAdmin key={i} product={product} categoryList={categoryList} />
 
                 ))}
-            {/* </div> */}
         </>
     );
 

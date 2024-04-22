@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { useState } from 'react';
+// import axios from 'axios';
+// import { useState } from 'react';
 import RenderProducts from '../Components/admin/renderProducts';
 import CreateProduct from '../Components/admin/createProduct';
 import CreateCategory from '../Components/admin/createCategory';
@@ -11,25 +11,25 @@ const AdminPage = () => {
     return (
         <>
             <Header />
-            <h1>Admin Page</h1>
+            <div style={{ marginTop:'100px' }}>
 
-            <div>
-                <h2>Create Product:</h2>
-                <CreateProduct />
-            </div>
+                <div style={{display: 'grid', placeItems: 'center'}}>
+                    <CreateProduct />
+                </div>
 
-            <div>
-                <h2>Products:</h2>
-                <RenderProducts />
-            </div>
+                <div>
+                    <h2>Products:</h2>
+                    <RenderProducts />
+                </div>
 
-            <div>
-                <h2>Create Category:</h2>
-                <CreateCategory />
-            </div>
-            <div>
-                <h2>Categories:</h2>
-                <RenderCategories />
+                <div>
+                    <h2>Create Category:</h2>
+                    <CreateCategory />
+                </div>
+                <div>
+                    <h2>Categories:</h2>
+                    <RenderCategories />
+                </div>
             </div>
         </>
     );
