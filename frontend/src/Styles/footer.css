@@ -4,3 +4,12 @@
     bottom: 0;
     width: 100%;
   }
+
+.custom-hover:hover {
+  color: lightgrey !important;
+}
+
+
+a.custom-hover:hover {
+  color: lightgrey !important;
+}
