@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test1": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "dev": "nodemon -r dotenv/config server.js"
+    "dev": "nodemon -r dotenv/config server.js",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +19,8 @@
     "express": "^4.19.1",
     "inquirer": "^7.3.3",
     "mongodb": "^6.5.0",
-    "mongoose": "^8.2.3"
+    "mongoose": "^8.2.3",
+    "supertest": "^6.3.4"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"

@@ -18,10 +18,10 @@
     "imageURL": "https://handlaprivatkund.ica.se/images-v3/bf7a00ca-390e-4769-865f-dc369586872e/ff912367-e5b7-49c1-9ff8-79132069cf39/300x300.jpg"
   },
   {
-    "name": "Bacon 140g",
+    "name": "",
     "category": "Kött",
-    "price": "16.90",
-    "imageURL": "https://handlaprivatkund.ica.se/images-v3/bf7a00ca-390e-4769-865f-dc369586872e/83e1c282-f28b-4271-8cc3-f914feeb60c1/300x300.jpg"
+    "price": "55",
+    "imageURL": "lear"
   },
   {
     "name": "Chips Grill 275g",
@@ -70,5 +70,53 @@
     "category": "Drycker",
     "price": "27.90",
     "imageURL": "https://handlaprivatkund.ica.se/images-v3/bf7a00ca-390e-4769-865f-dc369586872e/a298ce46-ae4b-4515-ae69-bf403f949c2d/1280x1280.webp"
+  },
+  {
+    "name": "Chips",
+    "category": "Snacks",
+    "price": "13.80",
+    "imageURL": ""
+  },
+  {
+    "name": "kaffe",
+    "category": "Drycker",
+    "price": "55",
+    "imageURL": ""
+  },
+  {
+    "name": "testdryck",
+    "category": "Drycker",
+    "price": "25",
+    "imageURL": ""
+  },
+  {
+    "name": "testtt",
+    "category": "Frukt",
+    "price": "25",
+    "imageURL": ""
+  },
+  {
+    "name": "testtt",
+    "category": "Frukt",
+    "price": "25",
+    "imageURL": ""
+  },
+  {
+    "name": "CITRON TEST",
+    "category": "Frukt",
+    "price": "25",
+    "imageURL": ""
+  },
+  {
+    "name": "ananas",
+    "category": "Frukt",
+    "price": "25",
+    "imageURL": ""
+  },
+  {
+    "name": "ananas",
+    "category": "Frukt",
+    "price": "55",
+    "imageURL": ""
   }
 ]
