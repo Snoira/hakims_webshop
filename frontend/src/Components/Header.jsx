@@ -101,7 +101,7 @@ const Header = ({ handleResetHome, openPopup }) => {
       </nav>
       {showCartModal && (
         <div ref={cartModalRef}>
-          <ShoppingCartModal />
+          <ShoppingCartModal setShowCartModal={setShowCartModal} />
         </div>
       )}
     </>

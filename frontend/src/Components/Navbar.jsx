@@ -27,7 +27,7 @@ const Navbar = ({ handleSelectCategory, handleResetHome, handleSort, sortOption 
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="nav-item">
-          <a href="#" className="nav-link active" aria-current="page" onClick={(e) => { e.preventDefault(); handleResetHome(); }}>
+          <a href="#" className="nav-link active" style={{ backgroundColor: '#2b613b' }} aria-current="page" onClick={(e) => { e.preventDefault(); handleResetHome(); }}>
             Home
           </a>
         </li>
