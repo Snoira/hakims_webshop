@@ -19,7 +19,8 @@ const ProductForm = ({ product, categoryList, submitFunction, setEditMode }) => 
             .min(1, "Too short")
             .max(20, "Too long")
             .required("Required")
-            .matches(/^[a-öA-Ö\s]*$/, "Only Swedish characters are allowed"),
+            // .matches(/^[a-öA-Ö\s]*$/, "Only Swedish characters are allowed"),
+            .matches(/^[a-öA-Ö0-9\s!?.:()-]*$/, 'Only alphanumeric, swedish characters and !?.:()- are allowed'),
         amount: Yup.string()
             .max(20, "Too long")
             .min(1, "Too short")
@@ -39,14 +40,15 @@ const ProductForm = ({ product, categoryList, submitFunction, setEditMode }) => 
             .required("Required")
             .min(10, "Too short")
             .max(500, "Too long")
-            .matches(/^[a-öA-Ö\s]*$/, "Only Swedish characters are allowed")
+            .matches(/^[a-öA-Ö0-9\s!?.:()-]*$/, 'Only alphanumeric, swedish characters and !?.:()- are allowed')
+            // .matches(/^[a-öA-Ö\s]*$/, "Only Swedish characters are allowed")
     });
 
     const initialValues = product
         ? {
             name: `${product.name}` || "",
             category: product._id || "",
-            brand: `${product.brand}` || "",
+            brand: `${product.brand}` || "-",
             price: product.price || 0,
             amount: `${product.amount}` || "",
             comparisonPrice: `${product.comparisonPrice}` || "",
@@ -98,7 +100,7 @@ const ProductForm = ({ product, categoryList, submitFunction, setEditMode }) => 
                         <label htmlFor="brand" className="visually-hidden">Märke</label>
                         <input type="text" name="brand" id='brand'
                             className={`form-control form-control-sm ${formik.touched.brand ? formik.errors.brand ? "is-invalid" : "is-valid" : ""}`}
-                            placeholder={product ? `${product.brand}` : "Märke på produkt"} defaultValue="-" {...formik.getFieldProps('brand')} />
+                            placeholder={product ? `${product.brand}` : "Märke på produkt"} {...formik.getFieldProps('brand')} />
                     </div>
                 </div>
                 <div className="row justify-content-center align-items-center mb-2">
@@ -143,7 +145,8 @@ const ProductForm = ({ product, categoryList, submitFunction, setEditMode }) => 
                         <label htmlFor="comparisonPrice" className="visually-hidden"> Jämförspris </label>
                         <input type="text" name="comparisonPrice" id='comparisonPrice'
                             className={`form-control form-control-sm ${formik.touched.comparisonPrice ? formik.errors.comparisonPrice ? "is-invalid" : "is-valid" : ""}`}
-                            placeholder={product ? `${product.comparisonPrice}` : "Jämförspris"} {...formik.getFieldProps('pricomparisonPricece')} />
+                            placeholder={product ? `${product.comparisonPrice}` : "Jämförspris"} {...formik.getFieldProps('comparisonPrice')} />
+                            {/* { formik.errors.comparisonPrice ? <div>{formik.errors.comparisonPrice}</div> : null} */}
                     </div>
                 </div>
                 <div className='row justify-content-center align-items-center mb-2'>
