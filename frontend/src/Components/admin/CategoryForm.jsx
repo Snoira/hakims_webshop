@@ -1,7 +1,11 @@
 import { useFormik } from 'formik'
 import * as Yup from "yup";
+import ConfirmDeleteModal from './ConfirmDeleteModal';
+import {useState} from 'react'
 
-const CategoryForm = ({ category, submitFunction, setEditMode, setQuestionDelete }) => {
+const CategoryForm = ({ category, submitFunction, setEditMode, deleteFunction }) => {
+
+    const [questionDelete, setQuestionDelete] = useState(false)
 
     const validationSchema = Yup.object({
         categoryName: Yup.string()
@@ -27,7 +31,7 @@ const CategoryForm = ({ category, submitFunction, setEditMode, setQuestionDelete
             setSubmitting(true)
             await submitFunction(values)
             setSubmitting(false)
-            console.log("submitted");
+            if(!category) formik.resetForm()
         },
     })
 
@@ -43,20 +47,15 @@ const CategoryForm = ({ category, submitFunction, setEditMode, setQuestionDelete
                         name="categoryName"
                         placeholder={category ? `${category.name}` : 'Category'}
                         {...formik.getFieldProps('categoryName')}
-                    // onChange={formik.handleChange}
-                    // onBlur={formik.handleBlur}
-                    // value={formik.values.category}
                     />
-                    {/* {formik.touched.category && formik.errors.category ? (
-                        <div className="alert alert-danger">{formik.errors.category}</div>
-                    ) : null} */}
                 </div>
                 <button type="submit" className="btn btn-primary button font-bold">{category ? "Uppdatera Kategori" : "Skapa Kategori"}</button>
                 {category&& <>
-                    <button type="reset" className="btn btn-secondary button font-bold" onClick={() => { setEditMode(false) }}>Cancel</button>
-                    <button type="button" className="btn btn-danger button font-bold" onClick={() => {setQuestionDelete(true)}}>Delete</button>
+                    <button type="reset" className="btn btn-secondary button font-bold" onClick={() => { setEditMode(false) }}>Avbryt</button>
+                    <button type="button" className="btn btn-danger button font-bold" onClick={() => {setQuestionDelete(true)}}>Ta Bort</button>
                 </>}
             </form>
+            {category && <ConfirmDeleteModal deleteFunction={deleteFunction} object={category} setQuestionDelete={setQuestionDelete} questionDelete={questionDelete} />}
         </div>
     )
 }

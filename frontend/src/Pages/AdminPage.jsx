@@ -1,8 +1,8 @@
 // import axios from 'axios';
 // import { useState } from 'react';
-import RenderProducts from '../Components/admin/renderProducts';
-import CreateProduct from '../Components/admin/createProduct';
-import CreateCategory from '../Components/admin/createCategory';
+import RenderProducts from '../Components/admin/RenderProducts';
+import CreateProduct from '../Components/admin/CreateProduct';
+import CreateCategory from '../Components/admin/CreateCategory';
 import RenderCategories from '../Components/admin/RenderCategories';
 import Header from '../Components/Header';
 
