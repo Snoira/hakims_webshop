@@ -10,6 +10,7 @@ const productSchema = new mongoose.Schema({
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category", // referens till category.model
+    required: true,
   },
   price: {
     type: Number,

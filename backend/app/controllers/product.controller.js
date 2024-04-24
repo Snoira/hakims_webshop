@@ -6,7 +6,7 @@ async function createProduct(req, res) {
     try {
         const { name, category, price, imageURL, description, comparisonPrice, amount, brand} = req.body;
 
-        if (!name || !price) {
+        if (!name || !price || !imageURL || !description || !comparisonPrice || !amount || !brand || !category) {
             return res.status(400).json({ message: "Missing required fields" });
         }
 
