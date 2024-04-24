@@ -6,6 +6,7 @@ import { useToaster } from "../../Context/Toaster.context";
 
 const ProductCardAdmin = ({ product, categoryList }) => {
     const [editMode, setEditMode] = useState(false)
+    const [productDeleted, setProductDeleted] = useState(false)
 
     const { successToaster } = useToaster()
    
@@ -34,7 +35,8 @@ const ProductCardAdmin = ({ product, categoryList }) => {
                 console.log("deleted product:", res.data);
                 setEditMode(false);
                 successToaster(product.name, "deleted")
-                // setQuestionDelete(false)
+                setProductDeleted(true)
+                
             }
         } catch (error) {
             console.error("Error deleting product", error);
@@ -66,7 +68,7 @@ const ProductCardAdmin = ({ product, categoryList }) => {
 
                                 </div>
                                 <p className="card-text">{product.description}</p>
-                                <button className="btn btn-primary button font-bold" onClick={() => { setEditMode(!editMode) }} >Redigera</button>
+                                {!productDeleted && <button className="btn btn-primary button font-bold" onClick={() => { setEditMode(!editMode) }} >Redigera</button>}
                             </div>
                             :
                             <div className='card-body'>
