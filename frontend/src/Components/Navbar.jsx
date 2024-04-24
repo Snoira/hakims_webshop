@@ -9,7 +9,7 @@ const Navbar = ({ handleSelectCategory, handleResetHome, handleSort, sortOption 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await axios.get(import.meta.env.VITE_BACKEND_URL+"/categories");
+        const res = await axios.get('https://hakims-webshop-1.onrender.com/categories/');
         setCategoryList(res.data);
       } catch (error) {
         console.error("Error fetching categories", error);
@@ -26,7 +26,7 @@ const Navbar = ({ handleSelectCategory, handleResetHome, handleSort, sortOption 
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="nav-item">
-          <a href="#" className="nav-link active" aria-current="page" onClick={(e) => { e.preventDefault(); handleResetHome(); }}>
+          <a href="#" className="nav-link active" style={{ backgroundColor: '#2b613b' }} aria-current="page" onClick={(e) => { e.preventDefault(); handleResetHome(); }}>
             Home
           </a>
         </li>
