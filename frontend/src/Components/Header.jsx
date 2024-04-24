@@ -4,6 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import SearchBar from "./SearchBar";
 import ShoppingCartModal from "./CartModal";
 import { useCart } from "../Context/Cart.contex";
+import logo from "../Styles/img/hakim-logo.png";
 
 const Header = ({ handleResetHome, openPopup }) => {
   const [showCartModal, setShowCartModal] = useState(false);
@@ -55,7 +56,7 @@ const Header = ({ handleResetHome, openPopup }) => {
         <div className="header-container d-flex align-items-center justify-content-between ">
           <div className="logo">
             <Link to="/" onClick={handleHomeClick} className="link">
-              <b>Hakim Livs</b>
+              <img src={logo} alt="Hakim Livs" className="header-logo" height={200} width={200}/>
             </Link>
           </div>
 
@@ -95,7 +96,6 @@ const Header = ({ handleResetHome, openPopup }) => {
                 {totalQuantity}
               </span>
             </a>
-
           </div>
         </div>
       </nav>
