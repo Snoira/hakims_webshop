@@ -111,7 +111,7 @@ const Footer = () => {
                 <span className="text-start link-color">
                   <FaLocationDot />
                 </span>
-                <span className="p-3 text-start link-color">Hakim Livs AB</span>
+                <span className="p-3 text-start link-color">Hakim Livs</span>
               </li>
               <li>
                 <a href="#" className="nav-link p-0 text-muted text-start">
