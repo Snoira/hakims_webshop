@@ -1,4 +1,5 @@
 /* Footer */
+
 .footer {
     z-index: 1;
     bottom: 0;
@@ -6,10 +7,15 @@
   }
 
 .custom-hover:hover {
-  color: lightgrey !important;
+  color: #6baa7e !important;
 }
 
 
 a.custom-hover:hover {
-  color: lightgrey !important;
+  color: #6baa7e !important;
+}
+
+
+.link-color  {
+  color: #2b613b !important;
 }
