@@ -7,10 +7,7 @@ import CategoryForm from './CategoryForm';
 
 const CategoryCardAdmin = ({ category }) => {
     const [editMode, setEditMode] = useState(false)
-    // const [name, setName] = useState(category.name)
-    // const [successUpdate, setSuccessUpdate] = useState(false)
     const [successDelete, setSuccessDelete] = useState(false)
-    const [questionDelete, setQuestionDelete] = useState(false)
 
     const { successToaster } = useToaster()
 
@@ -18,7 +15,9 @@ const CategoryCardAdmin = ({ category }) => {
         const { categoryName } = values
         // const name = categoryName
         try {
-            const res = await axios.put(`https://hakims-webshop-1.onrender.com/CATEGORIES/edit/${category._id}`, { "name": categoryName });
+            const res = await axios.put("https://hakims-webshop-1.onrender.com"+`/categories/edit/${category._id}`, { "name": categoryName });
+            // const res = await axios.put(import.meta.env.VITE_BACKEND_URL+`/categories/edit/${category._id}`, { "name": categoryName });
+
             if (res.status === 200) {
                 console.log("updated Category:", res.data);
                 setEditMode(false);
@@ -33,17 +32,19 @@ const CategoryCardAdmin = ({ category }) => {
 
     const deleteCategory = async () => {
         try {
-            const deletedProductsWithCategory = await axios.delete(`https://hakims-webshop-1.onrender.com/products/delete/category/${category._id}`);
+            // const deletedProductsWithCategory = await axios.delete(import.meta.env.VITE_BACKEND_URL+`/products/delete/category/${category._id}`);
+            const deletedProductsWithCategory = await axios.delete('https://hakims-webshop-1.onrender.com'+`/products/delete/category/${category._id}`);
             // const deletedProductsWithCategory = await axios.delete(`http://localhost:8000/products/delete/category/${category._id}`);
             if (deletedProductsWithCategory.status === 200) {
                 console.log("deleted products with category", category.name);
-                const res = await axios.delete(`https://hakims-webshop-1.onrender.com/categories/delete/${category._id}`);
+                // const res = await axios.delete(import.meta.env.VITE_BACKEND_URL+`/categories/delete/${category._id}`);
+                const res = await axios.delete('https://hakims-webshop-1.onrender.com'+`/categories/delete/${category._id}`);
                 // const res = await axios.delete(`http://localhost:8000/categories/delete/${category._id}`);
                 if (res.status === 200) {
                     console.log("deleted category:", res.data);
                     setEditMode(false);
                     successToaster(category.name, "deleted")
-                    setQuestionDelete(false)
+                    // setQuestionDelete(false)
                     setSuccessDelete(true)
                 }
             }
@@ -61,18 +62,10 @@ const CategoryCardAdmin = ({ category }) => {
                 </div>
                 :
                 <div>
-                    <CategoryForm category={category} submitFunction={updateCategory} setEditMode={setEditMode} setQuestionDelete={setQuestionDelete} />
-                    {/* <button onClick={() => { setIsModalOpen(true) }}>Radera kategori</button> */}
+                    <CategoryForm category={category} submitFunction={updateCategory} setEditMode={setEditMode} deleteFunction={deleteCategory} />
                 </div>
             }
-            {questionDelete &&
-                <div>
-                    <p>Är du säker på att du vill radera kategorin? Alla produkter i kategorin kommer också att raderas.</p>
-                    <button onClick={deleteCategory} >Ja, radera kategorin</button>
-                    <button onClick={() => { setQuestionDelete(false) }}>Nej, radera inte kategorin</button>
-                </div>
-            }
-            {/* {(successUpdate || successDelete) && <p>Category successfully {successDelete ? "deleted" : "updated"} </p>} */}
+           
         </>
 
     )

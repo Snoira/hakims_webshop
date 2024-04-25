@@ -1,6 +1,21 @@
 /* Footer */
+
 .footer {
     z-index: 1;
     bottom: 0;
     width: 100%;
   }
+
+.custom-hover:hover {
+  color: #6baa7e !important;
+}
+
+
+a.custom-hover:hover {
+  color: #6baa7e !important;
+}
+
+
+.link-color  {
+  color: #2b613b !important;
+}

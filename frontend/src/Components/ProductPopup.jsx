@@ -1,9 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useContext } from 'react';
+import { useCartUpdate } from "../Context/Cart.contex";
 
 const ProductPopup = ({ product, closePopup }) => {
+    const addToCart = useCartUpdate();
+
     return (
         <>
+
             {
                 product && ReactDOM.createPortal(
                     <div className="popup-overlay">
@@ -33,6 +38,7 @@ const ProductPopup = ({ product, closePopup }) => {
                     document.getElementById('popup-root')
                 )
             }
+
         </>
     );
 }

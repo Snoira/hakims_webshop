@@ -6,15 +6,15 @@ import { useToaster } from "../../Context/Toaster.context";
 
 const ProductCardAdmin = ({ product, categoryList }) => {
     const [editMode, setEditMode] = useState(false)
-    const [questionDelete, setQuestionDelete] = useState(false)
-    const [successDelete, setSuccessDelete] = useState(false)
+    const [productDeleted, setProductDeleted] = useState(false)
 
     const { successToaster } = useToaster()
    
     const updateProduct = async (values) => {
         const { name, category, brand, amount, price, comparisonPrice, imageURL, description } = values
         try {
-            const res = await axios.put(`https://hakims-webshop-1.onrender.com/products/edit/${product._id}`, { name, category, brand, amount, price, comparisonPrice, imageURL, description }); // (params)${product._id}
+            const res = await axios.put('https://hakims-webshop-1.onrender.com'+`/products/edit/${product._id}`, { name, category, brand, amount, price, comparisonPrice, imageURL, description }); // (params)${product._id}
+            // const res = await axios.put(import.meta.env.VITE_BACKEND_URL+`/products/edit/${product._id}`, { name, category, brand, amount, price, comparisonPrice, imageURL, description }); // (params)${product._id}
             if (res.status === 200) {
                 console.log("updated product:", res.data);
                 setEditMode(false);
@@ -29,12 +29,14 @@ const ProductCardAdmin = ({ product, categoryList }) => {
 
     const deleteProduct = async () => {
         try {
-            const res = await axios.delete(`https://hakims-webshop-1.onrender.com/products/delete/${product._id}`);
+            // const res = await axios.delete(import.meta.env.VITE_BACKEND_URL+`/products/delete/${product._id}`);
+            const res = await axios.delete('https://hakims-webshop-1.onrender.com'+`/products/delete/${product._id}`);
             if (res.status === 200) {
                 console.log("deleted product:", res.data);
                 setEditMode(false);
                 successToaster(product.name, "deleted")
-                setQuestionDelete(false)
+                setProductDeleted(true)
+                
             }
         } catch (error) {
             console.error("Error deleting product", error);
@@ -56,7 +58,7 @@ const ProductCardAdmin = ({ product, categoryList }) => {
                                 <div className='row'>
                                     <div className='col'>
                                         <p className="font-bold">{product.brand}</p>
-                                        <p className="font-bold">{product.category.name}</p>
+                                    <p className="font-bold">{product.category.name}</p>
                                     </div>
                                     <div className='col'>
                                         <p className="font-bold">{product.amount}</p>
@@ -66,17 +68,17 @@ const ProductCardAdmin = ({ product, categoryList }) => {
 
                                 </div>
                                 <p className="card-text">{product.description}</p>
-                                <button className="btn btn-primary button font-bold" onClick={() => { setEditMode(!editMode) }} >Redigera</button>
+                                {!productDeleted && <button className="btn btn-primary button font-bold" onClick={() => { setEditMode(!editMode) }} >Redigera</button>}
                             </div>
                             :
                             <div className='card-body'>
-                                    <ProductForm product={product} categoryList={categoryList} submitFunction={updateProduct} setEditMode={setEditMode} setQuestionDelete={setQuestionDelete} />                     
+                                    <ProductForm product={product} categoryList={categoryList} submitFunction={updateProduct} setEditMode={setEditMode} deleteFunction={deleteProduct} />                     
                             </div>
                         }
                     </div>
                 </div>
             </div>
-            {questionDelete && <ConfirmDeleteModal deleteProduct={deleteProduct} successDelete={successDelete} product={product.name} />}
+
         </>
     )
 }
