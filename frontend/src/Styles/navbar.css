@@ -7,3 +7,16 @@ alltså vänster meny med kategorier */
   justify-content: center;
   padding: 10px;
 }
+
+.button-home {
+  display: flex;
+  justify-content: center;
+  font-style: italic;
+  align-items: center;
+  background-color: #2b613b;
+  border: none;
+}
+
+.button-home:hover {
+  background-color: #378e52;
+}

@@ -66,6 +66,11 @@ p {
   font-style: italic;
   align-items: center;
   background-color: #2b613b;
+  border: none;
+}
+
+.button:hover {
+  background-color: #378e52;
 }
 
 
