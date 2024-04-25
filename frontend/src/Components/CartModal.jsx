@@ -59,13 +59,15 @@ const ShoppingCartmodal = ({ setShowCartModal }) => {
                         ))}
                         <div className="checkout">
                             <strong>Total: {total} kr</strong>
+                            <div className="checkout-button">
                             <Link to="/checkout"  >
                                 <button className="btn btn-primary btn-sm" >Till Kassan</button>
                             </Link>
-                            <button className="btn btn-secondary btn-sm" onClick={() => {
+                            </div>
+                            <a className="btn btn-secondary btn-sm" onClick={() => {
                                 setShowCartModal(false)
                                 console.log("clicked")
-                            }}>Fortsätt handla</button>
+                            }}>Fortsätt handla</a>
                         </div>
                     </ul>
 
