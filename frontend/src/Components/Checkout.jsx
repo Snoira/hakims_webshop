@@ -108,29 +108,28 @@ const CheckOut = () => {
     }
   }
 
+  // // Calculate total
   const calculateTotal = (cartProducts) => {
     if (cartProducts.length === 0) {
       return 0;
     }
-
+  
     const total = cartProducts.reduce((accumulator, currentItem) => {
       return accumulator + (currentItem.price * currentItem.quantity);
     }, 0);
-
-    const formatTotal = total.toFixed(2);
-
-    return formatTotal.replace('.', ',').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+  
+    return total.toFixed(2); // Ändra här för att returnera totalsumman med två decimaler
   };
-
-  const total = calculateTotal(cartProducts);
-
+  
+  const total = parseFloat(calculateTotal(cartProducts));
+  
   // Moms
   const Vat = 0.12;
-  const getTotalVat = parseFloat(total) * Vat;
-
+  const getTotalVat = (total * Vat).toFixed(2); // Ändra här för att beräkna momsen med två decimaler
+  
   // total summa inkl frakt och moms, 59kr i fraktkostnad
-  const getTotalCost = parseFloat(total) + getTotalVat + 59;
-  const formatTotalCost = getTotalCost.toFixed(2);
+  const getTotalCost = (total + parseFloat(getTotalVat) + 59).toFixed(2); // Ändra här för att beräkna den totala kostnaden med två decimaler
+  
 
   // skapa random ordernummer
   const generateOrderNumber = () => {
@@ -245,7 +244,7 @@ const successCreateOrder = () => toast.success(`Ordern är skapad!!`, {
             </li>
             <li className="list-group-item d-flex justify-content-between">
               <strong>TOTALSUMMA</strong>
-              <strong>{formatTotalCost} kr</strong>
+              <strong>{getTotalCost} kr</strong>
             </li>
             <li className="list-group-item d-flex justify-content-between" >
               <small>Moms (12%)</small>
