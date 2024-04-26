@@ -39,7 +39,7 @@ const ProductCards = ({ product, openPopup }) => {
     return (
         <>
             <div className="product-card gap-2">
-                <img style={{ maxWidth: '200px', maxHeight: '200px' }} src={product.imageURL} alt="..." onClick={() => openPopup(product)} />
+                <img className="product-img" style={{ maxWidth: '200px', maxHeight: '200px' }} src={product.imageURL} alt="..." onClick={() => openPopup(product)} />
                 <div className="product-card-details">
                     <p className="font-bold">{product.name}</p>
                     <h2 className="font-bold">{product.price.toLocaleString('de-DE', { minimumFractionDigits: 2 })} kr</h2>
