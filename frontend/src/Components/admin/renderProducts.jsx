@@ -10,8 +10,8 @@ const RenderProducts = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                // const res = await axios.get(import.meta.env.VITE_BACKEND_URL+"/products");
-                const res = await axios.get('https://hakims-webshop-1.onrender.com'+"/products");
+                const res = await axios.get(import.meta.env.VITE_BACKEND_URL+"/products");
+                // const res = await axios.get('https://hakims-webshop-1.onrender.com'+"/products");
                 // console.log("products:", res.data);
                 setProducts(res.data);
             } catch (error) {
@@ -21,8 +21,8 @@ const RenderProducts = () => {
 
         const fetchCategories = async () => {
             try {
-                // const res = await axios.get(import.meta.env.VITE_BACKEND_URL+"/categories");
-                const res = await axios.get('https://hakims-webshop-1.onrender.com'+"/categories");
+                const res = await axios.get(import.meta.env.VITE_BACKEND_URL+"/categories");
+                // const res = await axios.get('https://hakims-webshop-1.onrender.com'+"/categories");
                 // console.log("categories:", res.data);
                 setCategoryList(res.data);
             } catch (error) {

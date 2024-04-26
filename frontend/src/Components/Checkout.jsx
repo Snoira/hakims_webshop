@@ -165,8 +165,8 @@ const CheckOut = () => {
       };
 
     console.log(order);
-    const res = await axios.post(import.meta.env.VITE_BACKEND_URL+"/orders", order)
-    //const res = await axios.post("https://hakims-webshop-1.onrender.com/orders", order)
+    // const res = await axios.post(import.meta.env.VITE_BACKEND_URL+"/orders", order)
+    const res = await axios.post("https://hakims-webshop-1.onrender.com/orders", order)
     console.log('Order created successfully:', res.data)
     if(res.status === 201) {
       successCreateOrder();

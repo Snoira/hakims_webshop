@@ -12,7 +12,8 @@ const ProductForm = ({ product, categoryList, submitFunction, setEditMode, delet
             .min(2, "Too short")
             .max(50, "Too long")
             .required("Required")
-            .matches(/^[a-öA-Ö\s]*$/, "Only Swedish characters are allowed")
+            .matches(/^[a-öA-Ö0-9\s!?.:()-]*$/, 'Only alphanumeric, swedish characters and !?.:()- are allowed')
+            // .matches(/^[a-öA-Ö\s]*$/, "Only Swedish characters are allowed")
             .matches(/^[\p{L}\p{N}\p{P}\p{Z}]*$/gu, "Emojis are not allowed"),
         category: Yup.string()
             .required("Required")
