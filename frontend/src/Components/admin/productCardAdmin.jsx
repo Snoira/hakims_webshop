@@ -22,32 +22,32 @@ const ProductCardAdmin = ({ product, categoryList }) => {
     } = values;
     try {
       // const res = await axios.put('https://hakims-webshop-1.onrender.com'+`/products/edit/${product._id}`, { name, category, brand, amount, price, comparisonPrice, imageURL, description }); // (params)${product._id}
-      //   const res = await axios.put(
-      //     import.meta.env.VITE_BACKEND_URL + `/products/edit/${product._id}`,
-      //     {
-      //       name,
-      //       category,
-      //       brand,
-      //       amount,
-      //       price,
-      //       comparisonPrice,
-      //       imageURL,
-      //       description,
-      //     }
-      //   ); // (params)${product._id}
-      const res = await axios.put(
-        "http://localhost:8000" + `/products/edit/${product._id}`,
-        {
-          name,
-          category,
-          brand,
-          amount,
-          price,
-          comparisonPrice,
-          imageURL,
-          description,
-        }
-      ); // (params)${product._id}
+        const res = await axios.put(
+          import.meta.env.VITE_BACKEND_URL + `/products/edit/${product._id}`,
+          {
+            name,
+            category,
+            brand,
+            amount,
+            price,
+            comparisonPrice,
+            imageURL,
+            description,
+          }
+        ); // (params)${product._id}
+      // const res = await axios.put(
+      //   "http://localhost:8000" + `/products/edit/${product._id}`,
+      //   {
+      //     name,
+      //     category,
+      //     brand,
+      //     amount,
+      //     price,
+      //     comparisonPrice,
+      //     imageURL,
+      //     description,
+      //   }
+      // ); // (params)${product._id}
       console.log(category);
       if (res.status === 200) {
         console.log("updated product:", res.data);
