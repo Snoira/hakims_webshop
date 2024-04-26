@@ -120,7 +120,7 @@ const ProductForm = ({ product, categoryList, submitFunction, setEditMode, delet
                             // className="form-select form-select-sm"
                             onChange={formik.handleChange}> {/*defaultValue={product ? `${product.category.name}`: "Kategori på produkt"}*/}
                             {product ?
-                                <option hidden value={_id}>{product.category.name}</option>
+                                <option hidden value={product.category._id}>{product.category.name}</option>
                                 :
                                 <option hidden value="">Kategori</option>
                             }
