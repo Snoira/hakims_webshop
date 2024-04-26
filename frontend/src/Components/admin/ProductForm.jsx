@@ -53,7 +53,7 @@ const ProductForm = ({
       .min(10, "Too short")
       .max(500, "Too long")
       .matches(
-        /^[a-öA-Ö0-9\s!?.:()-]*$/,
+        /^[a-öA-Ö0-9\s!?.,:()-]*$/,
         "Only alphanumeric, swedish characters and !?.:()- are allowed"
       ),
     // .matches(/^[a-öA-Ö\s]*$/, "Only Swedish characters are allowed")
