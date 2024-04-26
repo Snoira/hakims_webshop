@@ -15,8 +15,8 @@ const CategoryCardAdmin = ({ category }) => {
         const { categoryName } = values
         // const name = categoryName
         try {
-            const res = await axios.put("https://hakims-webshop-1.onrender.com"+`/categories/edit/${category._id}`, { "name": categoryName });
-            // const res = await axios.put(import.meta.env.VITE_BACKEND_URL+`/categories/edit/${category._id}`, { "name": categoryName });
+            // const res = await axios.put("https://hakims-webshop-1.onrender.com"+`/categories/edit/${category._id}`, { "name": categoryName });
+            const res = await axios.put(import.meta.env.VITE_BACKEND_URL+`/categories/edit/${category._id}`, { "name": categoryName });
 
             if (res.status === 200) {
                 console.log("updated Category:", res.data);
@@ -32,13 +32,13 @@ const CategoryCardAdmin = ({ category }) => {
 
     const deleteCategory = async () => {
         try {
-            // const deletedProductsWithCategory = await axios.delete(import.meta.env.VITE_BACKEND_URL+`/products/delete/category/${category._id}`);
-            const deletedProductsWithCategory = await axios.delete('https://hakims-webshop-1.onrender.com'+`/products/delete/category/${category._id}`);
+            const deletedProductsWithCategory = await axios.delete(import.meta.env.VITE_BACKEND_URL+`/products/delete/category/${category._id}`);
+            // const deletedProductsWithCategory = await axios.delete('https://hakims-webshop-1.onrender.com'+`/products/delete/category/${category._id}`);
             // const deletedProductsWithCategory = await axios.delete(`http://localhost:8000/products/delete/category/${category._id}`);
             if (deletedProductsWithCategory.status === 200) {
                 console.log("deleted products with category", category.name);
-                // const res = await axios.delete(import.meta.env.VITE_BACKEND_URL+`/categories/delete/${category._id}`);
-                const res = await axios.delete('https://hakims-webshop-1.onrender.com'+`/categories/delete/${category._id}`);
+                const res = await axios.delete(import.meta.env.VITE_BACKEND_URL+`/categories/delete/${category._id}`);
+                // const res = await axios.delete('https://hakims-webshop-1.onrender.com'+`/categories/delete/${category._id}`);
                 // const res = await axios.delete(`http://localhost:8000/categories/delete/${category._id}`);
                 if (res.status === 200) {
                     console.log("deleted category:", res.data);
