@@ -18,23 +18,23 @@ const productSchema = new mongoose.Schema({
   },
   imageURL: {
     type: String,
-    required: false,
+    required: true,
   },
   description: {
     type: String,
-    required: false,
+    required: true,
   },
   comparisonPrice: {
     type: String,
-    required: false,
+    required: true,
   },
   amount: {
     type: String,
-    required: false,
+    required: true,
   },
   brand: {
     type: String,
-    required: false,
+    required: true,
   },
 });
 
