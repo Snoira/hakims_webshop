@@ -7,11 +7,13 @@ import SearchPage from './Pages/SearchPage.jsx'
 import AdminPage from './Pages/AdminPage.jsx'
 import { ToastContainer } from 'react-toastify';
 import { ToasterProvider } from './Context/Toaster.context.jsx'
+import { CartProvider } from "./Context/Cart.contex";
 
 function App() {
 
   return (
     <>
+      <CartProvider> 
         <ToasterProvider>
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -19,7 +21,9 @@ function App() {
             <Route path="/SearchPage" element={<SearchPage />} />
             <Route path="/admin" element={<AdminPage />} />
           </Routes>
+
         </ToasterProvider>
+        </CartProvider>
 
       <ToastContainer position="bottom-right"
         autoClose={5000}
@@ -33,6 +37,7 @@ function App() {
         theme="light"
         transition:Bounce
       />
+      
     </>
   )
 }
